@@ -109,4 +109,3 @@ angular.module('metrogas')
     $scope.venta = ventasService.getByIC($scope.item).query();
     console.log($scope.venta);
 }])
-    
