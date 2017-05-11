@@ -1,0 +1,66 @@
+.bar-metrogas{
+    background-color: #71AFE0 !important;
+}
+
+.profile img{
+    width: 25%;
+    margin-bottom: 6%;
+}
+
+.item-content p {
+    overflow: visible !important;
+    text-overflow: initial !important;
+    white-space: initial !important;
+}
+
+.popup-body{
+    text-align: center;
+}
+
+.button-wide, .login{
+    width: 90%;
+}
+
+.button-metrogas{
+    background-color: #71AFE0 !important;
+}
+.login{
+    margin: 0 auto !important;
+}
+
+.item .badge{
+    top: 35px !important;
+}
+
+button.button-clear > i.icon.ion-funnel:before{
+    font-size: 18px !important;
+    padding-bottom: 10px;
+}
+
+.button .icon {
+    vertical-align: middle;
+}
+
+.button-clear{
+    color: #000 !important;
+}
+
+.col > .button {
+    width: 100%;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    font-size: 85%;
+}
+
+.container{
+    margin-top: 10%;
+}
+
+.bold{
+    font-weight: 500;
+}
+
+.center {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}

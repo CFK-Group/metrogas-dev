@@ -1,0 +1,58 @@
+    <ion-modal-view>
+        <ion-header-bar>
+            <h1 class="title">Filtrar</h1>
+            <button class="button button-small" ng-click="closeModal()">X</button>
+        </ion-header-bar>
+        <ion-content>
+            <div class="list">
+                <label class="item item-input item-select">
+                    <div class="input-label">
+                        Comuna
+                    </div>
+                    <select ng-model="filterOptions.comuna">
+                        <option value="">Todas</option>
+                        <option ng-repeat="value in allComunas | unique" value="{{value}}">{{value}}</option>
+                    </select>
+                </label>
+                <label class="item item-input item-select">
+                    <div class="input-label">
+                        NODO
+                    </div>
+                    <select ng-model="filterOptions.nodo">
+                        <option value="">Todos</option>
+                        <option ng-repeat="value in allNodes | unique" value="{{value}}">{{value}}</option>
+                    </select>
+                </label>
+                <label class="item item-input item-select">
+                    <div class="input-label">
+                        CUADRANTE
+                    </div>
+                    <select ng-model="filterOptions.cuadrante">
+                        <option value="">Todos</option>
+                        <option ng-repeat="value in allCuadrantes | unique" value="{{value}}">{{value}}</option>
+                    </select>
+                </label>
+                <label class="item item-input item-select">
+                    <div class="input-label">
+                        ESTADO
+                    </div>
+                    <select ng-model="filterOptions.estado">
+                        <option value="">Todos</option>
+                        <option ng-repeat="value in allStatus | unique" value="{{value}}">{{value}}</option>
+                    </select>
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">FECHA</span>
+                    <input type="text" placeholder="Elegir Fecha" ng-click="openDate()" ng-model="filterOptions.fecha" ng-value="filterOptions.fecha" style="text-align: right;"> {{ date }}
+                </label>
+            </div>
+            <div style="text-align: center">
+                <button class="button button-positive" ng-click="closeModal()">
+                    Aplicar
+                </button>
+                <button class="button button-royal" ng-click="resetFilter()">
+                    Borrar Filtros
+                </button>
+            </div>
+        </ion-content>
+    </ion-modal-view>
