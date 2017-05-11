@@ -12,6 +12,13 @@ angular.module('metrogas')
         }
     }])
 
+    .service('UserService', ['$resource', 'baseUrl', function($resource, baseURL){
+        this.getUserData = function (sessionStorage.sessionToken){
+            var _token = sessionStorage.sessionToken
+            return $resource(baseURL+"userData", {token: _token})
+        }
+    }])
+
     .service('ventasService', ['$resource', 'baseURL', function($resource, baseURL){
         this.getVentas = function(){
             return $resource(baseURL+"getventas");
