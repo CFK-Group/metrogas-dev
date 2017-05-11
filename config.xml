@@ -61,7 +61,7 @@
 
 <content src="index.html" />
 <!-- Allow external resources -->
-<!-- <allow-navigation href="*" /> -->
+<allow-navigation href="*" />
 <access origin="*" />
 <!--<allow-intent href="*" />-->
 <allow-intent href="http://*/*" />
