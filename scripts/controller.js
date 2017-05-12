@@ -56,7 +56,7 @@ angular.module('metrogas')
                 }
             });
     }
-    console.log(localStorage.getItem('user');
+    console.log(localStorage.getItem('user'));
 }])
 
 .controller('HomeCtrl',['$scope', function($scope){
