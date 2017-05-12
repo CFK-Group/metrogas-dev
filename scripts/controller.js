@@ -52,11 +52,11 @@ angular.module('metrogas')
         UserService.getUserData().query(
             function(response){
                 if(response != "error"){
-                    localStorage.user = response;
+                    localStorage.setItem('user', response);
                 }
             });
     }
-    console.log(localStorage.user);
+    console.log(localStorage.getItem('user');
 }])
 
 .controller('HomeCtrl',['$scope', function($scope){
