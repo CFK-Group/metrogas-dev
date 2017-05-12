@@ -48,15 +48,9 @@ angular.module('metrogas')
         $state.go('login')
     };
     
-    if(sessionStorage.sessionToken){
-        UserService.getUserData().query(
-            function(response){
-                if(response != "error"){
-                    localStorage.setItem('user', response);
-                }
-            });
+    if(UserService.getUserData()){
+        console.log(localStorage.getItem('user'));    
     }
-    console.log(localStorage.getItem('user'));
 }])
 
 .controller('HomeCtrl',['$scope', function($scope){

@@ -14,8 +14,16 @@ angular.module('metrogas')
 
     .service('UserService', ['$resource', 'baseURL', function($resource, baseURL){
         this.getUserData = function (){
-            var _token = sessionStorage.sessionToken;
-            return $resource(baseURL+"userData", {token: _token});
+            if(typeof sessionStorage.sessionToken !== 'undefined'){
+                var _token = sessionStorage.sessionToken;
+                $resource(baseURL+"userData", {token: _token}).query(
+                    function(response){
+                        if(response != "error"){
+                            localStorage.setItem('user', response);
+                            return true;
+                        }
+                    });   
+            }
         }
     }])
 
