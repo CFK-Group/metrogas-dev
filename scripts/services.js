@@ -19,7 +19,7 @@ angular.module('metrogas')
                 $resource(baseURL+"userData", {token: _token}).query(
                     function(response){
                         if(response != "error"){
-                            localStorage.setItem('user', response);
+                            window.localStorage.setItem('user', response);
                             return true;
                         }
                     });   
