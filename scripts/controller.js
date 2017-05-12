@@ -51,6 +51,7 @@ angular.module('metrogas')
 }])
 
 .controller('HomeCtrl',['$scope', 'UserService', function($scope, UserService){
+    console.log("userData" + UserService.getUserData());
     if(UserService.getUserData()){
         console.log(localStorage.getItem('user'));    
     }
