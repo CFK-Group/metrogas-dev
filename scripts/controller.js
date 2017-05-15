@@ -39,15 +39,10 @@ angular.module('metrogas')
                     function(response){
                         if(response != "error"){
                             window.localStorage.setItem('user', angular.toJson(response));
-                            return true;
+                            $scope.user = angular.toJson(response);
                         }
                     });   
-    
-    
-    if (userdata && typeof(localStorage.getItem('user')!== 'undefined')){
-        $scope.user = JSON.parse(localStorage.getItem('user'));
-    }
-    
+        
     $scope.toggleMenu = function() {
         $ionicSideMenuDelegate.toggleLeft();
     };
