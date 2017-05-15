@@ -1,7 +1,7 @@
 'use strict';
 angular.module('metrogas')
 
-.controller('LoginCtrl', ['$scope', 'LoginService', '$state', '$ionicPopup', function($scope, LoginService, $state, $ionicPopup){
+.controller('LoginCtrl', ['$scope', 'LoginService', '$state', '$ionicPopup', 'UserService', function($scope, LoginService, $state, $ionicPopup, UserService){
     $scope.data = {
         username: "",
         password: "",
@@ -15,7 +15,14 @@ angular.module('metrogas')
                 $scope.loginInfo = response;
                 if($scope.loginInfo.statusCode == 0){
                     sessionStorage.userSession = angular.toJson($scope.loginInfo);
-                    console.log(sessionStorage.userSession);
+                    var _token = JSON.parse(sessionStorage.userSession).sessionToken;
+                    var userdata = UserService.getUserData(JSON.parse(_token).query(
+                    function(response){
+                        if(response != "error"){
+                            window.localStorage.setItem('user', angular.toJson(response));
+                            $scope.user = angular.toJson(response);
+                        }
+                    });   
                     $state.go('app');
                 }else{
                     var alertPopup = $ionicPopup.alert({
@@ -36,14 +43,6 @@ angular.module('metrogas')
 
 .controller('SideNavCtrl', ['$scope', '$ionicSideMenuDelegate', '$state', 'UserService', function ($scope, $ionicSideMenuDelegate, $state, UserService) {
     
-    /*var userdata = UserService.getUserData().query(
-                    function(response){
-                        if(response != "error"){
-                            window.localStorage.setItem('user', angular.toJson(response));
-                            $scope.user = angular.toJson(response);
-                        }
-                    });   
-      */  
     $scope.toggleMenu = function() {
         $ionicSideMenuDelegate.toggleLeft();
     };
