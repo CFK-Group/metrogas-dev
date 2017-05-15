@@ -15,6 +15,7 @@ angular.module('metrogas')
                 $scope.loginInfo = response;
                 if($scope.loginInfo.statusCode == 0){
                     sessionStorage.userSession = angular.toJson($scope.loginInfo);
+                    console.log(sessionStorage.userSession);
                     $state.go('app');
                 }else{
                     var alertPopup = $ionicPopup.alert({
