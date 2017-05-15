@@ -35,7 +35,7 @@ angular.module('metrogas')
 
 .controller('SideNavCtrl', ['$scope', '$ionicSideMenuDelegate', '$state', 'UserService', function ($scope, $ionicSideMenuDelegate, $state, UserService) {
     
-    if(UserService.getUserData() && localStorage.getItem('user')!== 'undefined'){
+    if(UserService.getUserData() && typeof localStorage.getItem('user')!== 'undefined'){
         $scope.user = localStorage.getItem('user');    
     }
     
