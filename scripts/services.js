@@ -13,7 +13,6 @@ angular.module('metrogas')
     }])
 
     .service('UserService', ['$resource', 'baseURL', function($resource, baseURL){
-        var user = "";
         
         this.getUserData = function (){
             if(typeof JSON.parse(sessionStorage.userSession).sessionToken !== 'undefined'){
@@ -22,16 +21,12 @@ angular.module('metrogas')
                     function(response){
                         if(response != "error"){
                             window.localStorage.setItem('user', angular.toJson(response));
-                            user = angular.toJson(response);
                             return true;
                         }
                     });   
             }
         }
         
-        this.getUser = function (){
-            return user;
-        }
     }])
 
     .service('ventasService', ['$resource', 'baseURL', function($resource, baseURL){
