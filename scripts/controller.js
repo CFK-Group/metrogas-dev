@@ -37,6 +37,7 @@ angular.module('metrogas')
     
     if (localStorage.getItem('user')!== 'undefined'){
         $scope.user = localStorage.getItem('user');
+        console.log($scope.user);
     }
     
     $scope.toggleMenu = function() {
