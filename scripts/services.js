@@ -15,6 +15,7 @@ angular.module('metrogas')
     .service('UserService', ['$resource', 'baseURL', function($resource, baseURL){
         
         this.getUserData = function (_token){
+            console.log("service: " + _token);
             if(typeof sessionStorage.userSession !== 'undefined'){
                  return $resource(baseURL+"userdata", {token: _token}, {'query': {isArray: false}});
             }
@@ -35,3 +36,4 @@ angular.module('metrogas')
             return $resource(baseURL+"getbyic", {ic: _id});
         }
     }])
+;

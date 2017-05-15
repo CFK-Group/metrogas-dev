@@ -16,6 +16,7 @@ angular.module('metrogas')
                 if($scope.loginInfo.statusCode == 0){
                     sessionStorage.userSession = angular.toJson($scope.loginInfo);
                     var _token = angular.toJson(sessionStorage.userSession).sessionToken;
+                    console.log("controller: " + _token);
                     var userdata = UserService.getUserData(_token).query(
                         function(response){
                             if(response != "error"){
