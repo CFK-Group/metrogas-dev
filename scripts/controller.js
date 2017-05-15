@@ -16,12 +16,12 @@ angular.module('metrogas')
                 if($scope.loginInfo.statusCode == 0){
                     sessionStorage.userSession = angular.toJson($scope.loginInfo);
                     var _token = JSON.parse(sessionStorage.userSession).sessionToken;
-                    var userdata = UserService.getUserData(JSON.parse(_token).query(
-                    function(response){
-                        if(response != "error"){
-                            window.localStorage.setItem('user', angular.toJson(response));
-                            $scope.user = angular.toJson(response);
-                        }
+                    var userdata = UserService.getUserData(JSON.parse(_token)).query(
+                        function(response){
+                            if(response != "error"){
+                                window.localStorage.setItem('user', angular.toJson(response));
+                                $scope.user = angular.toJson(response);
+                            }
                     });   
                     $state.go('app');
                 }else{
