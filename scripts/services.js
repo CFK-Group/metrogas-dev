@@ -14,9 +14,8 @@ angular.module('metrogas')
 
     .service('UserService', ['$resource', 'baseURL', function($resource, baseURL){
         
-        this.getUserData = function (){
+        this.getUserData = function (_token){
             if(typeof sessionStorage.userSession !== 'undefined'){
-                var _token = JSON.parse(sessionStorage.userSession).sessionToken;
                  return $resource(baseURL+"userdata", {token: _token}, {'query': {isArray: false}});
             }
         }
