@@ -34,7 +34,11 @@ angular.module('metrogas')
 }])
 
 .controller('SideNavCtrl', ['$scope', '$ionicSideMenuDelegate', '$state', function ($scope, $ionicSideMenuDelegate, $state) {
-
+    
+    if (localStorage.getItem('user')!== 'undefined'){
+        $scope.user = localStorage.getItem('user');
+    }
+    
     $scope.toggleMenu = function() {
         $ionicSideMenuDelegate.toggleLeft();
     };
@@ -53,7 +57,7 @@ angular.module('metrogas')
 .controller('HomeCtrl',['$scope', 'UserService', function($scope, UserService){
     console.log("userData" + UserService.getUserData());
     if(UserService.getUserData()){
-        console.log(localStorage.getItem('user'));    
+        localStorage.getItem('user');    
     }
 }])
 
