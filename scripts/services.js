@@ -12,7 +12,7 @@ angular.module('metrogas')
         }
     }])
 
-    .service('UserService', ['$resource', 'baseURL', '$scope', function($resource, baseURL, $scope){
+    .service('UserService', ['$resource', 'baseURL', function($resource, baseURL){
         var user = "";
         
         this.getUserData = function (){
