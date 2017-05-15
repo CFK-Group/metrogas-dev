@@ -13,6 +13,8 @@ angular.module('metrogas')
     }])
 
     .service('UserService', ['$resource', 'baseURL', '$scope', function($resource, baseURL, $scope){
+        var user = "";
+        
         this.getUserData = function (){
             if(typeof JSON.parse(sessionStorage.userSession).sessionToken !== 'undefined'){
                 var _token = JSON.parse(sessionStorage.userSession).sessionToken;
@@ -20,11 +22,15 @@ angular.module('metrogas')
                     function(response){
                         if(response != "error"){
                             window.localStorage.setItem('user', angular.toJson(response));
-                            $scope.user = "";
+                            user = angular.toJson(response);
                             return true;
                         }
                     });   
             }
+        }
+        
+        this.getUser = function (){
+            return user;
         }
     }])
 
