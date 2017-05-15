@@ -21,7 +21,6 @@ angular.module('metrogas')
                         function(response){
                             if(response != "error"){
                                 window.localStorage.setItem('user', angular.toJson(response));
-                                $scope.user = angular.toJson(response);
                             }
                     });   
                     $state.go('app');
@@ -43,6 +42,8 @@ angular.module('metrogas')
 }])
 
 .controller('SideNavCtrl', ['$scope', '$ionicSideMenuDelegate', '$state', 'UserService', function ($scope, $ionicSideMenuDelegate, $state, UserService) {
+    
+    $scope.user = window.localStorage.getItem('user');
     
     $scope.toggleMenu = function() {
         $ionicSideMenuDelegate.toggleLeft();
