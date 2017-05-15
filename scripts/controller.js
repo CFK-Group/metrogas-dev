@@ -36,14 +36,14 @@ angular.module('metrogas')
 
 .controller('SideNavCtrl', ['$scope', '$ionicSideMenuDelegate', '$state', 'UserService', function ($scope, $ionicSideMenuDelegate, $state, UserService) {
     
-    var userdata = UserService.getUserData().query(
+    /*var userdata = UserService.getUserData().query(
                     function(response){
                         if(response != "error"){
                             window.localStorage.setItem('user', angular.toJson(response));
                             $scope.user = angular.toJson(response);
                         }
                     });   
-        
+      */  
     $scope.toggleMenu = function() {
         $ionicSideMenuDelegate.toggleLeft();
     };
