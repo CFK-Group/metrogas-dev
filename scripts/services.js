@@ -20,6 +20,7 @@ angular.module('metrogas')
                     function(response){
                         if(response != "error"){
                             window.localStorage.setItem('user', angular.toJson(response));
+                            $scope.user = "";
                             return true;
                         }
                     });   
