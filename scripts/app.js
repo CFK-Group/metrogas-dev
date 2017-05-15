@@ -6,7 +6,7 @@ angular.module('metrogas', ['ionic','ui.router','ngCordova','angular.filter','ng
             url: '/login',
             views: {
                 'content': {
-                    templateUrl: 'views/login.html',
+                    templateUrl: 'login.html',
                     controller: 'LoginCtrl'
                 }
             }
