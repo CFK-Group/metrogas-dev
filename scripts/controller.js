@@ -15,15 +15,24 @@ angular.module('metrogas')
                 $scope.loginInfo = response;
                 console.log($scope.loginInfo);
                 if($scope.loginInfo.statusCode == 0){
+                    
                     sessionStorage.userSession = angular.toJson($scope.loginInfo);
-                    var _token = JSON.parse(sessionStorage.userSession).sessionToken
+                    
+                    var _token = JSON.parse(sessionStorage.userSession).sessionToken;
+                    
                     console.log("controller: " + _token);
+                    
                     var userdata = UserService.getUserData(_token).query(
+                    
                         function(response){
+                            console.log("response: " + response);
                             if(response != "error"){
+                                console.log("not error: " + response);
                                 window.localStorage.setItem('user', angular.toJson(response));
                             }
+                            
                     });   
+                    
                     $state.go('app');
                 }else{
                     var alertPopup = $ionicPopup.alert({
