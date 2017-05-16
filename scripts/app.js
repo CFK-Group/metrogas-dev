@@ -19,7 +19,7 @@ angular.module('metrogas', ['ionic','ui.router','ngCordova','angular.filter','ng
                     templateUrl: 'views/sidenav.html'
                     },
                 'content': {
-                    templateUrl: 'base.html',
+                    templateUrl: 'index.html',
                 }
             }
         })
