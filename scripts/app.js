@@ -11,40 +11,49 @@ angular.module('metrogas', ['ionic','ui.router','ngCordova','angular.filter','ng
                 }
             }
         })
-        
-    .state('app',{
-            url: '/app',
+    
+        .state('app',{
+            url: '/',
             views: {
                 'sidenav': {
                     templateUrl: 'views/sidenav.html'
-                },
+                    },
                 'content': {
-                    templateUrl: 'views/home.html',
-                    controller: 'HomeCtrl'
+                    templateUrl: 'base.html',
                 }
             }
         })
-    
-    .state('app.asignadas',{
-            url: '/asignadas',
-            views: {
-                'content@': {
-                    templateUrl: 'views/asignadas.html',
-                    controller: 'AsignCtrl'
+
+        .state('app.home',{
+                url: '/app',
+                views: {
+                    'content@': {
+                        templateUrl: 'views/home.html',
+                        controller: 'HomeCtrl'
+                    }
                 }
-            }
-        })
-    
-    .state('app.edit',{
-            url: '/edit/:ic',
-            views: {
-                'content@': {
-                    templateUrl: 'views/edit.html',
-                    controller: 'EditCtrl'
+            })
+
+        .state('app.asignadas',{
+                url: '/asignadas',
+                views: {
+                    'content@': {
+                        templateUrl: 'views/asignadas.html',
+                        controller: 'AsignCtrl'
+                    }
                 }
-            }
-        });
-    
+            })
+
+        .state('app.edit',{
+                url: '/edit/:ic',
+                views: {
+                    'content@': {
+                        templateUrl: 'views/edit.html',
+                        controller: 'EditCtrl'
+                    }
+                }
+            });
+
     $urlRouterProvider.otherwise('login');
 
 })
