@@ -33,7 +33,7 @@ angular.module('metrogas')
                             
                     });   
                     
-                    $state.go('app');
+                    $state.go('app.home');
                 }else{
                     var alertPopup = $ionicPopup.alert({
                         title: 'Ups!',
