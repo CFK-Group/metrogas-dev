@@ -13,7 +13,7 @@ angular.module('metrogas', ['ionic','ui.router','ngCordova','angular.filter','ng
         })
     
         .state('app',{
-            url: '/',
+            url: '/app',
             views: {
                 'sidenav': {
                     templateUrl: 'views/sidenav.html'
@@ -25,7 +25,7 @@ angular.module('metrogas', ['ionic','ui.router','ngCordova','angular.filter','ng
         })
 
         .state('app.home',{
-                url: '/app',
+                url: '/home',
                 views: {
                     'content@': {
                         templateUrl: 'views/home.html',
