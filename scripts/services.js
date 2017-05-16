@@ -24,8 +24,8 @@ angular.module('metrogas')
     }])
 
     .service('ventasService', ['$resource', 'baseURL', function($resource, baseURL){
-        this.getVentas = function(){
-            return $resource(baseURL+"getventas");
+        this.getVentas = function(token){
+            return $resource(baseURL+"getventas", {token: token});
         }
         
         this.getByIC = function(_ic){

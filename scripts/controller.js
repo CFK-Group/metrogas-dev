@@ -44,8 +44,7 @@ angular.module('metrogas')
 .controller('SideNavCtrl', ['$scope', '$ionicSideMenuDelegate', '$state', 'UserService', function ($scope, $ionicSideMenuDelegate, $state, UserService) {
     
     $scope.user = JSON.parse(window.localStorage.getItem('user'));
-    console.log($scope.user);
-    
+        
     $scope.toggleMenu = function() {
         $ionicSideMenuDelegate.toggleLeft();
     };
@@ -98,7 +97,7 @@ angular.module('metrogas')
         };
     }
     
-    $scope.direcciones = ventasService.getVentas().query();
+    $scope.direcciones = ventasService.getVentas(JSON.parse(window.localStorage.getItem('user')).api_token).query();
     console.log($scope.direcciones);
     /*$scope.allComunas = TaskService.getComunas();
     $scope.allNodes = TaskService.getNodes();
