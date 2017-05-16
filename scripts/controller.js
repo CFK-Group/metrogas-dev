@@ -44,6 +44,7 @@ angular.module('metrogas')
 .controller('SideNavCtrl', ['$scope', '$ionicSideMenuDelegate', '$state', 'UserService', function ($scope, $ionicSideMenuDelegate, $state, UserService) {
     
     $scope.user = JSON.parse(window.localStorage.getItem('user'));
+    console.log($scope.user);
     
     $scope.toggleMenu = function() {
         $ionicSideMenuDelegate.toggleLeft();
