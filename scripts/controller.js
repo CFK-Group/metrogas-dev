@@ -9,7 +9,8 @@ angular.module('metrogas')
         deviceId: ""
     };
 
-    $scope.login = function() { 
+    $scope.login = function() {
+        console.log("function login");
         $scope.loginVar = LoginService.loginUser($scope.data.username, $scope.data.password, $scope.data.deviceModel, $scope.data.deviceId).query(
             function(response){
                 $scope.loginInfo = response;
