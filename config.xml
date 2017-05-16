@@ -59,7 +59,7 @@
     <preference name="android-installLocation" value="auto" />
 </platform>
 
-<!-- <content src="login.html" /> -->
+<content src="login.html" />
 <!-- Allow external resources -->
 <allow-navigation href="*" />
 <access origin="*" />
