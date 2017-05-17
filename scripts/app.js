@@ -3,7 +3,7 @@ angular.module('metrogas', ['ionic','ui.router','ngCordova','angular.filter','ng
 .config(function($stateProvider, $urlRouterProvider){
     $stateProvider
         .state('login',{
-            url: '/login',
+            url: 'login',
             views: {
                 'login': {
                     templateUrl: 'views/login.html',
@@ -12,8 +12,8 @@ angular.module('metrogas', ['ionic','ui.router','ngCordova','angular.filter','ng
             }
         })
     
-        .state('app.home',{
-                url: '/home',
+        .state('app',{
+                url: '/',
                 views: {
                     'content@': {
                         templateUrl: 'views/home.html',
@@ -23,7 +23,7 @@ angular.module('metrogas', ['ionic','ui.router','ngCordova','angular.filter','ng
             })
 
         .state('app.asignadas',{
-                url: '/asignadas',
+                url: 'asignadas',
                 views: {
                     'content@': {
                         templateUrl: 'views/asignadas.html',
@@ -33,7 +33,7 @@ angular.module('metrogas', ['ionic','ui.router','ngCordova','angular.filter','ng
             })
 
         .state('app.edit',{
-                url: '/edit/:ic',
+                url: 'edit/:ic',
                 views: {
                     'content@': {
                         templateUrl: 'views/edit.html',

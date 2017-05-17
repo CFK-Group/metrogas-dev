@@ -2,7 +2,6 @@
 angular.module('metrogas')
 
 .controller('LoginCtrl', ['$scope', 'LoginService', '$state', '$ionicPopup', 'UserService', function($scope, LoginService, $state, $ionicPopup, UserService){
-    console.log("login");
     $scope.data = {
         username: "",
         password: "",
@@ -11,7 +10,6 @@ angular.module('metrogas')
     };
 
     $scope.login = function() {
-        console.log("function login");
         $scope.loginVar = LoginService.loginUser($scope.data.username, $scope.data.password, $scope.data.deviceModel, $scope.data.deviceId).query(
             function(response){
                 $scope.loginInfo = response;
@@ -35,7 +33,7 @@ angular.module('metrogas')
                             
                     });   
                     
-                    $state.go('app.home');
+                    $state.go('app');
                 }else{
                     var alertPopup = $ionicPopup.alert({
                         title: 'Ups!',
@@ -57,11 +55,14 @@ angular.module('metrogas')
 
     $rootScope.$on('$stateChangeSuccess',
         function(event, toState, toParams, fromState, fromParams){
-            console.log("event: "+ event);
-            console.log("toState: "+ toState);
-            console.log("toParams: "+ toParams);
-            console.log("fromState: "+ fromState);
-            console.log("fromParams: "+ fromParams);
+            console.log("event: ");
+            console.log(event);
+            console.log("toState: ");
+            console.log(toState);
+            console.log("toParams: ");
+            console.log(toParams);
+            console.log("fromState: ");
+            console.log(fromParams);
             $scope.user = JSON.parse(window.localStorage.getItem('user'));
             console.log($scope.user);
         });
