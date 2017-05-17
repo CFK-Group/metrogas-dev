@@ -56,7 +56,7 @@ angular.module('metrogas')
         );
     };
 }])
-
+/*
 .controller('SideNavCtrl', ['$rootScope', '$scope', '$ionicSideMenuDelegate', '$state', function ($rootScope, $scope, $ionicSideMenuDelegate, $state) {
 
     $rootScope.$on('$stateChangeSuccess',
@@ -139,7 +139,7 @@ angular.module('metrogas')
             angular.lowercase(row.ubicacion[0].cuadrante).toString().indexOf(angular.lowercase($scope.filterOptions.cuadrante) || "") !== -1 &&
             angular.lowercase(row.estado).toString().indexOf(angular.lowercase($scope.filterOptions.estado) || "") !== -1
         );
-    };*/
+    };*//*
 }])
 
 .controller('EditCtrl',['$scope', '$stateParams', '$state', 'ventasService', function($scope, $stateParams, $state, ventasService){
@@ -147,4 +147,4 @@ angular.module('metrogas')
     //console.log($scope.item);
     $scope.venta = ventasService.getByIC($scope.item).query();
     console.log($scope.venta);
-}])
+}])*/
