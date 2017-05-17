@@ -52,7 +52,13 @@ angular.module('metrogas')
 
     console.log("aaa");
 
-    $scope.user = JSON.parse(window.localStorage.getItem('user'));
+    $scope.$watch(function(){
+        return window.localStorage.getObject('user');
+    }, function(){
+        $scope.user = JSON.parse(window.localStorage.getItem('user'));
+        console.log($scope.user);
+    });
+
     console.log($scope.user);
 
     $scope.toggleMenu = function() {
