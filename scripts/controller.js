@@ -68,7 +68,8 @@ angular.module('metrogas')
 
     $scope.endSesion = function(){
         $ionicSideMenuDelegate.toggleLeft(false);
-        $rootScope.loginShow = false;
+        $rootScope.loginShow = true;
+        localStorage.removeItem('user');
         $state.go('login')
     };
     
