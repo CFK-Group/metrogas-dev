@@ -12,10 +12,23 @@
 <body ng-app="metrogas">
         
         <div style="margin: 30px auto;">
-            <div ui-view="content"></div>
+            <div ui-view="login"></div>
         </div>
+
+        <ion-side-menus ng-controller="SideNavCtrl">
+
+            <!-- content -->
+            <ion-side-menu-content>
+                <div ui-view="content"></div>
+            </ion-side-menu-content>
+
+            <!-- sidemenu -->
+            <div ui-view="sidenav">
+
+            </div>
+        </ion-side-menus>
         
-    <srcipt src="phonegap.js"></srcipt>
+    <script src="phonegap.js"></script>
     <!-- build:js scripts/main.js -->
     <script src="scripts/ionic.min.js"></script>
     <script src="scripts/ionic.bundle.min.js"></script>
