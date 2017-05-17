@@ -53,7 +53,7 @@ angular.module('metrogas')
 }])
 
 .controller('SideNavCtrl', ['$rootScope', '$scope', '$ionicSideMenuDelegate', '$state', function ($rootScope, $scope, $ionicSideMenuDelegate, $state) {
-    $rootScope.loginShow = false;
+    $rootScope.loginShow = true;
     $rootScope.$on('$stateChangeSuccess',
         function(event, toState, toParams, fromState, fromParams){
             console.log("event: ");
@@ -66,6 +66,7 @@ angular.module('metrogas')
             console.log(fromParams);
             $scope.user = JSON.parse(window.localStorage.getItem('user'));
             console.log($scope.user);
+            $rootScope.loginShow = false;
         });
     
     $scope.toggleMenu = function() {
