@@ -6,20 +6,20 @@ angular.module('metrogas', ['ionic','ui.router','ngCordova','angular.filter','ng
             url: '/login',
             views: {
                 'content': {
-                    templateUrl: 'index.html',
+                    templateUrl: 'views/login.html',
                     controller: 'LoginCtrl'
                 }
             }
         })
     
         .state('app',{
-            url: '/app',
+            url: '/',
             views: {
                 'sidenav': {
-                    templateUrl: 'views/sidenav.html'
+                    templateUrl: 'views/sidenav.html',
                     },
                 'content': {
-                    templateUrl: 'first.html',
+                    templateUrl: 'first.html'
                 }
             }
         })
