@@ -1,7 +1,8 @@
 'use strict';
 angular.module('metrogas')
 
-.controller('LoginCtrl', ['$scope', 'LoginService', '$state', '$ionicPopup', 'UserService', function($scope, LoginService, $state, $ionicPopup, UserService){
+.controller('LoginCtrl', ['$rootScope', '$scope', 'LoginService', '$state', '$ionicPopup', 'UserService', function($rootScope, $scope, LoginService, $state, $ionicPopup, UserService){
+    $rootScope.loginShow = true;
     $scope.data = {
         username: "",
         password: "",
@@ -52,7 +53,7 @@ angular.module('metrogas')
 }])
 
 .controller('SideNavCtrl', ['$rootScope', '$scope', '$ionicSideMenuDelegate', '$state', function ($rootScope, $scope, $ionicSideMenuDelegate, $state) {
-
+    $rootScope.loginShow = false;
     $rootScope.$on('$stateChangeSuccess',
         function(event, toState, toParams, fromState, fromParams){
             console.log("event: ");

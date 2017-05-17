@@ -11,11 +11,11 @@
 </head>
 <body ng-app="metrogas">
         
-        <div style="margin: 30px auto;" ng-if="!show">
+        <div style="margin: 30px auto;" ng-if="loginShow">
             <div ui-view="login"></div>
         </div>
 
-        <ion-side-menus ng-if="show">
+        <ion-side-menus ng-if="!loginShow">
 
             <!-- content -->
             <ion-side-menu-content>
