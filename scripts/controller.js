@@ -69,10 +69,10 @@ angular.module('metrogas')
             console.log(toParams);
             console.log("fromState: ");
             console.log(fromParams);
-            $scope.user = JSON.parse(window.localStorage.getItem('user'));
-            console.log($scope.user);
+
         });
-    
+    $scope.user = JSON.parse(window.localStorage.getItem('user'));
+    console.log($scope.user);
     $scope.toggleMenu = function() {
         $ionicSideMenuDelegate.toggleLeft();
     };
