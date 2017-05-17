@@ -2,8 +2,7 @@
 angular.module('metrogas')
 
 .controller('LoginCtrl', ['$rootScope', '$scope', 'LoginService', '$state', '$ionicPopup', 'UserService', function($rootScope, $scope, LoginService, $state, $ionicPopup, UserService){
-    $rootScope.loginShow = true;
-    console.log($rootScope.loginShow);
+
     $scope.data = {
         username: "",
         password: "",
@@ -38,8 +37,8 @@ angular.module('metrogas')
                         title: 'ok!',
                         template: "login correcto"
                     });
-
-//                    $state.go('app');
+                    $rootScope.loginShow = false;
+                    $state.go('app');
                 }else{
                     var alertPopup = $ionicPopup.alert({
                         title: 'Ups!',
@@ -56,9 +55,10 @@ angular.module('metrogas')
         );
     };
 }])
-/*
+
 .controller('SideNavCtrl', ['$rootScope', '$scope', '$ionicSideMenuDelegate', '$state', function ($rootScope, $scope, $ionicSideMenuDelegate, $state) {
 
+    console.log("aaa");
     $rootScope.$on('$stateChangeSuccess',
         function(event, toState, toParams, fromState, fromParams){
             console.log("event: ");
@@ -83,6 +83,7 @@ angular.module('metrogas')
 
     $scope.endSesion = function(){
         $ionicSideMenuDelegate.toggleLeft(false);
+        $rootScope.loginShow = false;
         $state.go('login')
     };
     
@@ -139,7 +140,7 @@ angular.module('metrogas')
             angular.lowercase(row.ubicacion[0].cuadrante).toString().indexOf(angular.lowercase($scope.filterOptions.cuadrante) || "") !== -1 &&
             angular.lowercase(row.estado).toString().indexOf(angular.lowercase($scope.filterOptions.estado) || "") !== -1
         );
-    };*//*
+    };*/
 }])
 
 .controller('EditCtrl',['$scope', '$stateParams', '$state', 'ventasService', function($scope, $stateParams, $state, ventasService){
@@ -147,4 +148,4 @@ angular.module('metrogas')
     //console.log($scope.item);
     $scope.venta = ventasService.getByIC($scope.item).query();
     console.log($scope.venta);
-}])*/
+}])

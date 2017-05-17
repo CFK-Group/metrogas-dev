@@ -3,15 +3,15 @@ angular.module('metrogas', ['ionic','ui.router','ngCordova','angular.filter','ng
 .config(function($stateProvider, $urlRouterProvider){
     $stateProvider
         .state('login',{
-            url: 'login',
+            url: '/login',
             views: {
                 'login': {
                     templateUrl: 'views/login.html',
                     controller: 'LoginCtrl'
                 }
             }
-        });
-    /*
+        })
+
         .state('app',{
                 url: '/',
                 views: {
@@ -45,8 +45,10 @@ angular.module('metrogas', ['ionic','ui.router','ngCordova','angular.filter','ng
                     }
                 }
             });
-*/
+
     $urlRouterProvider.otherwise('login');
 
+}).run(function($rootScope) {
+    $rootScope.loginShow= true;
 })
 ;
