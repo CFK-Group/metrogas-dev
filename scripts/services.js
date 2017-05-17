@@ -17,7 +17,15 @@ angular.module('metrogas')
         this.getUserData = function (_token){
             console.log("service: " + _token);
             if(typeof sessionStorage.userSession !== 'undefined'){
-                 return $resource(baseURL+"userdata", {token: _token}, {'query': {isArray: false}});
+                 $resource(baseURL+"userdata", {token: _token}, {'query': {isArray: false}}).query(
+                     function(response){
+                         console.log("response: " + response);
+                         if(response !== "error"){
+                             console.log("not error: " + response);
+                             window.localStorage.setItem('user', angular.toJson(response));
+                             return response;
+                         }
+                 });
             }
         }
         

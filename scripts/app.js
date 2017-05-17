@@ -16,8 +16,7 @@ angular.module('metrogas', ['ionic','ui.router','ngCordova','angular.filter','ng
                 url: '/',
                 views: {
                     'sidenav' : {
-                        templateUrl: 'views/sidenav.html',
-                        controller: 'SideNavCtrl'
+                        templateUrl: 'views/sidenav.html'
                     },
                     'content@': {
                         templateUrl: 'views/home.html',
@@ -50,5 +49,6 @@ angular.module('metrogas', ['ionic','ui.router','ngCordova','angular.filter','ng
 
 }).run(function($rootScope) {
     $rootScope.loginShow= true;
+    $rootScope.user = "";
 })
 ;

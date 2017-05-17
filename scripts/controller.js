@@ -23,31 +23,23 @@ angular.module('metrogas')
                     
                     console.log("controller: " + _token);
                     
-                    UserService.getUserData(_token).query(
-                    
-                        function(response){
-                            console.log("response: " + response);
-                            if(response !== "error"){
-                                console.log("not error: " + response);
-                                window.localStorage.setItem('user', angular.toJson(response));
-                            }
-                            
-                    });
-                    var alertPopup = $ionicPopup.alert({
+                    $scope.userData = UserService.getUserData(_token);
+                    console.log($scope.userData);
+                    $ionicPopup.alert({
                         title: 'ok!',
                         template: "login correcto"
                     });
                     $rootScope.loginShow = false;
                     $state.go('app');
                 }else{
-                    var alertPopup = $ionicPopup.alert({
+                    $ionicPopup.alert({
                         title: 'Ups!',
                         template: $scope.loginInfo.errorDesc
                     });
                 }
             },
             function(response){
-                var alertPopup = $ionicPopup.alert({
+                $ionicPopup.alert({
                     title: 'Ups!',
                     template: 'Algo ha pasado, vuelve a intentar más tarde'
                 });
@@ -59,20 +51,10 @@ angular.module('metrogas')
 .controller('SideNavCtrl', ['$rootScope', '$scope', '$ionicSideMenuDelegate', '$state', function ($rootScope, $scope, $ionicSideMenuDelegate, $state) {
 
     console.log("aaa");
-    $rootScope.$on('$stateChangeSuccess',
-        function(event, toState, toParams, fromState, fromParams){
-            console.log("event: ");
-            console.log(event);
-            console.log("toState: ");
-            console.log(toState);
-            console.log("toParams: ");
-            console.log(toParams);
-            console.log("fromState: ");
-            console.log(fromParams);
 
-        });
     $scope.user = JSON.parse(window.localStorage.getItem('user'));
     console.log($scope.user);
+
     $scope.toggleMenu = function() {
         $ionicSideMenuDelegate.toggleLeft();
     };
