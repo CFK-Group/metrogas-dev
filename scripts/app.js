@@ -15,6 +15,10 @@ angular.module('metrogas', ['ionic','ui.router','ngCordova','angular.filter','ng
         .state('app',{
                 url: '/',
                 views: {
+                    'sidenav' : {
+                        templateUrl: 'views/sidenav.html',
+                        controller: 'SideNavCtrl'
+                    },
                     'content@': {
                         templateUrl: 'views/home.html',
                         controller: 'HomeCtrl'
