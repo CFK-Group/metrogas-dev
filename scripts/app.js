@@ -12,18 +12,6 @@ angular.module('metrogas', ['ionic','ui.router','ngCordova','angular.filter','ng
             }
         })
     
-        .state('app',{
-            url: '/',
-            views: {
-                'sidenav': {
-                    templateUrl: 'views/sidenav.html'
-                    },
-                'content': {
-                    templateUrl: 'first.html'
-                }
-            }
-        })
-
         .state('app.home',{
                 url: '/home',
                 views: {

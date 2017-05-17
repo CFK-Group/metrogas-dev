@@ -53,10 +53,18 @@ angular.module('metrogas')
     };
 }])
 
-.controller('SideNavCtrl', ['$scope', '$ionicSideMenuDelegate', '$state', 'UserService', function ($scope, $ionicSideMenuDelegate, $state, UserService) {
-    
-    $scope.user = JSON.parse(window.localStorage.getItem('user'));
-    console.log($scope.user);
+.controller('SideNavCtrl', ['$rootScope', '$scope', '$ionicSideMenuDelegate', '$state', function ($rootScope, $scope, $ionicSideMenuDelegate, $state) {
+
+    $rootScope.$on('$stateChangeSuccess',
+        function(event, toState, toParams, fromState, fromParams){
+            console.log("event: "+ event);
+            console.log("toState: "+ toState);
+            console.log("toParams: "+ toParams);
+            console.log("fromState: "+ fromState);
+            console.log("fromParams: "+ fromParams);
+            $scope.user = JSON.parse(window.localStorage.getItem('user'));
+            console.log($scope.user);
+        });
     
     $scope.toggleMenu = function() {
         $ionicSideMenuDelegate.toggleLeft();
