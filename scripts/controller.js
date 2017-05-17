@@ -25,10 +25,7 @@ angular.module('metrogas')
                     
                     $scope.userData = UserService.getUserData(_token);
                     console.log($scope.userData);
-                    $ionicPopup.alert({
-                        title: 'ok!',
-                        template: "login correcto"
-                    });
+
                     $rootScope.loginShow = false;
                     $state.go('app');
                 }else{
@@ -53,7 +50,7 @@ angular.module('metrogas')
     console.log("aaa");
 
     $scope.$watch(function(){
-        return window.localStorage.getObject('user');
+        return window.localStorage.getItem('user');
     }, function(){
         $scope.user = JSON.parse(window.localStorage.getItem('user'));
         console.log($scope.user);
