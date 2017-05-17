@@ -10,8 +10,8 @@ angular.module('metrogas', ['ionic','ui.router','ngCordova','angular.filter','ng
                     controller: 'LoginCtrl'
                 }
             }
-        })
-    
+        });
+    /*
         .state('app',{
                 url: '/',
                 views: {
@@ -45,7 +45,7 @@ angular.module('metrogas', ['ionic','ui.router','ngCordova','angular.filter','ng
                     }
                 }
             });
-
+*/
     $urlRouterProvider.otherwise('login');
 
 })

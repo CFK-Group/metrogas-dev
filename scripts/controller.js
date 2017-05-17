@@ -3,6 +3,7 @@ angular.module('metrogas')
 
 .controller('LoginCtrl', ['$rootScope', '$scope', 'LoginService', '$state', '$ionicPopup', 'UserService', function($rootScope, $scope, LoginService, $state, $ionicPopup, UserService){
     $rootScope.loginShow = true;
+    console.log($rootScope.loginShow);
     $scope.data = {
         username: "",
         password: "",
@@ -32,9 +33,13 @@ angular.module('metrogas')
                                 window.localStorage.setItem('user', angular.toJson(response));
                             }
                             
-                    });   
-                    
-                    $state.go('app');
+                    });
+                    var alertPopup = $ionicPopup.alert({
+                        title: 'ok!',
+                        template: "login correcto"
+                    });
+
+//                    $state.go('app');
                 }else{
                     var alertPopup = $ionicPopup.alert({
                         title: 'Ups!',
@@ -53,8 +58,7 @@ angular.module('metrogas')
 }])
 
 .controller('SideNavCtrl', ['$rootScope', '$scope', '$ionicSideMenuDelegate', '$state', function ($rootScope, $scope, $ionicSideMenuDelegate, $state) {
-    $rootScope.loginShow = true;
-    console.log($rootScope.loginShow);
+
     $rootScope.$on('$stateChangeSuccess',
         function(event, toState, toParams, fromState, fromParams){
             console.log("event: ");
