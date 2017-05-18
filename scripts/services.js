@@ -40,5 +40,14 @@ angular.module('metrogas')
         this.getById = function(_id){
             return $resource(baseURL+"getbyic", {ic: _id});
         };
+
+        this.getComunas = function () {
+            $resource(baseURL+"getcomunas").query(
+                function (response) {
+                    window.localStorage.setItem('comunas', angular.toJson(response));
+                    return true;
+                }
+            );
+        }
     }])
 ;

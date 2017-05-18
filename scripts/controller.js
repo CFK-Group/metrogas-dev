@@ -1,7 +1,7 @@
 'use strict';
 angular.module('metrogas')
 
-.controller('LoginCtrl', ['$rootScope', '$scope', 'LoginService', '$state', '$ionicPopup', 'UserService', function($rootScope, $scope, LoginService, $state, $ionicPopup, UserService){
+.controller('LoginCtrl', ['$rootScope', '$scope', 'LoginService', '$state', '$ionicPopup', 'UserService', 'ventasService', function($rootScope, $scope, LoginService, $state, $ionicPopup, UserService, ventasService){
 
     $scope.data = {
         username: "",
@@ -23,6 +23,8 @@ angular.module('metrogas')
                     var _token = JSON.parse(sessionStorage.userSession).sessionToken;
 
                     $scope.userData = UserService.getUserData(_token);
+
+                    $scope.allComunas = ventasService.getComunas();
 
                     $rootScope.loginShow = false;
                     $state.go('app');
@@ -104,14 +106,14 @@ angular.module('metrogas')
             fecha: "",
             tipo_actividad: ""
         };
-    }
+    };
     
     $scope.direcciones = ventasService.getVentas(JSON.parse(window.localStorage.getItem('user')).api_token).query();
 
-    /*$scope.allComunas = TaskService.getComunas();
-    $scope.allNodes = TaskService.getNodes();
-    $scope.allCuadrantes = TaskService.getCuadrantes();
-    $scope.allStatus =  TaskService.getStatus();
+    $scope.allComunas = localStorage.getItem('comunas');
+    $scope.allNodes = ventasService.getNodes();
+    $scope.allCuadrantes = ventasService.getCuadrantes();
+    $scope.allStatus =  ventasService.getStatus();
     
     $scope.search = function(row) {
         return (
@@ -120,7 +122,7 @@ angular.module('metrogas')
             angular.lowercase(row.ubicacion[0].cuadrante).toString().indexOf(angular.lowercase($scope.filterOptions.cuadrante) || "") !== -1 &&
             angular.lowercase(row.estado).toString().indexOf(angular.lowercase($scope.filterOptions.estado) || "") !== -1
         );
-    };*/
+    };
 }])
 
 .controller('EditCtrl',['$scope', '$stateParams', '$state', 'ventasService', function($scope, $stateParams, $state, ventasService){
