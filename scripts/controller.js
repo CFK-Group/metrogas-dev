@@ -113,9 +113,9 @@ angular.module('metrogas')
     $scope.search = function(row) {
         console.log(row);
         console.log(row.comuna);
-
+        var comuna = row.comuna;
         return (
-            angular.lowercase(row.comuna).toString().indexOf(angular.lowercase($scope.filterOptions.comuna) || "") !== -1 /*&&
+            angular.lowercase(comuna).toString().indexOf(angular.lowercase($scope.filterOptions.comuna) || "") !== -1 /*&&
             angular.lowercase(row.ubicacion[0].nodo).toString().indexOf(angular.lowercase($scope.filterOptions.nodo) || "")!== -1 &&
             angular.lowercase(row.ubicacion[0].cuadrante).toString().indexOf(angular.lowercase($scope.filterOptions.cuadrante) || "") !== -1 &&
             angular.lowercase(row.estado).toString().indexOf(angular.lowercase($scope.filterOptions.estado) || "") !== -1
