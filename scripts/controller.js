@@ -113,7 +113,7 @@ angular.module('metrogas')
     $scope.search = function(row) {
         console.log(row);
         console.log(row.comuna);
-        console.log(JSON.parse(row).comuna);
+
         return (
             angular.lowercase(row.comuna).toString().indexOf(angular.lowercase($scope.filterOptions.comuna) || "") !== -1 /*&&
             angular.lowercase(row.ubicacion[0].nodo).toString().indexOf(angular.lowercase($scope.filterOptions.nodo) || "")!== -1 &&
