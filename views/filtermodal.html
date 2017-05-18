@@ -51,7 +51,7 @@
                     </div>
                     <select ng-model="filterOptions.estado">
                         <option value="">Todos</option>
-                        <option ng-repeat="(key, value)in allContactada" value="{{obj.key}}">{{obj.value}}</option>
+                        <option ng-repeat="(key, value) in allContactada" value="{{value}}">{{key}}</option>
                     </select>
                 </label>
 
