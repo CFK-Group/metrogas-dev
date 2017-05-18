@@ -111,6 +111,7 @@ angular.module('metrogas')
     $scope.direcciones = ventasService.getVentas(JSON.parse(window.localStorage.getItem('user')).api_token).query();
 
     $scope.allComunas = localStorage.getItem('comunas');
+    console.log($scope.allComunas);
     /*$scope.allNodes = ventasService.getNodes();
     $scope.allCuadrantes = ventasService.getCuadrantes();
     $scope.allStatus =  ventasService.getStatus();
