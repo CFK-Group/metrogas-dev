@@ -15,13 +15,10 @@ angular.module('metrogas')
     .service('UserService', ['$resource', 'baseURL', function($resource, baseURL){
         
         this.getUserData = function (_token){
-            console.log("service: " + _token);
             if(typeof sessionStorage.userSession !== 'undefined'){
                  $resource(baseURL+"userdata", {token: _token}, {'query': {isArray: false}}).query(
                      function(response){
-                         console.log("response: " + response);
                          if(response !== "error"){
-                             console.log("not error: " + response);
                              window.localStorage.setItem('user', angular.toJson(response));
                              return response;
                          }
@@ -34,14 +31,14 @@ angular.module('metrogas')
     .service('ventasService', ['$resource', 'baseURL', function($resource, baseURL){
         this.getVentas = function(token){
             return $resource(baseURL+"getventas", {token: token});
-        }
+        };
         
         this.getByIC = function(_ic){
             return $resource(baseURL+"getbyic", {ic: _ic});
-        }
+        };
         
         this.getById = function(_id){
             return $resource(baseURL+"getbyic", {ic: _id});
-        }
+        };
     }])
 ;
