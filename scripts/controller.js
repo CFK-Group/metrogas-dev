@@ -116,8 +116,7 @@ angular.module('metrogas')
     $scope.allGrilla = ventasService.getGrillas();
     $scope.allRecorrida = [{"value": 0}, {"value": 1}];
     $scope.allContactada = [{"value": 0}, {"value": 1}];
-    $scope.ic = "";
-
+    
     $scope.filterOptions={
         calle: "",
         comuna: "",
