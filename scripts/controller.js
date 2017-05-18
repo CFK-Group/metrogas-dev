@@ -111,16 +111,17 @@ angular.module('metrogas')
     $scope.direcciones = ventasService.getVentas(JSON.parse(window.localStorage.getItem('user')).api_token).query();
 
     $scope.allComunas = localStorage.getItem('comunas');
-    $scope.allNodes = ventasService.getNodes();
+    /*$scope.allNodes = ventasService.getNodes();
     $scope.allCuadrantes = ventasService.getCuadrantes();
     $scope.allStatus =  ventasService.getStatus();
-    
+    */
     $scope.search = function(row) {
         return (
-            angular.lowercase(row.ubicacion[0].comuna).toString().indexOf(angular.lowercase($scope.filterOptions.comuna) || "") !== -1 &&
+            angular.lowercase(row.ubicacion[0].comuna).toString().indexOf(angular.lowercase($scope.filterOptions.comuna) || "") !== -1 /*&&
             angular.lowercase(row.ubicacion[0].nodo).toString().indexOf(angular.lowercase($scope.filterOptions.nodo) || "")!== -1 &&
             angular.lowercase(row.ubicacion[0].cuadrante).toString().indexOf(angular.lowercase($scope.filterOptions.cuadrante) || "") !== -1 &&
             angular.lowercase(row.estado).toString().indexOf(angular.lowercase($scope.filterOptions.estado) || "") !== -1
+            */
         );
     };
 }])
