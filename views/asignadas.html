@@ -8,7 +8,7 @@
 <ion-content>
     <ion-list>
 
-        <ion-item ng-repeat="dir in direcciones" ui-sref="app.edit({ic: dir.IC})">
+        <ion-item ng-repeat="dir in direcciones | filter: search" ui-sref="app.edit({ic: dir.IC})">
             <div class="row">
                 <div class="col col-100">
                     <h2>{{dir.direccion}} {{dir.numero}}</h2>
