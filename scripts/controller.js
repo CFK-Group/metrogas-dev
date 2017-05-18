@@ -99,28 +99,42 @@ angular.module('metrogas')
    
     $scope.resetFilter = function () {
         $scope.filterOptions={
-            comuna: ""
+            calle: "",
+            comuna: "",
+            grilla: "",
+            recorrida: "",
+            contactada: "",
+            ic: ""
         };
     };
     
     $scope.direcciones = ventasService.getVentas(JSON.parse(window.localStorage.getItem('user')).api_token).query();
+    localStorage.setItem('direcciones', $scope.direcciones);
 
     $scope.allComunas = JSON.parse(localStorage.getItem('comunas'));
-    /*$scope.allNodes = ventasService.getNodes();
-    $scope.allCuadrantes = ventasService.getCuadrantes();
-    $scope.allStatus =  ventasService.getStatus();
-    */
+    $scope.allCalles = ventasService.getCalles();
+    $scope.allGrilla = ventasService.getGrillas();
+    $scope.allRecorrida = [{"value": 0}, {"value": 1}];
+    $scope.allContactada = [{"value": 0}, {"value": 1}];
+    $scope.ic = "";
+
     $scope.filterOptions={
-        comuna: ""
+        calle: "",
+        comuna: "",
+        grilla: "",
+        recorrida: "",
+        contactada: "",
+        ic: ""
     };
 
     $scope.search = function(row) {
         return (
-            angular.lowercase(row.comuna).toString().indexOf(angular.lowercase($scope.filterOptions.comuna) || "") !== -1 /*&&
-            angular.lowercase(row.ubicacion[0].nodo).toString().indexOf(angular.lowercase($scope.filterOptions.nodo) || "")!== -1 &&
-            angular.lowercase(row.ubicacion[0].cuadrante).toString().indexOf(angular.lowercase($scope.filterOptions.cuadrante) || "") !== -1 &&
-            angular.lowercase(row.estado).toString().indexOf(angular.lowercase($scope.filterOptions.estado) || "") !== -1
-            */
+            angular.lowercase(row.calle).toString().indexOf(angular.lowercase($scope.filterOptions.calle) || "") !== -1 &&
+            angular.lowercase(row.comuna).toString().indexOf(angular.lowercase($scope.filterOptions.comuna) || "") !== -1 &&
+            angular.lowercase(row.grilla).toString().indexOf(angular.lowercase($scope.filterOptions.grilla) || "") !== -1 &&
+            angular.lowercase(row.recorrida).toString().indexOf(angular.lowercase($scope.filterOptions.recorrida) || "") !== -1 &&
+            angular.lowercase(row.contactada).toString().indexOf(angular.lowercase($scope.filterOptions.contactada) || "") !== -1 &&
+            angular.lowercase(row.ic).toString().indexOf(angular.lowercase($scope.filterOptions.ic) || "") !== -1
         );
     };
 }])

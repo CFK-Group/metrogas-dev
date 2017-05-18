@@ -48,6 +48,24 @@ angular.module('metrogas')
                     return true;
                 }
             );
-        }
+        };
+
+        this.getCalles = function () {
+            $resource(baseURL+"getcalles").query(
+                function (response) {
+                    window.localStorage.setItem('calles', angular.toJson(response));
+                    return true;
+                }
+            );
+        };
+
+        this.getGrillas = function () {
+            $resource(baseURL+"getgrillas").query(
+                function (response) {
+                    window.localStorage.setItem('grillas', angular.toJson(response));
+                    return true;
+                }
+            );
+        };
     }])
 ;
