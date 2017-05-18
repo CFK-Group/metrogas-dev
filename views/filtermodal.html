@@ -11,7 +11,7 @@
                     </div>
                     <select ng-model="filterOptions.comuna">
                         <option value="">Todas</option>
-                        <option ng-repeat="(key, value) in allComunas" value="{{value}}">{{value}}</option>
+                        <option ng-repeat="obj in allComunas" value="{{obj.comuna}}">{{obj.comuna}}</option>
                     </select>
                 </label>
                 <label class="item item-input item-select">
