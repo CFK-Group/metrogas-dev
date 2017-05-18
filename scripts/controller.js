@@ -13,18 +13,16 @@ angular.module('metrogas')
     $scope.login = function() {
         $scope.loginVar = LoginService.loginUser($scope.data.username, $scope.data.password, $scope.data.deviceModel, $scope.data.deviceId).query(
             function(response){
+
                 $scope.loginInfo = response;
-                console.log($scope.loginInfo);
+
                 if($scope.loginInfo.statusCode === 0){
                     
                     sessionStorage.userSession = angular.toJson($scope.loginInfo);
                     
                     var _token = JSON.parse(sessionStorage.userSession).sessionToken;
-                    
-                    console.log("controller: " + _token);
-                    
+
                     $scope.userData = UserService.getUserData(_token);
-                    console.log($scope.userData);
 
                     $rootScope.loginShow = false;
                     $state.go('app');
@@ -47,16 +45,11 @@ angular.module('metrogas')
 
 .controller('SideNavCtrl', ['$rootScope', '$scope', '$ionicSideMenuDelegate', '$state', function ($rootScope, $scope, $ionicSideMenuDelegate, $state) {
 
-    console.log("aaa");
-
     $scope.$watch(function(){
         return window.localStorage.getItem('user');
     }, function(){
         $scope.user = JSON.parse(window.localStorage.getItem('user'));
-        console.log($scope.user);
     });
-
-    console.log($scope.user);
 
     $scope.toggleMenu = function() {
         $ionicSideMenuDelegate.toggleLeft();
@@ -70,6 +63,7 @@ angular.module('metrogas')
         $ionicSideMenuDelegate.toggleLeft(false);
         $rootScope.loginShow = true;
         localStorage.removeItem('user');
+        sessionStorage.removeItem('userSession');
         $state.go('login')
     };
     
@@ -113,7 +107,7 @@ angular.module('metrogas')
     }
     
     $scope.direcciones = ventasService.getVentas(JSON.parse(window.localStorage.getItem('user')).api_token).query();
-    console.log($scope.direcciones);
+
     /*$scope.allComunas = TaskService.getComunas();
     $scope.allNodes = TaskService.getNodes();
     $scope.allCuadrantes = TaskService.getCuadrantes();
@@ -131,7 +125,6 @@ angular.module('metrogas')
 
 .controller('EditCtrl',['$scope', '$stateParams', '$state', 'ventasService', function($scope, $stateParams, $state, ventasService){
     $scope.item = parseInt($stateParams.ic);
-    //console.log($scope.item);
     $scope.venta = ventasService.getByIC($scope.item).query();
-    console.log($scope.venta);
 }])
+;
