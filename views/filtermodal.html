@@ -9,7 +9,7 @@
                     <div class="input-label">
                         Calle
                     </div>
-                    <select ng-model="filterOptions.nodo">
+                    <select ng-model="filterOptions.calle">
                         <option value="">Todos</option>
                         <option ng-repeat="obj in allCalles" value="{{obj.direction}}">{{obj.direccion}}</option>
                     </select>
@@ -29,7 +29,7 @@
                     <div class="input-label">
                         Grilla
                     </div>
-                    <select ng-model="filterOptions.cuadrante">
+                    <select ng-model="filterOptions.grilla">
                         <option value="">Todos</option>
                         <option ng-repeat="obj in allGrilla" value="{{obj.grilla}}">{{obj.grilla}}</option>
                     </select>
@@ -38,6 +38,8 @@
                 <label class="item item-input item-select">
                     <div class="input-label">
                         Recorrida
+                        <br>
+                        {{allRecorrida}}
                     </div>
                     <select ng-model="filterOptions.recorrida">
                         <option value="">Todos</option>
