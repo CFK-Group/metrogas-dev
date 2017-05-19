@@ -118,8 +118,6 @@ angular.module('metrogas')
     $scope.allComunas = JSON.parse(localStorage.getItem('comunas'));
     $scope.allCalles = JSON.parse(localStorage.getItem('calles'));
     $scope.allGrilla = JSON.parse(localStorage.getItem('grillas'));
-    $scope.allRecorrida = [{"no": 0}, {"si": 1}];
-    $scope.allContactada = [{"no": 0}, {"si": 1}];
 
     $scope.filterOptions={
         calle: "",
@@ -131,7 +129,6 @@ angular.module('metrogas')
     };
 
     $scope.search = function(row) {
-        console.log(row);
         return (
             angular.lowercase(row.direccion).toString().indexOf(angular.lowercase($scope.filterOptions.calle) || "") !== -1 &&
             angular.lowercase(row.comuna).toString().indexOf(angular.lowercase($scope.filterOptions.comuna) || "") !== -1 &&

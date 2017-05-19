@@ -38,12 +38,11 @@
                 <label class="item item-input item-select">
                     <div class="input-label">
                         Recorrida
-                        <br>
-                        {{allRecorrida}}
                     </div>
                     <select ng-model="filterOptions.recorrida">
                         <option value="">Todos</option>
-                        <option ng-repeat="(key, value) in allRecorrida" value="{{value}}">{{key}}</option>
+                        <option value="0">Si</option>
+                        <option value="1">No</option>
                     </select>
                 </label>
 
@@ -53,7 +52,8 @@
                     </div>
                     <select ng-model="filterOptions.contactada">
                         <option value="">Todos</option>
-                        <option ng-repeat="(key, value) in allContactada" value="{{value}}">{{key}}</option>
+                        <option value="0">Si</option>
+                        <option value="1">No</option>
                     </select>
                 </label>
 
