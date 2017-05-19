@@ -112,10 +112,15 @@ angular.module('metrogas')
     localStorage.setItem('direcciones', $scope.direcciones);
 
     $scope.allComunas = JSON.parse(localStorage.getItem('comunas'));
+    console.log($scope.allComunas);
     $scope.allCalles = JSON.parse(localStorage.getItem('calles'));
+    console.log($scope.allCalles);
     $scope.allGrilla = JSON.parse(localStorage.getItem('grillas'));
+    console.log($scope.allGrilla);
     $scope.allRecorrida = [{"no": 0}, {"si": 1}];
+    console.log($scope.allrecorrido);
     $scope.allContactada = [{"no": 0}, {"si": 1}];
+    console.log($scope.allContactada);
 
     $scope.filterOptions={
         calle: "",
