@@ -24,8 +24,10 @@ angular.module('metrogas')
 
                     $scope.userData = UserService.getUserData(_token);
 
-                    $scope.allComunas = ventasService.getComunas();
-
+                    ventasService.getComunas();
+                    ventasService.getCalles();
+                    ventasService.getGrillas();
+                    
                     $rootScope.loginShow = false;
                     $state.go('app');
                 }else{
@@ -118,7 +120,7 @@ angular.module('metrogas')
     $scope.allGrilla = JSON.parse(localStorage.getItem('grillas'));
     console.log($scope.allGrilla);
     $scope.allRecorrida = [{"no": 0}, {"si": 1}];
-    console.log($scope.allrecorrido);
+    console.log($scope.allRecorrida);
     $scope.allContactada = [{"no": 0}, {"si": 1}];
     console.log($scope.allContactada);
 
