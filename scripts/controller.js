@@ -25,8 +25,7 @@ angular.module('metrogas')
                     $scope.userData = UserService.getUserData(_token);
                     ventasService.getVentas(_token).query(
                         function(response){
-                            console.log(response);
-                            localStorage.setItem('direcciones', response);
+                            localStorage.setItem('direcciones', angular.toJson(response));
                         }
                     );
                     ventasService.getComunas();
@@ -115,7 +114,7 @@ angular.module('metrogas')
         };
     };
     
-    $scope.direcciones = localStorage.getItem('direcciones');
+    $scope.direcciones = JSON.parse(localStorage.getItem('direcciones'));
     $scope.allComunas = JSON.parse(localStorage.getItem('comunas'));
     $scope.allCalles = JSON.parse(localStorage.getItem('calles'));
     $scope.allGrilla = JSON.parse(localStorage.getItem('grillas'));
