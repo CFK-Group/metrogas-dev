@@ -138,7 +138,7 @@ angular.module('metrogas')
             angular.lowercase(row.grilla).toString().indexOf(angular.lowercase($scope.filterOptions.grilla) || "") !== -1 &&
             angular.lowercase(row.recorrida).toString().indexOf(angular.lowercase($scope.filterOptions.recorrida) || "") !== -1 &&
             angular.lowercase(row.contactada).toString().indexOf(angular.lowercase($scope.filterOptions.contactada) || "") !== -1 &&
-            angular.lowercase(row.ic).toString().indexOf(angular.lowercase($scope.filterOptions.ic) || "") !== -1
+            angular.lowercase(row.IC).toString().indexOf(angular.lowercase($scope.filterOptions.ic) || "") !== -1
         );
     };
 }])
