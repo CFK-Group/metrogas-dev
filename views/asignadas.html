@@ -21,9 +21,9 @@
                     <p>Grilla: {{dir.grilla}}</p>  
                 </div>
                 <div class="col col-50">
-                    <p>Recorrida: No </p>
-                    <p>Contactada: No</p>
-                    <p>Interesa: Sin Información</p>   
+                    <p>Recorrida: <span ng-if="dir.recorrida">Si</span><span ng-if="!dir.recorrida">No</span></p>
+                    <p>Contactada: <span ng-if="dir.contactada">Si</span><span ng-if="!dir.contactada">No</span></p>
+                    <p>Interesa: Sin Información</p>
                 </div>   
             </div>
         </ion-item>
