@@ -23,11 +23,15 @@ angular.module('metrogas')
                     var _token = JSON.parse(sessionStorage.userSession).sessionToken;
 
                     $scope.userData = UserService.getUserData(_token);
-
+                    ventasService.getVentas(JSON.parse(window.localStorage.getItem('user')).api_token).query(
+                        function(response){
+                            localStorage.setItem('direcciones', $scope.direcciones);
+                        }
+                    );
                     ventasService.getComunas();
                     ventasService.getCalles();
                     ventasService.getGrillas();
-                    
+
                     $rootScope.loginShow = false;
                     $state.go('app');
                 }else{
@@ -110,19 +114,12 @@ angular.module('metrogas')
         };
     };
     
-    $scope.direcciones = ventasService.getVentas(JSON.parse(window.localStorage.getItem('user')).api_token).query();
-    localStorage.setItem('direcciones', $scope.direcciones);
-
+    $scope.direcciones = localStorage.getItem('direcciones');
     $scope.allComunas = JSON.parse(localStorage.getItem('comunas'));
-    console.log($scope.allComunas);
     $scope.allCalles = JSON.parse(localStorage.getItem('calles'));
-    console.log($scope.allCalles);
     $scope.allGrilla = JSON.parse(localStorage.getItem('grillas'));
-    console.log($scope.allGrilla);
     $scope.allRecorrida = [{"no": 0}, {"si": 1}];
-    console.log($scope.allRecorrida);
     $scope.allContactada = [{"no": 0}, {"si": 1}];
-    console.log($scope.allContactada);
 
     $scope.filterOptions={
         calle: "",

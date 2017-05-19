@@ -39,9 +39,9 @@
                     <div class="input-label">
                         Recorrida
                     </div>
-                    <select ng-model="filterOptions.estado">
+                    <select ng-model="filterOptions.recorrida">
                         <option value="">Todos</option>
-                        <option ng-repeat="(key, value)in allRecorrida" value="{{obj.key}}">{{obj.value}}</option>
+                        <option ng-repeat="(key, value)in allRecorrida" value="{{value}}">{{key}}</option>
                     </select>
                 </label>
 
@@ -49,7 +49,7 @@
                     <div class="input-label">
                         Contactada
                     </div>
-                    <select ng-model="filterOptions.estado">
+                    <select ng-model="filterOptions.contactada">
                         <option value="">Todos</option>
                         <option ng-repeat="(key, value) in allContactada" value="{{value}}">{{key}}</option>
                     </select>
