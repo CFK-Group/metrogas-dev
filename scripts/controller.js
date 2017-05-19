@@ -132,7 +132,7 @@ angular.module('metrogas')
 
     $scope.search = function(row) {
         return (
-            angular.lowercase(row.calle).toString().indexOf(angular.lowercase($scope.filterOptions.calle) || "") !== -1 &&
+            angular.lowercase(row.direccion).toString().indexOf(angular.lowercase($scope.filterOptions.calle) || "") !== -1 &&
             angular.lowercase(row.comuna).toString().indexOf(angular.lowercase($scope.filterOptions.comuna) || "") !== -1 &&
             angular.lowercase(row.grilla).toString().indexOf(angular.lowercase($scope.filterOptions.grilla) || "") !== -1 &&
             angular.lowercase(row.recorrida).toString().indexOf(angular.lowercase($scope.filterOptions.recorrida) || "") !== -1 &&
