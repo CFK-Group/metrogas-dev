@@ -25,7 +25,7 @@ angular.module('metrogas')
                     $scope.userData = UserService.getUserData(_token);
                     ventasService.getVentas(JSON.parse(_token)).query(
                         function(response){
-                            localStorage.setItem('direcciones', $scope.direcciones);
+                            localStorage.setItem('direcciones', response);
                         }
                     );
                     ventasService.getComunas();
