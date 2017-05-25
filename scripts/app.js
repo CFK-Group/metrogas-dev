@@ -56,15 +56,20 @@ angular.module('metrogas', ['ionic','ui.router','ngCordova','angular.filter','ng
     function($ionicSideMenuDelegate, $ionicPlatform, $state){
         $ionicPlatform.registerBackButtonAction(function (event) {
             console.log($ionicSideMenuDelegate.isOpen);
-            if($ionicSideMenuDelegate.isOpen){
-                $ionicSideMenuDelegate.toggleLeft(false);
                 console.log($state.current.name);
                 if($state.current.name=="app" || $state.current.name=="login"){
-                    navigator.app.exitApp();
+                    if($ionicSideMenuDelegate.isOpen()) {
+                        $ionicSideMenuDelegate.toggleLeft(false);
+                    }else {
+                        navigator.app.exitApp();
+                    }
                 }
                 else {
-                    navigator.app.backHistory();
+                    if($ionicSideMenuDelegate.isOpen()) {
+                        $ionicSideMenuDelegate.toggleLeft(false);
+                    }else {
+                        navigator.app.backHistory();
+                    }
                 }
-            }
         }, 100)}
     );
