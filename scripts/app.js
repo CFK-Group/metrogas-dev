@@ -48,12 +48,9 @@ angular.module('metrogas', ['ionic','ui.router','ngCordova','angular.filter','ng
     $urlRouterProvider.otherwise('login');
 
 }).run(
-    function($rootScope) {
+    function($rootScope, $ionicSideMenuDelegate, $ionicPlatform, $state){
         $rootScope.loginShow= true;
         $rootScope.user = "";
-    },
-
-    function($ionicSideMenuDelegate, $ionicPlatform, $state){
         $ionicPlatform.registerBackButtonAction(function (event) {
             console.log($ionicSideMenuDelegate.isOpen);
                 console.log($state.current.name);
