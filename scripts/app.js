@@ -26,7 +26,7 @@ angular.module('metrogas', ['ionic','ui.router','ngCordova','angular.filter','ng
             })
 
         .state('app.asignadas',{
-                url: 'asignadas',
+                url: '/asignadas',
                 views: {
                     'content@': {
                         templateUrl: 'views/asignadas.html',
@@ -36,7 +36,7 @@ angular.module('metrogas', ['ionic','ui.router','ngCordova','angular.filter','ng
             })
 
         .state('app.edit',{
-                url: 'edit/:ic',
+                url: '/edit/:ic',
                 views: {
                     'content@': {
                         templateUrl: 'views/edit.html',
@@ -47,8 +47,22 @@ angular.module('metrogas', ['ionic','ui.router','ngCordova','angular.filter','ng
 
     $urlRouterProvider.otherwise('login');
 
-}).run(function($rootScope) {
-    $rootScope.loginShow= true;
-    $rootScope.user = "";
-})
-;
+}).run(
+    function($rootScope) {
+        $rootScope.loginShow= true;
+        $rootScope.user = "";
+    },
+
+    function($ionicSideMenuDelegate, $ionicPlatform, $state){
+        $ionicPlatform.registerBackButtonAction(function (event) {
+            if($ionicSideMenuDelegate.isOpen){
+                $ionicSideMenuDelegate.toggleLeft(false);
+                if($state.current.name=="app" || $state.current.name=="login"){
+                    navigator.app.exitApp();
+                }
+                else {
+                    navigator.app.backHistory();
+                }
+            }
+        }, 100)}
+    );
