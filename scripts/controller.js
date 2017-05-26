@@ -141,12 +141,13 @@ angular.module('metrogas')
 }])
 
 .controller('EditCtrl',['$scope', '$stateParams', '$state', 'ventasService', function($scope, $stateParams, $state, ventasService){
-    var item = parseInt($stateParams.ic);
-    $scope.direcciones = JSON.parse(localStorage.getItem('direcciones'));
+    var item = $stateParams.ic;
+    var direcciones = JSON.parse(localStorage.getItem('direcciones'));
 
     function findDireccion(address) {
         return address.IC === item;
     }
-    console.log($scope.direcciones.find(findDireccion));
+    $scope.direccion = direcciones.find(findDireccion);
+    console.log(direcciones.find(findDireccion));
 }])
 ;
