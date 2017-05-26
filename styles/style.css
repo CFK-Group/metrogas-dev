@@ -2,6 +2,9 @@
     background-color: #71AFE0 !important;
 }
 
+.bar-footer{
+    height: 50px !important;
+}
 .profile img{
     width: 25%;
     margin-bottom: 6%;

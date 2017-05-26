@@ -143,8 +143,10 @@ angular.module('metrogas')
 .controller('EditCtrl',['$scope', '$stateParams', '$state', 'ventasService', function($scope, $stateParams, $state, ventasService){
     var item = parseInt($stateParams.ic);
     $scope.direcciones = JSON.parse(localStorage.getItem('direcciones'));
-    console.log($scope.direcciones);
-    var a = $filter('filter')(myArray, {'ic': item});
-    console.log(a);
+
+    function findDireccion(address) {
+        return address.IC === item;
+    }
+    console.log($scope.direcciones.find(findDireccion));
 }])
 ;
