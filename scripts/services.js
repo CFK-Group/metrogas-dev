@@ -34,7 +34,7 @@ angular.module('metrogas')
         };
         
         this.getByIC = function(_ic){
-            return $resource(baseURL+"getbyic", {ic: _ic});
+            return $resource(baseURL+"getbyic", {ic: _ic}, {'query': {isArray: false}});
         };
         
         this.getById = function(_id){
