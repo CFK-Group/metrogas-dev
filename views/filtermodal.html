@@ -60,12 +60,10 @@
                 <label class="item item-input item-select">
                     <div class="input-label">
                         Carga de datos
-                        <br>
-                        {{allCargas}}
                     </div>
                     <select ng-model="filterOptions.carga">
                         <option value="">Todos</option>
-                        <option ng-repeat="obj in allCargas" value="{{obj.id}}">{{obj.nombre}}</option>
+                        <option ng-repeat="obj in allCargas | filter: unique" value="{{obj.id}}">{{obj.nombre}}</option>
                     </select>
                 </label>
 
