@@ -31,6 +31,7 @@ angular.module('metrogas')
                     ventasService.getComunas();
                     ventasService.getCalles();
                     ventasService.getGrillas();
+                    ventasService.getCargas();
 
                     $rootScope.loginShow = false;
                     $state.go('app');
@@ -110,7 +111,8 @@ angular.module('metrogas')
             grilla: "",
             recorrida: "",
             contactada: "",
-            ic: ""
+            ic: "",
+            carga: ""
         };
     };
     
@@ -118,6 +120,7 @@ angular.module('metrogas')
     $scope.allComunas = JSON.parse(localStorage.getItem('comunas'));
     $scope.allCalles = JSON.parse(localStorage.getItem('calles'));
     $scope.allGrilla = JSON.parse(localStorage.getItem('grillas'));
+    $scope.allCargas = JSON.parse(localStorage.getItem('cargas'));
 
     $scope.filterOptions={
         calle: "",
@@ -125,7 +128,8 @@ angular.module('metrogas')
         grilla: "",
         recorrida: "",
         contactada: "",
-        ic: ""
+        ic: "",
+        carga: ""
     };
 
     $scope.search = function(row) {
@@ -135,6 +139,7 @@ angular.module('metrogas')
             angular.lowercase(row.grilla).toString().indexOf(angular.lowercase($scope.filterOptions.grilla) || "") !== -1 &&
             angular.lowercase(row.recorrida).toString().indexOf(angular.lowercase($scope.filterOptions.recorrida) || "") !== -1 &&
             angular.lowercase(row.contactada).toString().indexOf(angular.lowercase($scope.filterOptions.contactada) || "") !== -1 &&
+            angular.lowercase(row.carga).toString().indexOf(angular.lowercase($scope.filterOptions.carga) || "") !== -1 &&
             angular.lowercase(row.IC).toString().indexOf(angular.lowercase($scope.filterOptions.ic) || "") !== -1
         );
     };

@@ -32,17 +32,20 @@ angular.module('metrogas')
         this.getVentas = function(token){
             return $resource(baseURL+"getventas", {token: token});
         };
-        
+
+        //uses only if user has internet connection
         this.getByIC = function(_ic){
             return $resource(baseURL+"getbyic", {ic: _ic}, {'query': {isArray: false}});
         };
-        
+
+        //uses only if user has internet connection
         this.getById = function(_id){
             return $resource(baseURL+"getbyic", {ic: _id});
         };
 
+        //get all comunas related to the user for use on filters
         this.getComunas = function () {
-            $resource(baseURL+"getcomunas").query(
+            $resource(baseURL+"getcomunas", {token: token}).query(
                 function (response) {
                     window.localStorage.setItem('comunas', angular.toJson(response));
                     return true;
@@ -50,8 +53,9 @@ angular.module('metrogas')
             );
         };
 
+        //get all calles related to the user for use on filters
         this.getCalles = function () {
-            $resource(baseURL+"getcalles").query(
+            $resource(baseURL+"getcalles", {token: token}).query(
                 function (response) {
                     window.localStorage.setItem('calles', angular.toJson(response));
                     return true;
@@ -59,10 +63,20 @@ angular.module('metrogas')
             );
         };
 
+        //get all grillas related to the user for use on filters
         this.getGrillas = function () {
-            $resource(baseURL+"getgrillas").query(
+            $resource(baseURL+"getgrillas", {token: token}).query(
                 function (response) {
                     window.localStorage.setItem('grillas', angular.toJson(response));
+                    return true;
+                }
+            );
+        };
+
+        this.getCargas = function () {
+            $resource(baseURL+"getCargas", {token: token}).query(
+                function (response) {
+                    window.localStorage.setItem('cargas', angular.toJson(response));
                     return true;
                 }
             );
