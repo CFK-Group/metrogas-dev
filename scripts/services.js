@@ -44,7 +44,7 @@ angular.module('metrogas')
         };
 
         //get all comunas related to the user for use on filters
-        this.getComunas = function () {
+        this.getComunas = function (token) {
             $resource(baseURL+"getcomunas", {token: token}).query(
                 function (response) {
                     window.localStorage.setItem('comunas', angular.toJson(response));
@@ -54,7 +54,7 @@ angular.module('metrogas')
         };
 
         //get all calles related to the user for use on filters
-        this.getCalles = function () {
+        this.getCalles = function (token) {
             $resource(baseURL+"getcalles", {token: token}).query(
                 function (response) {
                     window.localStorage.setItem('calles', angular.toJson(response));
@@ -64,7 +64,7 @@ angular.module('metrogas')
         };
 
         //get all grillas related to the user for use on filters
-        this.getGrillas = function () {
+        this.getGrillas = function (token) {
             $resource(baseURL+"getgrillas", {token: token}).query(
                 function (response) {
                     window.localStorage.setItem('grillas', angular.toJson(response));

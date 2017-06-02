@@ -28,10 +28,10 @@ angular.module('metrogas')
                             localStorage.setItem('direcciones', angular.toJson(response));
                         }
                     );
-                    ventasService.getComunas();
-                    ventasService.getCalles();
-                    ventasService.getGrillas();
-                    ventasService.getCargas();
+                    ventasService.getComunas(_token);
+                    ventasService.getCalles(_token);
+                    ventasService.getGrillas(_token);
+                    ventasService.getCargas(_token);
 
                     $rootScope.loginShow = false;
                     $state.go('app');
