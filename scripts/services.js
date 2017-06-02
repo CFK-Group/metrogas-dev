@@ -73,7 +73,7 @@ angular.module('metrogas')
             );
         };
 
-        this.getCargas = function () {
+        this.getCargas = function (token) {
             $resource(baseURL+"getCargas", {token: token}).query(
                 function (response) {
                     window.localStorage.setItem('cargas', angular.toJson(response));
