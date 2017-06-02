@@ -121,7 +121,6 @@ angular.module('metrogas')
     $scope.allCalles = JSON.parse(localStorage.getItem('calles'));
     $scope.allGrilla = JSON.parse(localStorage.getItem('grillas'));
     $scope.allCargas = JSON.parse(localStorage.getItem('cargas'));
-
     $scope.filterOptions={
         calle: "",
         comuna: "",
