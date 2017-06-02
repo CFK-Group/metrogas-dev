@@ -74,7 +74,7 @@ angular.module('metrogas')
         };
 
         this.getCargas = function (token) {
-            $resource(baseURL+"getCargas", {token: token}).query(
+            $resource(baseURL+"getcargas", {token: token}).query(
                 function (response) {
                     window.localStorage.setItem('cargas', angular.toJson(response));
                     return true;
