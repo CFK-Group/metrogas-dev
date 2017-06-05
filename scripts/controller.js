@@ -45,7 +45,7 @@ angular.module('metrogas')
             function(response){
                 $ionicPopup.alert({
                     title: 'Ups!',
-                    template: 'Algo ha pasado, vuelve a intentar más tarde'
+                    template: 'Algo ha pasado, vuelve a intentar más tarde' + response
                 });
             }
         );
@@ -82,13 +82,18 @@ angular.module('metrogas')
         
 }])
 
-.controller('AsignCtrl',['$scope', '$ionicModal', 'ventasService', function($scope, $ionicModal, ventasService){
+.controller('AsignCtrl',['$scope', '$ionicModal', 'ventasService', function($scope, $ionicModal){
     
     $ionicModal.fromTemplateUrl('views/filtermodal.html',{
         scope: $scope,
         animation: 'slide-in-up'
     }).then(function(modal){
         $scope.modal = modal;
+        $scope.direcciones = JSON.parse(localStorage.getItem('direcciones'));
+        $scope.allComunas = JSON.parse(localStorage.getItem('comunas'));
+        $scope.allCalles = JSON.parse(localStorage.getItem('calles'));
+        $scope.allGrilla = JSON.parse(localStorage.getItem('grillas'));
+        $scope.allCargas = JSON.parse(localStorage.getItem('cargas'));
     });
     
     $scope.openModal = function() {
@@ -116,11 +121,6 @@ angular.module('metrogas')
         };
     };
     
-    $scope.direcciones = JSON.parse(localStorage.getItem('direcciones'));
-    $scope.allComunas = JSON.parse(localStorage.getItem('comunas'));
-    $scope.allCalles = JSON.parse(localStorage.getItem('calles'));
-    $scope.allGrilla = JSON.parse(localStorage.getItem('grillas'));
-    $scope.allCargas = JSON.parse(localStorage.getItem('cargas'));
     $scope.filterOptions={
         calle: "",
         comuna: "",
