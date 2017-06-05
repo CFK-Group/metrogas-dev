@@ -63,7 +63,7 @@
                     </div>
                     <select ng-model="filterOptions.carga">
                         <option value="">Todos</option>
-                        <option ng-repeat="obj in allCargas | unique: 'obj.nombre'" value="{{obj.id}}">{{obj.nombre}}</option>
+                        <option ng-repeat="obj in allCargas | unique: 'obj'" value="{{obj.id}}">{{obj.nombre}}</option>
                     </select>
                 </label>
 
