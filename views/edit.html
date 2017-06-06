@@ -15,8 +15,8 @@
     <ion-list>
         <ion-item ng-repeat="(key, value) in direccion">
             <label>
-                <span class="input-label">{{key}}</span>
-                <input type="text" value="{{value}}">
+                <b><span class="input-label">{{key | uppercase}}</span></b>
+                <input type="text" value="{{value}}" style="width: 100%">
             </label>
         </ion-item>
     </ion-list>
