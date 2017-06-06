@@ -146,6 +146,7 @@ angular.module('metrogas')
 }])
 
 .controller('EditCtrl',['$scope', '$stateParams', '$state', 'ventasService', function($scope, $stateParams, $state, ventasService){
+    $scope.choice = "";
     var item = $stateParams.ic;
     var direcciones = JSON.parse(localStorage.getItem('direcciones'));
 
