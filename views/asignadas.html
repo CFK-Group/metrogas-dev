@@ -11,7 +11,11 @@
         <ion-item ng-repeat="dir in direcciones | filter: search" ui-sref="app.edit({ic: dir.IC})">
             <div class="row">
                 <div class="col col-100">
-                    <h2>{{dir.direccion}} {{dir.numero}}</h2>
+                    <h2>{{dir.direccion}} {{dir.numero}}
+                        <br>
+                        <span ng-if="dir.casa!==null">Casa {{dir.casa}}</span>
+                        <span ng-if="dir.block!==null">Block{{dir.block}}</span>
+                        <span ng-if="dir.dpto!==null">Depto {{dir.dpto}}</span></h2>
                 </div>
             </div>
             <div class="row">
