@@ -15,12 +15,12 @@
             <ion-radio ng-model="choice" ng-value="'D'">Choose D</ion-radio>
         </ion-slide-page>
 
-        <ion-slide-page ion-wizard-step next-condition="choice=='B'" class="has-header" ng-if="choice == 'A'">
+        <ion-slide-page ion-wizard-step next-condition="choice=='B'" class="has-header" ng-show="choice == 'A'">
             <div class="box yellow"><h1>YELLOW</h1></div>
             <ion-radio ng-model="choice" ng-value="'B'">Choose A</ion-radio>
         </ion-slide-page>
 
-        <ion-slide-page ion-wizard-step next-condition="choice=='C'" class="has-header" ng-if="choice == 'D'">
+        <ion-slide-page ion-wizard-step next-condition="choice=='C'" class="has-header" ng-show="choice == 'D'">
             <div class="box pink"><h1>PINK</h1></div>
             <ion-radio ng-model="choice" ng-value="'C'">Choose A</ion-radio>
         </ion-slide-page>
