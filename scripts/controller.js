@@ -181,12 +181,15 @@ angular.module('metrogas')
     }
 
     $scope.save = function(){
-        if (localStorage.getItem('modified_dir') != null){
-            var existent = localStorage.getItem('modified_dir');
-            existent.push($scope.model);
-            localStorage.setItem('modified_dir', existent);
-        }else{
-            localStorage.setItem('modified_dir', $scope.model);
+
+        if (isEquivalent($scope.model, $scope.direccion)) {
+            if (localStorage.getItem('modified_dir') != null) {
+                var existent = localStorage.getItem('modified_dir');
+                existent.push($scope.model);
+                localStorage.setItem('modified_dir', existent);
+            } else {
+                localStorage.setItem('modified_dir', $scope.model);
+            }
         }
 
         console.log($scope.model);
