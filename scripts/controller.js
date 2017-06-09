@@ -153,6 +153,12 @@ angular.module('metrogas')
         return address.IC === item; //
     }
     $scope.direccion = direcciones.find(findDireccion);
-    console.log(direcciones.find(findDireccion));
+    $scope.model = $scope.direccion;
+
+    setInterval(function () {
+        console.log($scope.model);
+    }, 1000);
+
+
 }])
 ;
