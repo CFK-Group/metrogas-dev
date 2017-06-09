@@ -155,12 +155,10 @@ angular.module('metrogas')
     $scope.direccion = direcciones.find(findDireccion);
     $scope.model = JSON.parse(JSON.stringify($scope.direccion));
 
-    setInterval(function () {
-        console.log($scope.model);
-        console.log($scope.direccion);
-        console.log(isEquivalent($scope.model, $scope.direccion));
-        console.log('-------------');
-    }, 1000);
+    console.log($scope.model);
+    console.log($scope.direccion);
+    console.log(isEquivalent($scope.model, $scope.direccion));
+    console.log('-------------');
 
     function isEquivalent(a, b) {
         // Create arrays of property names
