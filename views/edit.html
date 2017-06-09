@@ -6,7 +6,59 @@
 </ion-header-bar>
 <ion-content style="margin-bottom: 50px;">
 
+    <!-- Tocar puerta -->
+    <div class="card">
+        <div class="item item-text-wrap">
+            <h2>¿Tocó Puerta?</h2>
+            <ion-list>
+                <ion-radio ng-model="choice" ng-value="'A'">SI</ion-radio>
+                <ion-radio ng-model="choice" ng-value="'B'">NO</ion-radio>
+            </ion-list>
+        </div>
+    </div>
 
+    <!-- Hacer contacto -->
+    <div class="card">
+        <div class="item item-text-wrap">
+            <h2>¿Hizo contacto?</h2>
+            <ion-list>
+                <ion-radio ng-model="choice" ng-value="'A'">SI</ion-radio>
+                <ion-radio ng-model="choice" ng-value="'B'">NO</ion-radio>
+            </ion-list>
+        </div>
+    </div>
+
+    <!-- Motivo NO contacto -->
+    <div class="card">
+        <div class="item item-text-wrap">
+            <h2>Motivo por el qué no hizo contacto</h2>
+            <div class="list">
+                <select>
+                    <option>No se</option>
+                    <option selected>No importa</option>
+                    <option>Azul es un color</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="item item-text-wrap">
+            This is a basic Card which contains an item that has wrapping text.
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="item item-text-wrap">
+            This is a basic Card which contains an item that has wrapping text.
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="item item-text-wrap">
+            This is a basic Card which contains an item that has wrapping text.
+        </div>
+    </div>
 
     <!--<ion-list>
         <ion-item ng-repeat="(key, value) in direccion">
