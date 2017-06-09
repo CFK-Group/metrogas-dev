@@ -155,11 +155,6 @@ angular.module('metrogas')
     $scope.direccion = direcciones.find(findDireccion);
     $scope.model = JSON.parse(JSON.stringify($scope.direccion));
 
-    console.log($scope.model);
-    console.log($scope.direccion);
-    console.log(isEquivalent($scope.model, $scope.direccion));
-    console.log('-------------');
-
     function isEquivalent(a, b) {
         // Create arrays of property names
         var aProps = Object.getOwnPropertyNames(a);
@@ -183,6 +178,22 @@ angular.module('metrogas')
         // If we made it this far, objects
         // are considered equivalent
         return true;
+    }
+
+    $scope.save = function(){
+        if (localStorage.getItem('modified_dir') != null){
+            var existent = localStorage.getItem('modified_dir');
+            existent.push($scope.model);
+            localStorage.setItem('modified_dir', existent);
+        }else{
+            localStorage.setItem('modified_dir', $scope.model);
+        }
+
+        console.log($scope.model);
+        console.log($scope.direccion);
+        console.log(isEquivalent($scope.model, $scope.direccion));
+        console.log('-------------');
+
     }
 
 }])
