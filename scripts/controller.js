@@ -157,6 +157,7 @@ angular.module('metrogas')
 
     setInterval(function () {
         console.log($scope.model);
+        console.log($scope.model == $scope.direccion);
     }, 1000);
 
 
