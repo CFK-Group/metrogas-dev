@@ -157,13 +157,17 @@ angular.module('metrogas')
 
     setInterval(function () {
         console.log($scope.model);
+        console.log($scope.direccion);
         console.log(isEquivalent($scope.model, $scope.direccion));
+        console.log('-------------');
     }, 1000);
 
     function isEquivalent(a, b) {
         // Create arrays of property names
         var aProps = Object.getOwnPropertyNames(a);
         var bProps = Object.getOwnPropertyNames(b);
+        console.log(aProps);
+        console.log(bProps);
         // If number of properties is different,
         // objects are not equivalent
         if (aProps.length != bProps.length) {
