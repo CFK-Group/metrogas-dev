@@ -150,9 +150,10 @@ angular.module('metrogas')
     var direcciones = JSON.parse(localStorage.getItem('direcciones')); //get direcciones from localstorage
 
     function findDireccion(address) {
-        return address.IC === item; //
+        return address.IC === item; // verifica si el campo IC es igual al parametro  de la url
     }
     $scope.direccion = direcciones.find(findDireccion);
+    console.log($scope.direccion);
     $scope.model = JSON.parse(JSON.stringify($scope.direccion));
 
     function isEquivalent(a, b) {
@@ -183,8 +184,9 @@ angular.module('metrogas')
     $scope.save = function(){
         var arr = [];
         if (!isEquivalent($scope.model, $scope.direccion)) {
-            if (localStorage.getItem('modified_dir') != null) {
+            if (localStorage.getItem('modified_dir') !== null) {
                 var existent = JSON.parse(localStorage.getItem('modified_dir'));
+                //arr.find(findDireccion);
                 arr.push(existent);
                 arr.push($scope.model);
                 localStorage.setItem('modified_dir', angular.toJson(arr));
