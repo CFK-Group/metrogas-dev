@@ -6,8 +6,10 @@
 </ion-header-bar>
 <ion-content style="margin-bottom: 50px;">
 
-    <!-- Tocar puerta -->
+
     <form>
+
+        <!-- Tocar puerta -->
         <div class="card">
             <div class="item item-text-wrap">
                 <h2>¿Tocó Puerta?</h2>
@@ -34,7 +36,7 @@
             <div class="item item-text-wrap">
                 <h2>Motivo por el qué no hizo contacto</h2>
                 <div class="list">
-                    <label class="item item-input item-select">
+                    <label class="item item-input item-select" id="label">
                         <select>
                             <option>No se</option>
                             <option>No importa</option>
@@ -45,9 +47,16 @@
             </div>
         </div>
 
+        <!-- Editar datos de contacto-->
         <div class="card">
             <div class="item item-text-wrap">
-                This is a basic Card which contains an item that has wrapping text.
+                <p>Telefono: {{direccion.fono_BBDD}}</p>
+                <p>Correo: {{direccion.correo_BBDD}}</p>
+
+                <input type="text" ng-model="model.nombre">
+                <input type="text" ng-model="model.fono_actualizado">
+                <input type="text" ng-model="model.correo_actualizado">
+
             </div>
         </div>
 
