@@ -37,10 +37,10 @@
                 <h2>Motivo por el qué no hizo contacto</h2>
                 <div class="list">
                     <label class="item item-input item-select" id="label">
-                        <select>
-                            <option>No se</option>
-                            <option>No importa</option>
-                            <option>Paq kieres saber eso jaja salu2!</option>
+                        <select ng-model="model.contactada">
+                            <option value="no sabe">No se</option>
+                            <option value="no importa">No importa</option>
+                            <option value="salu2">Paq kieres saber eso jaja salu2!</option>
                         </select>
                     </label>
                 </div>
@@ -53,9 +53,20 @@
                 <p>Telefono: {{direccion.fono_BBDD}}</p>
                 <p>Correo: {{direccion.correo_BBDD}}</p>
 
-                <input type="text" ng-model="model.nombre">
-                <input type="text" ng-model="model.fono_actualizado">
-                <input type="text" ng-model="model.correo_actualizado">
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label">Nombre</span>
+                    <input type="text" placeholder="Juan Perez" ng-model="model.nombre">
+                </label>
+
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label">Correo Actualizado</span>
+                    <input type="text" placeholder="correo@ejemplo.com" ng-model="model.correo_actualizado">
+                </label>
+
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label">Teléfono Actualizado</span>
+                    <input type="text" placeholder="John" ng-model="model.fono_actualizado">
+                </label>
 
             </div>
         </div>
