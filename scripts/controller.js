@@ -181,12 +181,13 @@ angular.module('metrogas')
     }
 
     $scope.save = function(){
-
+        var arr = [];
         if (!isEquivalent($scope.model, $scope.direccion)) {
             if (localStorage.getItem('modified_dir') != null) {
                 var existent = JSON.parse(localStorage.getItem('modified_dir'));
-                existent.push($scope.model);
-                localStorage.setItem('modified_dir', angular.toJson(existent));
+                arr.push(existent);
+                arr.push($scope.model);
+                localStorage.setItem('modified_dir', angular.toJson(arr));
             } else {
                 localStorage.setItem('modified_dir', [angular.toJson($scope.model)]);
             }
