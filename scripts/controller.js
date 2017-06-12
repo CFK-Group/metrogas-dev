@@ -188,7 +188,7 @@ angular.module('metrogas')
                 existent.push($scope.model);
                 localStorage.setItem('modified_dir', angular.toJson(existent));
             } else {
-                localStorage.setItem('modified_dir', angular.toJson($scope.model));
+                localStorage.setItem('modified_dir', [angular.toJson($scope.model)]);
             }
         }
 
