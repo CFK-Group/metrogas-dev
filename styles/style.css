@@ -95,3 +95,7 @@ a.button{
 #label{
     height: 35px;
 }
+
+.input-label{
+    width: auto !important;
+}
