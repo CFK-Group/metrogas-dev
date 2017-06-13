@@ -156,6 +156,7 @@ angular.module('metrogas')
     console.log($scope.direccion);
     $scope.model = JSON.parse(JSON.stringify($scope.direccion));
 
+    /*
     function isEquivalent(a, b) {
         // Create arrays of property names
         var aProps = Object.getOwnPropertyNames(a);
@@ -180,8 +181,12 @@ angular.module('metrogas')
         // are considered equivalent
         return true;
     }
+    */
+    $scope.edit = function(){
+        ventasService.edit().update({IC: $scope.model.IC}, $scope.model);
+        /*
+        PARA OFFLINE
 
-    $scope.save = function(){
         var arr = [];
         if (!isEquivalent($scope.model, $scope.direccion)) { //evalua si el elemento fue modificado o no comparandolo con el mismo elemento en el array original
             if (localStorage.getItem('modified_dir') !== null) { //si existía algun elemento modificado en cola se agrega este elemento a la cola, de lo contrario
@@ -193,7 +198,7 @@ angular.module('metrogas')
                 arr.push($scope.model);
                 localStorage.setItem('modified_dir', [angular.toJson(arr)]);
             }
-        }
+        }*/
 
         console.log($scope.model);
         console.log($scope.direccion);
