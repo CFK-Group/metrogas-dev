@@ -183,7 +183,7 @@ angular.module('metrogas')
     }
     */
     $scope.edit = function(){
-        ventasService.edit().update({IC: $scope.model.IC}, $scope.model);
+        console.log(ventasService.edit().update({IC: $scope.model.IC}, $scope.model));
         /*
         PARA OFFLINE
 

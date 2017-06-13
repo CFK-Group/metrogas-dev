@@ -83,7 +83,7 @@ angular.module('metrogas')
         };
 
         this.edit = function (data){
-            return $resource(baseURL+"edit", null, {'update':{method:'PUT'}});
+            return $resource(baseURL, null, {'edit':{method:'PUT'}});
         }
     }])
 ;
