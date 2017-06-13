@@ -164,7 +164,7 @@ angular.module('metrogas')
         console.log(bProps);
         // If number of properties is different,
         // objects are not equivalent
-        if (aProps.length != bProps.length) {
+        if (aProps.length !== bProps.length) {
             return false;
         }
         for (var i = 0; i < aProps.length; i++) {
@@ -183,18 +183,15 @@ angular.module('metrogas')
 
     $scope.save = function(){
         var arr = [];
-        if (!isEquivalent($scope.model, $scope.direccion)) {
-            if (localStorage.getItem('modified_dir') !== null) {
+        if (!isEquivalent($scope.model, $scope.direccion)) { //evalua si el elemento fue modificado o no comparandolo con el mismo elemento en el array original
+            if (localStorage.getItem('modified_dir') !== null) { //si existía algun elemento modificado en cola se agrega este elemento a la cola, de lo contrario
                 var existent = JSON.parse(localStorage.getItem('modified_dir'));
-                //arr.find(findDireccion);
-                /*
-                UNA VEZ QUE ESTÉN DENTRO DE ESTE ITEM SE DEBEN BLOQUEAR ASI NO SE PODRÁ EDITAR UN CAMPO YA EDITADO.
-                 */
                 arr.push(existent);
                 arr.push($scope.model);
                 localStorage.setItem('modified_dir', angular.toJson(arr));
-            } else {
-                localStorage.setItem('modified_dir', [angular.toJson($scope.model)]);
+            } else { //se crea el elemento
+                arr.push($scope.model);
+                localStorage.setItem('modified_dir', [angular.toJson(arr)]);
             }
         }
 
