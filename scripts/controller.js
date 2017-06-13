@@ -187,6 +187,9 @@ angular.module('metrogas')
             if (localStorage.getItem('modified_dir') !== null) {
                 var existent = JSON.parse(localStorage.getItem('modified_dir'));
                 //arr.find(findDireccion);
+                /*
+                UNA VEZ QUE ESTÉN DENTRO DE ESTE ITEM SE DEBEN BLOQUEAR ASI NO SE PODRÁ EDITAR UN CAMPO YA EDITADO.
+                 */
                 arr.push(existent);
                 arr.push($scope.model);
                 localStorage.setItem('modified_dir', angular.toJson(arr));
