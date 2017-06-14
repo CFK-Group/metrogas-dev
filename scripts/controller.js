@@ -12,7 +12,7 @@ angular.module('metrogas')
 
     $scope.login = function() {
         $ionicLoading.show({
-            content: 'Cargando...',
+            template: 'Inicindo Sesión...',
             animation: 'fade-in',
             showBackdrop: true
         });
@@ -41,6 +41,7 @@ angular.module('metrogas')
                     $rootScope.loginShow = false;
                     $state.go('app');
                 }else{
+                    $ionicLoading.hide();
                     $ionicPopup.alert({
                         title: 'Ups!',
                         template: $scope.loginInfo.errorDesc
@@ -153,7 +154,7 @@ angular.module('metrogas')
 .controller('EditCtrl',['$scope', '$stateParams', '$state', 'ventasService', '$ionicLoading', '$ionicPopup', function($scope, $stateParams, $state, ventasService, $ionicLoading, $ionicPopup){
     var id = parseInt($stateParams.id,10); //get Id parameter;
     $ionicLoading.show({
-          content: 'Cargando...',
+          content: 'Obteniendo Información...',
           animation: 'fade-in',
           showBackdrop: true
       });
@@ -162,6 +163,9 @@ angular.module('metrogas')
         function(response){
             $scope.direccion = response;
             $ionicLoading.hide();
+
+            //Agregar aquí los pasos para trabajar la dirección, hay que pensar en como hacer
+            //que los pasos se vayan mostrando uno a uno...
 
 
 
