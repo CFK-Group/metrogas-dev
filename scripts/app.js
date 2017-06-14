@@ -51,7 +51,7 @@ angular.module('metrogas', ['ionic','ui.router','ngCordova','angular.filter','ng
     function($rootScope, $ionicSideMenuDelegate, $ionicPlatform, $state, $ionicHistory){
         $rootScope.loginShow= true;
         $rootScope.user = "";
-        console.log($ionicHistory);
+        console.log($ionicHistory); // <-- PROBAR PARA IR RETROCEDIENDO...
         $ionicPlatform.registerBackButtonAction(function (event) {
             console.log($state.current.name);
 
