@@ -10,6 +10,12 @@ angular.module('metrogas')
         deviceId: ""
     };
 
+    $ionicLoading.show({
+        content: 'Cargando...',
+        animation: 'fade-in',
+        showBackdrop: true
+    });
+
     $scope.login = function() {
         $scope.loginVar = LoginService.loginUser($scope.data.username, $scope.data.password, $scope.data.deviceModel, $scope.data.deviceId).query(
             function(response){
@@ -32,7 +38,7 @@ angular.module('metrogas')
                     ventasService.getCalles(_token);
                     ventasService.getGrillas(_token);
                     ventasService.getCargas(_token);
-
+                    $ionicLoading.hide();
                     $rootScope.loginShow = false;
                     $state.go('app');
                 }else{
@@ -157,8 +163,14 @@ angular.module('metrogas')
         function(response){
             $scope.direccion = response;
             $ionicLoading.hide();
-        },
 
+
+
+
+
+
+
+        },
         function(response){
             $ionicLoading.hide();
             $ionicPopup.alert({
@@ -166,9 +178,7 @@ angular.module('metrogas')
                 template: 'Algo ha pasado, vuelve a intentar más tarde'
             });
         }
-
     );
-    console.log($scope.direccion);
 
     //var direcciones = JSON.parse(localStorage.getItem('direcciones')); //get direcciones from localstorage
 /*
