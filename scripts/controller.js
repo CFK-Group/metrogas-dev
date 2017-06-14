@@ -82,7 +82,7 @@ angular.module('metrogas')
         
 }])
 
-.controller('AsignCtrl',['$scope', '$ionicModal', 'ventasService', function($scope, $ionicModal){
+.controller('AsignCtrl',['$scope', '$ionicModal', 'ventasService', '$state', function($scope, $ionicModal, ventasService, $state){
     
     $ionicModal.fromTemplateUrl('views/filtermodal.html',{
         scope: $scope,
@@ -146,16 +146,19 @@ angular.module('metrogas')
 }])
 
 .controller('EditCtrl',['$scope', '$stateParams', '$state', 'ventasService', function($scope, $stateParams, $state, ventasService){
-    var item = $stateParams.ic; //get IC parameter;
-    var direcciones = JSON.parse(localStorage.getItem('direcciones')); //get direcciones from localstorage
+    var id = parseInt($stateParams.id,10); //get Id parameter;
+    $scope.direccion = ventasService.getById(id).get();
+    console.log($scope.direccion);
 
+    //var direcciones = JSON.parse(localStorage.getItem('direcciones')); //get direcciones from localstorage
+/*
     function findDireccion(address) {
         return address.IC === item; // verifica si el campo IC es igual al parametro  de la url
     }
     $scope.direccion = direcciones.find(findDireccion);
     console.log($scope.direccion);
     $scope.model = JSON.parse(JSON.stringify($scope.direccion));
-
+*/
     /*
     function isEquivalent(a, b) {
         // Create arrays of property names
@@ -182,8 +185,8 @@ angular.module('metrogas')
         return true;
     }
     */
-    $scope.edit = function(){
-        console.log(ventasService.edit().update({IC: $scope.model.IC}, $scope.model));
+  //  $scope.edit = function(){
+  //      console.log(ventasService.edit().update({IC: $scope.model.IC}, $scope.model));
         /*
         PARA OFFLINE
 
@@ -200,12 +203,12 @@ angular.module('metrogas')
             }
         }*/
 
-        console.log($scope.model);
+   /*   console.log($scope.model);
         console.log($scope.direccion);
         console.log(isEquivalent($scope.model, $scope.direccion));
         console.log('-------------');
 
-    }
+    }*/
 
 }])
 ;

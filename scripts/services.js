@@ -40,7 +40,7 @@ angular.module('metrogas')
 
         //uses only if user has internet connection
         this.getById = function(_id){
-            return $resource(baseURL+"getbyic", {ic: _id});
+            return $resource(baseURL+"getbyic", {id: _id});
         };
 
         //get all comunas related to the user for use on filters
@@ -85,5 +85,9 @@ angular.module('metrogas')
         this.edit = function (data){
             return $resource(baseURL, null, {'edit':{method:'PUT'}});
         }
+    }])
+
+    .service('ventaOnline', ['$resource', 'baseURL', function($resource, baseURL){
+        return $resource(baseURL)
     }])
 ;
