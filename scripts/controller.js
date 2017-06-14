@@ -10,13 +10,12 @@ angular.module('metrogas')
         deviceId: ""
     };
 
-    $ionicLoading.show({
-        content: 'Cargando...',
-        animation: 'fade-in',
-        showBackdrop: true
-    });
-
     $scope.login = function() {
+        $ionicLoading.show({
+            content: 'Cargando...',
+            animation: 'fade-in',
+            showBackdrop: true
+        });
         $scope.loginVar = LoginService.loginUser($scope.data.username, $scope.data.password, $scope.data.deviceModel, $scope.data.deviceId).query(
             function(response){
 
