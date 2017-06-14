@@ -45,7 +45,7 @@ angular.module('metrogas')
             function(response){
                 $ionicPopup.alert({
                     title: 'Ups!',
-                    template: 'Algo ha pasado, vuelve a intentar más tarde' + response
+                    template: 'Algo ha pasado, vuelve a intentar más tarde'
                 });
             }
         );
@@ -145,9 +145,29 @@ angular.module('metrogas')
     };
 }])
 
-.controller('EditCtrl',['$scope', '$stateParams', '$state', 'ventasService', function($scope, $stateParams, $state, ventasService){
+.controller('EditCtrl',['$scope', '$stateParams', '$state', 'ventasService', '$ionicLoading', '$ionicPopup', function($scope, $stateParams, $state, ventasService, $ionicLoading, $ionicPopup){
     var id = parseInt($stateParams.id,10); //get Id parameter;
-    $scope.direccion = ventasService.getById(id).get();
+    $ionicLoading.show({
+          content: 'Cargando...',
+          animation: 'fade-in',
+          showBackdrop: true
+      });
+
+    ventasService.getById(id).get().$promise.then(
+        function(response){
+            $scope.direccion = response;
+            $ionicLoading.hide();
+        },
+
+        function(response){
+            $ionicLoading.hide();
+            $ionicPopup.alert({
+                title: 'Ups!',
+                template: 'Algo ha pasado, vuelve a intentar más tarde'
+            });
+        }
+
+    );
     console.log($scope.direccion);
 
     //var direcciones = JSON.parse(localStorage.getItem('direcciones')); //get direcciones from localstorage
