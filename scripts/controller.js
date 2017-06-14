@@ -1,7 +1,7 @@
 'use strict';
 angular.module('metrogas')
 
-.controller('LoginCtrl', ['$rootScope', '$scope', 'LoginService', '$state', '$ionicPopup', 'UserService', 'ventasService', function($rootScope, $scope, LoginService, $state, $ionicPopup, UserService, ventasService){
+.controller('LoginCtrl', ['$rootScope', '$scope', 'LoginService', '$state', '$ionicPopup', 'UserService', 'ventasService', '$ionicLoading', function($rootScope, $scope, LoginService, $state, $ionicPopup, UserService, ventasService, $ionicLoading){
 
     $scope.data = {
         username: "",
