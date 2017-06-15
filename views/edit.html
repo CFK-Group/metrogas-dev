@@ -22,7 +22,7 @@
                     <button class="button button-assertive" ng-click="cancel()">Anular</button>
                 </div>
                 <div class="col padding-horizontal">
-                    <button class="button button-metrogas" ng-class="{disabled: (model.recorrida == '' || model.recorrida == undefined)}" ng-click="stepForward('2')">Siguiente</button>
+                    <button class="button button-metrogas" ng-class="{disabled: (model.recorrida == '' || model.recorrida == undefined)} || (model.recorrida == 0}" ng-click="stepForward('2')">Siguiente</button>
                 </div>
             </div>
         </div>
@@ -41,6 +41,7 @@
                     <button class="button button-assertive" ng-click="cancel()">Anular</button>
                 </div>
                 <div class="col padding-horizontal">
+                    <button class="button button-metrogas" ng-class="{disabled: (model.contactada == '' || model.contactada == undefined)}" ng-click="stepForward('3A')" ng-if="model.contactada==undefined">Siguiente</button>
                     <button class="button button-metrogas" ng-class="{disabled: (model.contactada == '' || model.contactada == undefined)}" ng-click="stepForward('3A')" ng-if="model.contactada==1">Siguiente</button>
                     <button class="button button-metrogas" ng-class="{disabled: (model.contactada == '' || model.contactada == undefined)}" ng-click="stepForward('3B')" ng-if="model.contactada==0">Siguiente</button>
                 </div>
