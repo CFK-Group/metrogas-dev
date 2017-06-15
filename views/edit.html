@@ -17,8 +17,9 @@
                     <ion-radio ng-model="model.recorrida" ng-value="'0'" name="recorrida">NO</ion-radio>
                 </ion-list>
             </div>
-            <div class="item item-divider">
-                <button class="button button-wide button-large button-metrogas" ng-class="{disabled: (model.recorrida == '' || model.recorrida == undefined)}" ng-click="stepForward()">Siguiente</button>
+            <div class="item item-divider text-center row">
+                <button class="button button-metrogas col" ng-class="{disabled: (model.recorrida == '' || model.recorrida == undefined)}" ng-click="stepForward()">Siguiente</button>
+                <button class="button button-assertive col" ng-click="stepBack()">Anular</button>
             </div>
         </div>
 
