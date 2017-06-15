@@ -60,7 +60,7 @@ angular.module('metrogas', ['ionic','ui.router','ngCordova','angular.filter','ng
                     navigator.app.exitApp();
                 }
             }
-            else if($state.current.name=="app.state")
+            else if($state.current.name=="app.edit")
             {
                 if($ionicSideMenuDelegate.isOpen()) {
                     $ionicSideMenuDelegate.toggleLeft(false);
