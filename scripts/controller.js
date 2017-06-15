@@ -84,12 +84,12 @@ angular.module('metrogas')
     
 }])
 
-.controller('HomeCtrl',['$scope', 'UserService', function($scope, UserService){
-        
+.controller('HomeCtrl',['$scope', 'UserService', '$ionicHistory', function($scope, UserService, $ionicHistory){
+        console.log($ionicHistory.viewHistory());
 }])
 
-.controller('AsignCtrl',['$scope', '$ionicModal', 'ventasService', '$state', function($scope, $ionicModal, ventasService, $state){
-    
+.controller('AsignCtrl',['$scope', '$ionicModal', 'ventasService', '$state', '$ionicHistory', function($scope, $ionicModal, ventasService, $state, $ionicHistory){
+    console.log($ionicHistory.viewHistory());
     $ionicModal.fromTemplateUrl('views/filtermodal.html',{
         scope: $scope,
         animation: 'slide-in-up'
@@ -151,7 +151,8 @@ angular.module('metrogas')
     };
 }])
 
-.controller('EditCtrl',['$scope', '$stateParams', '$state', 'ventasService', '$ionicLoading', '$ionicPopup', function($scope, $stateParams, $state, ventasService, $ionicLoading, $ionicPopup){
+.controller('EditCtrl',['$scope', '$stateParams', '$state', 'ventasService', '$ionicLoading', '$ionicPopup', '$ionicHistory', function($scope, $stateParams, $state, ventasService, $ionicLoading, $ionicPopup, $ionicHistory){
+    console.log($ionicHistory.viewHistory());
     var id = parseInt($stateParams.id,10); //get Id parameter;
     $ionicLoading.show({
           content: 'Obteniendo Información...',
