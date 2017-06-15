@@ -67,8 +67,7 @@ angular.module('metrogas', ['ionic','ui.router','ngCordova','angular.filter','ng
                         $ionicSideMenuDelegate.toggleLeft(false);
                     }else {
                         //navigator.app.backHistory();
-                        $backView = $ionicHistory.backView();
-                        $backView.go();
+                        $ionicHistory.backView().go();
                     }
                 }
         }, 100)}

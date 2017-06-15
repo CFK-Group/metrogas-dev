@@ -12,7 +12,7 @@ angular.module('metrogas')
 
     $scope.login = function() {
         $ionicLoading.show({
-            template: 'Inicindo Sesión...',
+            template: 'Iniciando Sesión...',
             animation: 'fade-in',
             showBackdrop: true
         });
