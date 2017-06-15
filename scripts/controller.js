@@ -84,12 +84,12 @@ angular.module('metrogas')
     
 }])
 
-.controller('HomeCtrl',['$scope', 'UserService', '$ionicHistory', function($scope, UserService, $ionicHistory){
-        console.log($ionicHistory.viewHistory());
+.controller('HomeCtrl',['$scope', 'UserService', function($scope, UserService){
+
 }])
 
-.controller('AsignCtrl',['$scope', '$ionicModal', 'ventasService', '$state', '$ionicHistory', function($scope, $ionicModal, ventasService, $state, $ionicHistory){
-    console.log($ionicHistory.viewHistory());
+.controller('AsignCtrl',['$scope', '$ionicModal', 'ventasService', '$state', function($scope, $ionicModal, ventasService, $state){
+    console.log($state.current.name);
     $ionicModal.fromTemplateUrl('views/filtermodal.html',{
         scope: $scope,
         animation: 'slide-in-up'
