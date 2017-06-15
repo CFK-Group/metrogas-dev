@@ -32,7 +32,7 @@
             <div class="item item-text-wrap">
                 <h2>¿Hizo contacto?</h2>
                 <ion-list>
-                    <ion-radio ng-model="model.contactada" ng-value="'1'" name="conectada" ng-change="stepForward()">SI</ion-radio>
+                    <ion-radio ng-model="model.contactada" ng-value="'1'" name="contactada">SI</ion-radio>
                     <ion-radio ng-model="model.contactada" ng-value="'0'" name="contactada">NO</ion-radio>
                 </ion-list>
             </div>
@@ -41,7 +41,7 @@
                     <button class="button button-assertive" ng-click="cancel()">Anular</button>
                 </div>
                 <div class="col padding-horizontal">
-                    <button class="button button-metrogas" ng-class="{disabled: (model.recorrida == '' || model.recorrida == undefined)}" ng-click="stepForward()">Siguiente</button>
+                    <button class="button button-metrogas" ng-class="{disabled: (model.contactada == '' || model.contactada == undefined)}" ng-click="stepForward()">Siguiente</button>
                 </div>
             </div>
         </div>
