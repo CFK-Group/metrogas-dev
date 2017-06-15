@@ -90,7 +90,7 @@ angular.module('metrogas')
 }])
 
 .controller('AsignCtrl',['$scope', '$ionicModal', 'ventasService', '$state', function($scope, $ionicModal, ventasService, $state){
-    console.log($state.current.name);
+
     $ionicModal.fromTemplateUrl('views/filtermodal.html',{
         scope: $scope,
         animation: 'slide-in-up'
