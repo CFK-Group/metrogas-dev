@@ -13,10 +13,12 @@
             <div class="item item-text-wrap">
                 <h2>¿Tocó Puerta?</h2>
                 <ion-list>
-                    <ion-radio ng-model="direccion.recorrida" ng-value="1" name="recorrida" ng-change="stepForward()">SI</ion-radio>
-                    <ion-radio ng-model="direccion.recorrida" ng-value="0" name="recorrida">NO</ion-radio>
+                    <ion-radio ng-model="model.recorrida" ng-value="1" name="recorrida">SI</ion-radio>
+                    <ion-radio ng-model="model.recorrida" ng-value="0" name="recorrida">NO</ion-radio>
                 </ion-list>
             </div>
+            <div class="item item-divider">
+                <button class="button button-wide button-large button-metrogas" ng-class="{ disabled: (model.recorrida == '' || model.recorrida == undefined)}" ng-click="stepForward()">Siguiente</button>
         </div>
 
         <!-- Hacer contacto -->
@@ -24,8 +26,8 @@
             <div class="item item-text-wrap">
                 <h2>¿Hizo contacto?</h2>
                 <ion-list>
-                    <ion-radio ng-model="direccion.contactada" ng-value="1" name="conectada" ng-change="stepForward()">SI</ion-radio>
-                    <ion-radio ng-model="direccion.contactada" ng-value="0" name="contactada">NO</ion-radio>
+                    <ion-radio ng-model="model.contactada" ng-value="1" name="conectada" ng-change="stepForward()">SI</ion-radio>
+                    <ion-radio ng-model="model.contactada" ng-value="0" name="contactada">NO</ion-radio>
                 </ion-list>
             </div>
         </div>

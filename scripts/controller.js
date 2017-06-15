@@ -155,7 +155,7 @@ angular.module('metrogas')
 .controller('EditCtrl',['$scope', '$stateParams', '$state', 'ventasService', '$ionicLoading', '$ionicPopup', function($scope, $stateParams, $state, ventasService, $ionicLoading, $ionicPopup){
 
     var id = parseInt($stateParams.id,10); //get Id parameter;
-
+    $scope.model = {};
     $ionicLoading.show({
           content: 'Obteniendo Información...',
           animation: 'fade-in',
@@ -170,6 +170,7 @@ angular.module('metrogas')
 
             $scope.stepForward = function(){
                 $scope.step = $scope.step + 1;
+                console.log($scope.model);
             };
 
             //Agregar aquí los pasos para trabajar la dirección, hay que pensar en como hacer
