@@ -168,9 +168,8 @@ angular.module('metrogas')
             $ionicLoading.hide();
             $scope.step = 1;
 
-            $scope.stepForward = function(){
-                $scope.step = $scope.step + 1;
-                console.log($scope.model);
+            $scope.stepForward = function(nextStep){
+                $scope.step = nextStep;
             };
 
             $scope.cancel = function(){

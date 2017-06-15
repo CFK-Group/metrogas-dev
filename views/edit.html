@@ -8,8 +8,8 @@
 
 <form>
 
-        <!-- Tocar puerta -->
-        <div class="card" ng-show="step == 1">
+        <!-- Tocar puerta - 1 -->
+        <div class="card" ng-show="step == '1'">
             <div class="item item-text-wrap">
                 <h2>¿Tocó Puerta?</h2>
                 <ion-list>
@@ -22,13 +22,13 @@
                     <button class="button button-assertive" ng-click="cancel()">Anular</button>
                 </div>
                 <div class="col padding-horizontal">
-                    <button class="button button-metrogas" ng-class="{disabled: (model.recorrida == '' || model.recorrida == undefined)}" ng-click="stepForward()">Siguiente</button>
+                    <button class="button button-metrogas" ng-class="{disabled: (model.recorrida == '' || model.recorrida == undefined)}" ng-click="stepForward('2')">Siguiente</button>
                 </div>
             </div>
         </div>
 
-        <!-- Hacer contacto -->
-        <div class="card" ng-show="step == 2">
+        <!-- Hacer contacto - 2 -->
+        <div class="card" ng-show="step == '2'">
             <div class="item item-text-wrap">
                 <h2>¿Hizo contacto?</h2>
                 <ion-list>
@@ -41,29 +41,30 @@
                     <button class="button button-assertive" ng-click="cancel()">Anular</button>
                 </div>
                 <div class="col padding-horizontal">
-                    <button class="button button-metrogas" ng-class="{disabled: (model.contactada == '' || model.contactada == undefined)}" ng-click="stepForward()">Siguiente</button>
+                    <button class="button button-metrogas" ng-class="{disabled: (model.contactada == '' || model.contactada == undefined)}" ng-click="stepForward('3A')" ng-if="model.contactada==1">Siguiente</button>
+                    <button class="button button-metrogas" ng-class="{disabled: (model.contactada == '' || model.contactada == undefined)}" ng-click="stepForward('3B')" ng-if="model.contactada==0">Siguiente</button>
                 </div>
             </div>
         </div>
 
           <!-- Motivo NO contacto -->
-        <div class="card" ng-show="step == 3">
+        <div class="card" ng-show="step == '3B'">
             <div class="item item-text-wrap">
                 <h2>Motivo por el qué no hizo contacto</h2>
                 <div class="list">
-                  <label class="item item-input item-select" id="label">
-                      <select ng-model="model.contactada">
-                          <option value="no sabe">No se</option>
-                          <option value="no importa">No importa</option>
-                          <option value="salu2">Paq kieres saber eso jaja salu2!</option>
-                      </select>
-                  </label>
+                    <label class="item item-input item-select" id="label">
+                        <select ng-model="model.contactada">
+                            <option value="no sabe">No se</option>
+                            <option value="no importa">No importa</option>
+                            <option value="salu2">Paq kieres saber eso jaja salu2!</option>
+                        </select>
+                    </label>
                 </div>
             </div>
         </div>
 
           <!-- Editar datos de contacto-->
-        <div class="card" ng-show="step == 4">
+        <div class="card" ng-show="step == '3A'">
             <div class="item item-text-wrap">
                 <div class="item item-divider">
                   <h4>Datos almacenados</h4>
