@@ -48,27 +48,32 @@ angular.module('metrogas', ['ionic','ui.router','ngCordova','angular.filter','ng
     $urlRouterProvider.otherwise('login');
 
 }).run(
-    function($rootScope, $ionicSideMenuDelegate, $ionicPlatform, $state, $ionicHistory){
+    function($rootScope, $ionicSideMenuDelegate, $ionicPlatform, $state){
         $rootScope.loginShow= true;
         $rootScope.user = "";
-        console.log($ionicHistory); // <-- PROBAR PARA IR RETROCEDIENDO...
         $ionicPlatform.registerBackButtonAction(function (event) {
-            console.log($state.current.name);
 
-                if($state.current.name=="app" || $state.current.name=="login"){
-                    if($ionicSideMenuDelegate.isOpen()) {
-                        $ionicSideMenuDelegate.toggleLeft(false);
-                    }else {
-                        navigator.app.exitApp();
-                    }
+            if($state.current.name=="app" || $state.current.name=="login"){
+                if($ionicSideMenuDelegate.isOpen()) {
+                    $ionicSideMenuDelegate.toggleLeft(false);
+                }else {
+                    navigator.app.exitApp();
                 }
-                else {
-                    if($ionicSideMenuDelegate.isOpen()) {
-                        $ionicSideMenuDelegate.toggleLeft(false);
-                    }else {
-                        navigator.app.backHistory();
-                        //$ionicHistory.goBack();
-                    }
+            }
+            else if($state.current.name=="app.state")
+            {
+                if($ionicSideMenuDelegate.isOpen()) {
+                    $ionicSideMenuDelegate.toggleLeft(false);
+                }else {
+                    $state.go('app.asignadas');
                 }
+            }
+            else {
+                if($ionicSideMenuDelegate.isOpen()) {
+                    $ionicSideMenuDelegate.toggleLeft(false);
+                }else {
+                    navigator.app.backHistory();
+                }
+            }
         }, 100)}
     );
