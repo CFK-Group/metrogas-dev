@@ -4,8 +4,8 @@ angular.module('metrogas')
 .controller('LoginCtrl', ['$rootScope', '$scope', 'LoginService', '$state', '$ionicPopup', 'UserService', 'ventasService', '$ionicLoading', function($rootScope, $scope, LoginService, $state, $ionicPopup, UserService, ventasService, $ionicLoading){
 
     $scope.data = {
-        username: "",
-        password: "",
+        username: "test",
+        password: "test",
         deviceModel : "",
         deviceId: ""
     };
