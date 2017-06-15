@@ -151,8 +151,8 @@ angular.module('metrogas')
     };
 }])
 
-.controller('EditCtrl',['$scope', '$stateParams', '$state', 'ventasService', '$ionicLoading', '$ionicPopup', '$ionicHistory', function($scope, $stateParams, $state, ventasService, $ionicLoading, $ionicPopup, $ionicHistory){
-    console.log($ionicHistory.viewHistory());
+.controller('EditCtrl',['$scope', '$stateParams', '$state', 'ventasService', '$ionicLoading', '$ionicPopup', function($scope, $stateParams, $state, ventasService, $ionicLoading, $ionicPopup){
+    console.log($state.current.name);
     var id = parseInt($stateParams.id,10); //get Id parameter;
     $ionicLoading.show({
           content: 'Obteniendo Información...',
