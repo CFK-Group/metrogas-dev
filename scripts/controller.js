@@ -49,6 +49,7 @@ angular.module('metrogas')
                 }
             },
             function(response){
+                $ionicLoading.hide();
                 $ionicPopup.alert({
                     title: 'Ups!',
                     template: 'Algo ha pasado, vuelve a intentar más tarde'
