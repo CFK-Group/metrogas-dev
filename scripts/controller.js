@@ -167,6 +167,10 @@ angular.module('metrogas')
             $ionicLoading.hide();
             $scope.step = 1;
 
+            $scope.stepForward = function(){
+                $scope.step += 1;
+            }
+
             //Agregar aquí los pasos para trabajar la dirección, hay que pensar en como hacer
             //que los pasos se vayan mostrando uno a uno...
 

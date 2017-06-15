@@ -9,29 +9,29 @@
 <form>
 
         <!-- Tocar puerta -->
-        <div class="card">
+        <div class="card" ng-show="step == 1">
             <div class="item item-text-wrap">
                 <h2>¿Tocó Puerta?</h2>
                 <ion-list>
-                    <ion-radio ng-model="model.recorrida" ng-value="'A'" name="recorrida">SI</ion-radio>
+                    <ion-radio ng-model="model.recorrida" ng-value="'A'" name="recorrida" ng-click="stepForward">SI</ion-radio>
                     <ion-radio ng-model="model.recorrida" ng-value="'B'" name="recorrida">NO</ion-radio>
                 </ion-list>
             </div>
         </div>
 
         <!-- Hacer contacto -->
-        <div class="card">
+        <div class="card" ng-show="step == 2">
             <div class="item item-text-wrap">
                 <h2>¿Hizo contacto?</h2>
                 <ion-list>
-                    <ion-radio ng-model="model.contactada" ng-value="'A'" name="contactada">SI</ion-radio>
+                    <ion-radio ng-model="model.contactada" ng-value="'A'" name="contactada" ng-click="stepForward">SI</ion-radio>
                     <ion-radio ng-model="model.contactada" ng-value="'B'" name="contactada">NO</ion-radio>
                 </ion-list>
             </div>
         </div>
 
           <!-- Motivo NO contacto -->
-        <div class="card">
+        <div class="card" ng-show="step == 3">
             <div class="item item-text-wrap">
                 <h2>Motivo por el qué no hizo contacto</h2>
                 <div class="list">
@@ -47,7 +47,7 @@
         </div>
 
           <!-- Editar datos de contacto-->
-        <div class="card">
+        <div class="card" ng-show="step == 4">
             <div class="item item-text-wrap">
                 <div class="item item-divider">
                   <h4>Datos almacenados</h4>
@@ -72,7 +72,7 @@
                 </label>
             </div>
         </div>
-
+        <!--
         <div class="card">
           <div class="item item-text-wrap">
               This is a basic Card which contains an item that has wrapping text.
@@ -83,7 +83,7 @@
           <div class="item item-text-wrap">
               This is a basic Card which contains an item that has wrapping text.
           </div>
-        </div>
+        </div>-->
       </form>
 </ion-content>
 <div class="bar bar-footer row">
