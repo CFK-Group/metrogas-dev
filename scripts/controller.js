@@ -174,7 +174,7 @@ angular.module('metrogas')
 
             $scope.cancel = function(){
                 $scope.model = {};
-                $state.go('app.asigandas');
+                $state.go('app.asignadas');
             };
 
             //Agregar aquí los pasos para trabajar la dirección, hay que pensar en como hacer
