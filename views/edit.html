@@ -22,7 +22,7 @@
                     <button class="button button-assertive" ng-click="cancel()">Anular</button>
                 </div>
                 <div class="col padding-horizontal">
-                    <button class="button button-metrogas" ng-class="{disabled: (model.recorrida == '' || model.recorrida == undefined)} || (model.recorrida == 0}" ng-click="stepForward('2')">Siguiente</button>
+                    <button class="button button-metrogas" ng-class="{disabled: (model.recorrida == '' || model.recorrida == undefined || model.recorrida == 0}" ng-click="stepForward('2')">Siguiente</button>
                 </div>
             </div>
         </div>
