@@ -173,6 +173,11 @@ angular.module('metrogas')
                 console.log($scope.model);
             };
 
+            $scope.cancel = function(){
+                $scope.model = {};
+                $state.go('app.asigandas');
+            };
+
             //Agregar aquí los pasos para trabajar la dirección, hay que pensar en como hacer
             //que los pasos se vayan mostrando uno a uno...
 
