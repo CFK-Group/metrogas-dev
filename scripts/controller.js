@@ -193,8 +193,15 @@ angular.module('metrogas')
                 });
 
                 $scope.enviar = function (){
-                    console.log($scope.model);
-                    console.log($scope.direccion);
+                    ventasService.edit().post().$promise.then(
+                        function (response2) {
+                            console.log(response2);
+                        },
+                        function (response3){
+                            console.log(response3);
+                        }
+
+                    )
                 };
             };
 

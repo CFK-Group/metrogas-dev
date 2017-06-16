@@ -83,11 +83,7 @@ angular.module('metrogas')
         };
 
         this.edit = function (data){
-            return $resource(baseURL, null, {'edit':{method:'PUT'}});
+            return $resource(baseURL+"save");
         }
-    }])
-
-    .service('ventaOnline', ['$resource', 'baseURL', function($resource, baseURL){
-        return $resource(baseURL)
     }])
 ;
