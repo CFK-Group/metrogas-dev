@@ -133,9 +133,9 @@
                 <div class="list">
                     <label class="item item-input item-select label-big">
                         <select ng-model="model.contactada">
-                            <option value="no sabe">No se</option>
-                            <option value="no importa">No importa</option>
-                            <option value="salu2">Paq kieres saber eso jaja salu2!</option>
+                            <option ng-value="0">No se</option>
+                            <option ng-value="1">No importa</option>
+                            <option ng-value="2">Paq kieres saber eso jaja salu2!</option>
                         </select>
                     </label>
                 </div>
@@ -152,15 +152,31 @@
 
         <!-- Accion comercial -->
         <div ng-show="step == '6'">
-            <div class="item item-text-wrap">
+            <label class="item item-input item-select">
                 <div class="input-label">
-                    Acción realizada
+                    Accion Comercial
                 </div>
-                <ion-list>
-                    <ion-radio ng-model="model.accion" ng-value="'1'" name="interes">SI</ion-radio>
-                    <ion-radio ng-model="model.accion" ng-value="'0'" name="interes">NO</ion-radio>
-                </ion-list>
-            </div>
+                <select>
+                    <option ng-model="model.accion" ng-value="0">Blue 1</option>
+                    <option ng-model="model.accion" ng-value="1">Blue 2</option>
+                    <option ng-model="model.accion" ng-value="2">Blue 3</option>
+                </select>
+            </label>
+
+            <label class="item item-input">
+                <span class="input-label">Fecha de accion</span>
+                <input type="date" ng-model="model.fecha_accion" ng-value="new Date()">
+            </label>
+
+            <label class="item item-input item-stacked-label">
+                <h2 class="input-label">Resultado de la accion</h2>
+                <input type="text" placeholder="Escriba aquí el resultado" ng-model="model.resultado">
+            </label>
+
+            <label class="item item-input">
+                <span class="input-label">Fecha del resultado</span>
+                <input type="date" ng-model="model.fecha_resultado" ng-value="new Date()">
+            </label>
         </div>
 
     </form>
