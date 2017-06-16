@@ -149,6 +149,20 @@
                 </div>
             </div>
         </div>
+
+        <!-- Accion comercial -->
+        <div ng-show="step == '6'">
+            <div class="item item-text-wrap">
+                <div class="input-label">
+                    Acción realizada
+                </div>
+                <ion-list>
+                    <ion-radio ng-model="model.accion" ng-value="'1'" name="interes">SI</ion-radio>
+                    <ion-radio ng-model="model.accion" ng-value="'0'" name="interes">NO</ion-radio>
+                </ion-list>
+            </div>
+        </div>
+
     </form>
 </ion-content>
 

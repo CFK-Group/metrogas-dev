@@ -166,7 +166,7 @@ angular.module('metrogas')
         function(response){
             $scope.direccion = response;
             $ionicLoading.hide();
-            $scope.step = 1;
+            $scope.step = '1';
 
             $scope.stepForward = function(nextStep){
                 $scope.step = nextStep;
@@ -186,16 +186,13 @@ angular.module('metrogas')
                 confirmPopup.then(function(res) {
                     if(res) {
                         console.log('You are sure');
+                        $scope.step = 6;
                     } else {
                         console.log('You are not sure');
+                        //enviar formulario...
                     }
                 });
             };
-
-
-
-
-
 
 
 
