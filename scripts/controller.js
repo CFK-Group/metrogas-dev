@@ -185,7 +185,7 @@ angular.module('metrogas')
 
                 confirmPopup.then(function(res) {
                     if(res) {
-                        console.log('You are sure');
+                        $scope.date = new Date();
                         $scope.step = 6;
                     } else {
                         console.log('You are not sure');
