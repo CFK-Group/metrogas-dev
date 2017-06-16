@@ -188,10 +188,14 @@ angular.module('metrogas')
                         $scope.date = new Date();
                         $scope.step = 6;
                     } else {
-                        console.log('You are not sure');
-                        //enviar formulario...
+                        $scope.enviar();
                     }
                 });
+
+                $scope.enviar = function (){
+                    console.log($scope.model);
+                    console.log($scope.direccion);
+                };
             };
 
 
