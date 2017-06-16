@@ -177,8 +177,21 @@ angular.module('metrogas')
                 $state.go('app.asignadas');
             };
 
-            //Agregar aquí los pasos para trabajar la dirección, hay que pensar en como hacer
-            //que los pasos se vayan mostrando uno a uno...
+            $scope.showConfirm = function() {
+                var confirmPopup = $ionicPopup.confirm({
+                    title: 'Continuar',
+                    template: '¿Deseas agregar una acción comercial?'
+                });
+
+                confirmPopup.then(function(res) {
+                    if(res) {
+                        console.log('You are sure');
+                    } else {
+                        console.log('You are not sure');
+                    }
+                });
+            };
+
 
 
 
