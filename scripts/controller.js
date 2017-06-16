@@ -177,7 +177,7 @@ angular.module('metrogas')
                 $state.go('app.asignadas');
             };
 
-            $scope.showConfirm = function() {
+            $scope.addAccionComercial = function() {
                 var confirmPopup = $ionicPopup.confirm({
                     title: 'Continuar',
                     template: '¿Deseas agregar una acción comercial?'
