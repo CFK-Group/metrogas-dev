@@ -222,15 +222,18 @@ angular.module('metrogas')
                         //si apreta si
                         $scope.date = new Date();
                         $scope.step = '6';
-                        $ionicLoading.show();
-                        $scope.editarVenta();
+                        $scope.executeSaving();
                     } else {
                         //si apreta no
-                        $ionicLoading.show();
-                        $scope.editarVenta();
+                        $scope.executeSaving();
                     }
                 });
             };
+
+            $scope.executeSaving= function () {
+                $ionicLoading.show();
+                $scope.editarVenta();
+            }
 
 
 
