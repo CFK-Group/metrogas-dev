@@ -47,7 +47,7 @@
             </div>
         </div>
 
-          <!-- Motivo NO contacto - 3B-->
+        <!-- Motivo NO contacto - 3B-->
         <div class="card" ng-show="step == '3B'">
             <div class="item item-text-wrap">
                 <h2>Motivo por el qué no hizo contacto</h2>
@@ -66,12 +66,12 @@
                     <button class="button button-assertive" ng-click="cancel()">Anular</button>
                 </div>
                 <div class="col padding-horizontal">
-                    <button class="button button-metrogas" ng-class="{disabled: (model.contactada == '' || model.contactada == undefined)}" ng-click="send()">Enviar</button>
+                    <button class="button button-metrogas" ng-class="{disabled: (model.contactada == '' || model.contactada == undefined)}" ng-click="editarVenta()">Enviar</button>
                 </div>
             </div>
         </div>
 
-          <!-- Editar datos de contacto 3A-->
+        <!-- Editar datos de contacto 3A-->
         <div class="card" ng-show="step == '3A'">
             <div class="item item-text-wrap">
                 <div class="item item-divider">
@@ -106,6 +106,7 @@
             </div>
         </div>
 
+        <!-- Interes -->
         <div class="card" ng-show="step == '4'">
             <div class="item item-text-wrap">
                 <h2>¿Le interesa?</h2>
@@ -145,7 +146,7 @@
                     <button class="button button-assertive" ng-click="cancel()">Anular</button>
                 </div>
                 <div class="col padding-horizontal">
-                    <button class="button button-metrogas" ng-class="{disabled: (model.contactada == '' || model.contactada == undefined)}" ng-click="send()">Terminar</button>
+                    <button class="button button-metrogas" ng-class="{disabled: (model.contactada == '' || model.contactada == undefined)}" ng-click="editarVenta()">Terminar</button>
                 </div>
             </div>
         </div>
