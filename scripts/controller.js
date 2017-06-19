@@ -89,7 +89,7 @@ angular.module('metrogas')
 
 }])
 
-.controller('AsignCtrl',['$scope', '$ionicModal', 'ventasService', '$state', function($scope, $ionicModal, ventasService, $state){
+.controller('AsignCtrl',['$scope', '$ionicModal', function($scope, $ionicModal){
 
     $ionicModal.fromTemplateUrl('views/filtermodal.html',{
         scope: $scope,
@@ -163,6 +163,7 @@ angular.module('metrogas')
       });
 
     ventasService.getById(id).get().$promise.then(
+        //funcion correctamente ejecutada
         function(response){
             $scope.direccion = response;
             $ionicLoading.hide();
@@ -185,20 +186,45 @@ angular.module('metrogas')
 
                 confirmPopup.then(function(res) {
                     if(res) {
+                        //si apreta si
                         $scope.date = new Date();
-                        $scope.step = 6;
+                        $scope.step = '6';
+                        $ionicLoading.show();
+                        $scope.editarVenta();
                     } else {
-                        $scope.enviar();
+                        //si apreta no
+                        $ionicLoading.show();
+                        $scope.editarVenta();
                     }
                 });
 
-                $scope.enviar = function (){
-                    ventasService.edit().save($scope.model).$promise.then(
+                $scope.editarVenta = function (){
+                    ventasService.edit().save($scope.model, $scope.direccion).$promise.then(
                         function (response2) {
-                            console.log(response2);
+                            console.log("Hola mundo");
+
+                            $ionicPopup.alert({
+                                title: 'Ok',
+                                template: 'Información guardada correctamente'
+                            });
+
+
+                            if($scope.step !== '6'){
+                                $state.go('app.asignadas');
+                            }else{
+                                $state.go('app.accioncomercial/:id', {id: $scope.direccion.id});
+                            }
+
+                            $ionicLoading.hide();
                         },
-                        function (response3){
-                            console.log(response3);
+                        function (response_){
+                            $ionicLoading.hide();
+                            $ionicPopup.alert({
+                                title: 'UPS!!',
+                                template: 'Algo pasó, intentaremos nuevamente' + response_
+                            });
+                            $scope.editarVenta();
+                            $ionicLoading.show();
                         }
 
                     )
@@ -208,6 +234,7 @@ angular.module('metrogas')
 
 
         },
+        //error en la funcion
         function(response){
             $ionicLoading.hide();
             $ionicPopup.alert({
@@ -218,7 +245,7 @@ angular.module('metrogas')
     );
 
     //var direcciones = JSON.parse(localStorage.getItem('direcciones')); //get direcciones from localstorage
-/*
+    /*
     function findDireccion(address) {
         return address.IC === item; // verifica si el campo IC es igual al parametro  de la url
     }
@@ -252,9 +279,9 @@ angular.module('metrogas')
         return true;
     }
     */
-  //  $scope.edit = function(){
+    //  $scope.edit = function(){
   //      console.log(ventasService.edit().update({IC: $scope.model.IC}, $scope.model));
-        /*
+    /*
         PARA OFFLINE
 
         var arr = [];
@@ -269,8 +296,7 @@ angular.module('metrogas')
                 localStorage.setItem('modified_dir', [angular.toJson(arr)]);
             }
         }*/
-
-   /*   console.log($scope.model);
+    /*   console.log($scope.model);
         console.log($scope.direccion);
         console.log(isEquivalent($scope.model, $scope.direccion));
         console.log('-------------');
@@ -278,4 +304,30 @@ angular.module('metrogas')
     }*/
 
 }])
+
+    .controller('AccionCtrl',['$scope', '$ionicModal', '$stateParams', function($scope, $ionicModal, $stateParams) {
+        var id = $stateParams.id;
+        console.log(id);
+
+        $ionicModal.fromTemplateUrl('views/filtermodal.html',{
+            scope: $scope,
+            animation: 'slide-in-up'
+        }).then(function(modal){
+            $scope.modal = modal;
+        });
+
+        $scope.openModal = function() {
+            $scope.modal.show();
+        };
+
+        $scope.closeModal = function() {
+            $scope.modal.hide();
+        };
+
+        // Cleanup the modal when we're done with it!
+        $scope.$on('$destroy', function() {
+            $scope.modal.remove();
+        });
+
+    }])
 ;

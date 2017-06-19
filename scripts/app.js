@@ -43,7 +43,18 @@ angular.module('metrogas', ['ionic','ui.router','ngCordova','angular.filter','ng
                         controller: 'EditCtrl'
                     }
                 }
-            });
+            })
+
+        .state('app.accioncomercial',{
+            url: '/accioncomercial/:id',
+            views: {
+                'content@': {
+                    templateUrl: 'views/accioncomercial.html',
+                    controller: 'AccionCtrl'
+                }
+            }
+        })
+    ;
 
     $urlRouterProvider.otherwise('login');
 
