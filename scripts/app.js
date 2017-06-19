@@ -46,7 +46,7 @@ angular.module('metrogas', ['ionic','ui.router','ngCordova','angular.filter','ng
             })
 
         .state('app.accioncomercial',{
-            url: '/accioncomercial/:id',
+            url: '/accioncomercial/:id/:from',
             views: {
                 'content@': {
                     templateUrl: 'views/accioncomercial.html',
@@ -59,19 +59,27 @@ angular.module('metrogas', ['ionic','ui.router','ngCordova','angular.filter','ng
     $urlRouterProvider.otherwise('login');
 
 }).run(
-    function($rootScope, $ionicSideMenuDelegate, $ionicPlatform, $state){
+    function($rootScope, $ionicSideMenuDelegate, $ionicPlatform, $state, $stateParams){
         $rootScope.loginShow= true;
         $rootScope.user = "";
         $ionicPlatform.registerBackButtonAction(function (event) {
 
-            if($state.current.name=="app" || $state.current.name=="login"){
+            if($state.current.name==="app" || $state.current.name==="login"){
                 if($ionicSideMenuDelegate.isOpen()) {
                     $ionicSideMenuDelegate.toggleLeft(false);
                 }else {
                     navigator.app.exitApp();
                 }
             }
-            else if($state.current.name=="app.edit")
+            else if($state.current.name==="app.edit")
+            {
+                if($ionicSideMenuDelegate.isOpen()) {
+                    $ionicSideMenuDelegate.toggleLeft(false);
+                }else {
+                    $state.go('app.asignadas');
+                }
+            }
+            else if($state.current.name==="app.accioncomercial" && $stateParams.from === "edit" )
             {
                 if($ionicSideMenuDelegate.isOpen()) {
                     $ionicSideMenuDelegate.toggleLeft(false);

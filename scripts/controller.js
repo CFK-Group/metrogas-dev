@@ -192,7 +192,7 @@ angular.module('metrogas')
                         if($scope.step !== '6'){
                             $state.go('app.asignadas');
                         }else{
-                            $state.go('app.accioncomercial', {id: $scope.direccion.id});
+                            $state.go('app.accioncomercial', {id: $scope.direccion.id, from: "edit"});
                         }
 
                     },
