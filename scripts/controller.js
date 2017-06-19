@@ -178,6 +178,37 @@ angular.module('metrogas')
                 $state.go('app.asignadas');
             };
 
+            $scope.editarVenta = function (){
+                ventasService.edit().save($scope.model, $scope.direccion).$promise.then(
+                    function (response2) {
+                        console.log("Hola mundo");
+                        $ionicLoading.hide();
+                        $ionicPopup.alert({
+                            title: 'Ok',
+                            template: 'Información guardada correctamente'
+                        });
+
+
+                        if($scope.step !== '6'){
+                            $state.go('app.asignadas');
+                        }else{
+                            $state.go('app.accioncomercial', {id: $scope.direccion.id});
+                        }
+
+                    },
+                    function (response_){
+                        $ionicLoading.hide();
+                        $ionicPopup.alert({
+                            title: 'UPS!!',
+                            template: 'Algo pasó, intentaremos nuevamente' + response_
+                        });
+                        $scope.editarVenta();
+                        $ionicLoading.show();
+                    }
+
+                )
+            };
+
             $scope.addAccionComercial = function() {
                 var confirmPopup = $ionicPopup.confirm({
                     title: 'Continuar',
@@ -199,37 +230,7 @@ angular.module('metrogas')
                         $scope.editarVenta();
                     }
                 });
-
-                $scope.editarVenta = function (){
-                    ventasService.edit().save($scope.model, $scope.direccion).$promise.then(
-                        function (response2) {
-                            console.log("Hola mundo");
-                            $ionicLoading.hide();
-                            $ionicPopup.alert({
-                                title: 'Ok',
-                                template: 'Información guardada correctamente'
-                            });
-
-
-                            if($scope.step !== '6'){
-                                $state.go('app.asignadas');
-                            }else{
-                                $state.go('app.accioncomercial', {id: $scope.direccion.id});
-                            }
-
-                        },
-                        function (response_){
-                            $ionicLoading.hide();
-                            $ionicPopup.alert({
-                                title: 'UPS!!',
-                                template: 'Algo pasó, intentaremos nuevamente' + response_
-                            });
-                            $scope.editarVenta();
-                            $ionicLoading.show();
-                        }
-
-                    )
-                };
+                $scope.editarVenta();
             };
 
 
