@@ -181,7 +181,9 @@ angular.module('metrogas')
             $scope.addAccionComercial = function() {
                 var confirmPopup = $ionicPopup.confirm({
                     title: 'Continuar',
-                    template: '¿Deseas agregar una acción comercial?'
+                    template: '¿Deseas agregar una acción comercial?',
+                    cancelText: 'No',
+                    okText: 'Si'
                 });
 
                 confirmPopup.then(function(res) {
