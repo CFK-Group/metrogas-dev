@@ -202,7 +202,7 @@ angular.module('metrogas')
                     ventasService.edit().save($scope.model, $scope.direccion).$promise.then(
                         function (response2) {
                             console.log("Hola mundo");
-
+                            $ionicLoading.hide();
                             $ionicPopup.alert({
                                 title: 'Ok',
                                 template: 'Información guardada correctamente'
@@ -215,7 +215,6 @@ angular.module('metrogas')
                                 $state.go('app.accioncomercial/:id', {id: $scope.direccion.id});
                             }
 
-                            $ionicLoading.hide();
                         },
                         function (response_){
                             $ionicLoading.hide();
