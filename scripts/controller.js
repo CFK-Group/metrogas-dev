@@ -230,7 +230,6 @@ angular.module('metrogas')
                         $scope.editarVenta();
                     }
                 });
-                $scope.editarVenta();
             };
 
 
