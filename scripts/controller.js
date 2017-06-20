@@ -182,7 +182,8 @@ angular.module('metrogas')
             };
 
             $scope.editarVenta = function (){
-                ventasService.edit().save($scope.model, $scope.direccion).$promise.then(
+                var data = [$scope.model, $scope.direccion];
+                ventasService.edit().save(data).$promise.then(
                     function (response2) {
                         console.log(response2);
                         $ionicLoading.hide();
@@ -359,7 +360,7 @@ angular.module('metrogas')
                         template: 'Accion añadida correctamente'
                     });
                     $ionicLoading.show();
-                    ventasService.getAcciones().$promise.then(
+                    ventasService.getAcciones().then(
                         function(data){
                             $ionicLoading.hide();
                             $scope.modal.close();
