@@ -10,7 +10,7 @@
                         Accion Comercial
                     </div>
                     <select>
-                        <option ng-repeat="(key, value) in tac" ng-model="model.accion" ng-value="tac.id">tac.tipo_accion</option>
+                        <option ng-repeat="data in tac" ng-model="model.accion_id" ng-value="data.id">data.tipo_accion</option>
                     </select>
                 </label>
 
@@ -24,7 +24,7 @@
                         <h2 class="input-label">Resultado de la accion</h2>
                     </div>
                     <div class="col">
-                        <input type="text" placeholder="Escriba aquí el resultado" ng-model="model.resultado">
+                        <input type="text" placeholder="Escriba aquí el resultado" ng-model="model.resultado" style="text-align: right; padding-right: 35px;">
                     </div>
                 </label>
 
@@ -38,7 +38,7 @@
                         <button class="button button-assertive" ng-click="cancel()">Anular</button>
                     </div>
                     <div class="col padding-horizontal">
-                        <button class="button button-metrogas" ng-class="{disabled: (model.contactada == '' || model.contactada == undefined)}" ng-click="enviar()">Enviar</button>
+                        <button class="button button-metrogas" ng-class="{disabled: (model.accion_id == '' || model.accion_id == undefined || model.fecha_accion == '' || model.fecha_accion == undefined || model.resultado == '' || model.resultado == undefined || model.fecha_resultado == '' || model.fecha_resultado == undefined)}" ng-click="enviar()">Enviar</button>
                     </div>
                 </div>
             </div>
