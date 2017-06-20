@@ -82,7 +82,7 @@ angular.module('metrogas')
             );
         };
 
-        this.edit = function (data){
+        this.edit = function (){
             return $resource(baseURL+"save");
         };
 
