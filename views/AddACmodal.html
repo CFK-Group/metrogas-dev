@@ -12,7 +12,7 @@
                         </div>
                         <select>
                             <option value="">Selecciona</option>
-                            <option ng-repeat="data in tac" ng-model="model.accion_id" ng-value="data.id">{{data.tipo_accion}}</option>
+                            <option ng-repeat="data in tac" ng-model="model.accion_id" ng-value="data.id" name="action_id">{{data.tipo_accion}}</option>
                         </select>
                     </label>
 
@@ -40,7 +40,7 @@
                             <button class="button button-assertive" ng-click="cancel()">Anular</button>
                         </div>
                         <div class="col padding-horizontal">
-                            <button class="button button-metrogas" ng-class="{disabled: (model.accion_id == '' || model.accion_id == undefined) || (model.fecha_accion == '' || model.fecha_accion == undefined) || (model.resultado == '' || model.resultado == undefined) || (model.fecha_resultado == '' || model.fecha_resultado == undefined)}" ng-click="enviar()">Enviar</button>
+                            <button class="button button-metrogas" ng-class="{disabled: (model.accion_id == '' || model.accion_id == undefined) || (model.fecha_accion == '' || model.fecha_accion == undefined)}" ng-click="enviar()">Enviar</button>
                         </div>
                         <button ng-click="printmodel()">aaaaaaa</button>
                     </div>
