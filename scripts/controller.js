@@ -167,6 +167,7 @@ angular.module('metrogas')
     ventasService.getById(id).get().$promise.then(
         //funcion correctamente ejecutada
         function(response){
+            console.log(response);
             $scope.direccion = response;
             $ionicLoading.hide();
             $scope.step = '1';
@@ -183,7 +184,7 @@ angular.module('metrogas')
             $scope.editarVenta = function (){
                 ventasService.edit().save($scope.model, $scope.direccion).$promise.then(
                     function (response2) {
-                        console.log("Hola mundo");
+                        console.log(response2);
                         $ionicLoading.hide();
                         $ionicPopup.alert({
                             title: 'Ok',
@@ -324,11 +325,6 @@ angular.module('metrogas')
 
         $scope.tac = JSON.parse(localStorage.getItem("tac"));
 
-        $scope.printmodel = function(){
-            console.log($scope.tac);
-            console.log($scope.model);
-        };
-
         console.log("Venta: " + idVenta);
         console.log("Carga: " + idCarga);
 
@@ -356,6 +352,7 @@ angular.module('metrogas')
             $ionicLoading.show();
             ventasService.saveAC().save($scope.model).$promise.then(
                 function(response){
+                    console.log(response);
                     $ionicLoading.hide();
                     $ionicPopup.alert({
                         title: 'Guardado',
