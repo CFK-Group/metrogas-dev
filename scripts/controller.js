@@ -309,22 +309,22 @@ angular.module('metrogas')
     }*/
 
 }])
-
     .controller('AccionCtrl',['$scope', '$ionicModal', '$stateParams', '$ionicLoading', 'ventasService', function($scope, $ionicModal, $stateParams, $ionicLoading, ventasService) {
         var idVenta = $stateParams.idVenta;
         var idCarga = $stateParams.idCarga;
         $scope.model = {
-                          accion_id: "",
-                          fecha_accion: "",
-                          resultado: "",
-                          fecha_resultado: ""
-                        };
-
-        $scope.printmodel = function(){
-            console.log($scope.model);
+            accion_id: null,
+            fecha_accion: "",
+            resultado: "",
+            fecha_resultado: ""
         };
 
         $scope.tac = JSON.parse(localStorage.getItem("tac"));
+
+        $scope.printmodel = function(){
+            console.log($scope.tac);
+            console.log($scope.model);
+        };
 
         console.log("Venta: " + idVenta);
         console.log("Carga: " + idCarga);
@@ -351,14 +351,15 @@ angular.module('metrogas')
         $scope.enviar = function(){
             $ionicLoading.show();
             ventasService.saveAC().save($scope.model,idVenta, idCarga).$promise.then(
-            function(response){
-                console.log("wii");
-                console.log(response);
-            }
+                function(response){
+                    console.log("wii");
+                    console.log(response);
+                }
 
             );
         }
 
 
     }])
+
 ;
