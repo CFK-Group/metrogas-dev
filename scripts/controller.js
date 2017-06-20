@@ -310,7 +310,7 @@ angular.module('metrogas')
 
 }])
 
-    .controller('AccionCtrl',['$scope', '$ionicModal', '$stateParams', , '$ionicLoading', function($scope, $ionicModal, $stateParams, $ionicLoading) {
+    .controller('AccionCtrl',['$scope', '$ionicModal', '$stateParams', '$ionicLoading', function($scope, $ionicModal, $stateParams, $ionicLoading) {
         var idVenta = $stateParams.idVenta;
         var idCarga = $stateParams.idCarga;
         $scope.model = {
