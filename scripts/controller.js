@@ -311,11 +311,15 @@ angular.module('metrogas')
 }])
 
     .controller('AccionCtrl',['$scope', '$ionicModal', '$stateParams', function($scope, $ionicModal, $stateParams) {
-        var id = $stateParams.id;
-        $scope.tac = localStorage.getItem("tac");
-        console.log(id);
+        var idVenta = $stateParams.idVenta;
+        var idCarga = $stateParams.idCarga;
 
-        $ionicModal.fromTemplateUrl('views/filtermodal.html',{
+        $scope.tac = localStorage.getItem("tac");
+        
+        console.log("Venta: " + idVenta);
+        console.log("Carga: " + idCarga);
+
+        $ionicModal.fromTemplateUrl('views/AddACmodal.html',{
             scope: $scope,
             animation: 'slide-in-up'
         }).then(function(modal){
