@@ -4,44 +4,47 @@
             <button class="button button-small" ng-click="closeModal()">X</button>
         </ion-header-bar>
         <ion-content>
-            <div>
-                <label class="item item-input item-select">
-                    <div class="input-label">
-                        Accion Comercial
-                    </div>
-                    <select>
-                        <option ng-repeat="data in tac" ng-model="model.accion_id" ng-value="data.id">{{data.tipo_accion}}</option>
-                    </select>
-                </label>
+            <form>
+                <div>
+                    <label class="item item-input item-select">
+                        <div class="input-label">
+                            Accion Comercial
+                        </div>
+                        <select>
+                            <option value="">Selecciona</option>
+                            <option ng-repeat="data in tac" ng-model="model.accion_id" ng-value="data.id">{{data.tipo_accion}}</option>
+                        </select>
+                    </label>
 
-                <label class="item item-input">
-                    <span class="input-label">Fecha de accion</span>
-                    <input type="date" style="text-align: right" ng-model="model.fecha_accion" ng-value="date">
-                </label>
+                    <label class="item item-input">
+                        <span class="input-label">Fecha de accion</span>
+                        <input type="date" style="text-align: right" ng-model="model.fecha_accion" ng-value="date">
+                    </label>
 
-                <label class="item item-input item-stacked-label row">
-                    <div class="col" style="padding-left: 11px">
-                        <h2 class="input-label">Resultado de la accion</h2>
-                    </div>
-                    <div class="col">
-                        <input type="text" placeholder="Escriba aquí el resultado" ng-model="model.resultado" style="text-align: right; padding-right: 35px;">
-                    </div>
-                </label>
+                    <label class="item item-input item-stacked-label row">
+                        <div class="col" style="padding-left: 11px">
+                            <h2 class="input-label">Resultado de la accion</h2>
+                        </div>
+                        <div class="col">
+                            <input type="text" placeholder="Escriba aquí el resultado" ng-model="model.resultado" style="text-align: right; padding-right: 35px;">
+                        </div>
+                    </label>
 
-                <label class="item item-input">
-                    <span class="input-label">Fecha del resultado</span>
-                    <input type="date" style="text-align: right" ng-model="model.fecha_resultado" ng-value="date">
-                </label>
+                    <label class="item item-input">
+                        <span class="input-label">Fecha del resultado</span>
+                        <input type="date" style="text-align: right" ng-model="model.fecha_resultado" ng-value="date">
+                    </label>
 
-                <div class="row">
-                    <div class="col padding-horizontal">
-                        <button class="button button-assertive" ng-click="cancel()">Anular</button>
+                    <div class="row">
+                        <div class="col padding-horizontal">
+                            <button class="button button-assertive" ng-click="cancel()">Anular</button>
+                        </div>
+                        <div class="col padding-horizontal">
+                            <button class="button button-metrogas" ng-class="{disabled: (model.accion_id == '' || model.accion_id == undefined) || (model.fecha_accion == '' || model.fecha_accion == undefined) || (model.resultado == '' || model.resultado == undefined) || (model.fecha_resultado == '' || model.fecha_resultado == undefined)}" ng-click="enviar()">Enviar</button>
+                        </div>
+                        <button ng-click="printmodel()">aaaaaaa</button>
                     </div>
-                    <div class="col padding-horizontal">
-                        <button class="button button-metrogas" ng-class="{disabled: (model.accion_id == '' || model.accion_id == undefined) || (model.fecha_accion == '' || model.fecha_accion == undefined) || (model.resultado == '' || model.resultado == undefined) || (model.fecha_resultado == '' || model.fecha_resultado == undefined)}" ng-click="enviar()">Enviar</button>
-                    </div>
-                    <button ng-click="printmodel()">aaaaaaa</button>
                 </div>
-            </div>
+            </form>
         </ion-content>
     </ion-modal-view>
