@@ -350,9 +350,13 @@ angular.module('metrogas')
         });
         $scope.enviar = function(){
             $ionicLoading.show();
-            ventasService.saveAC().save($scope.model,idVenta, idCarga).$promise.then(
+            ventasService.saveAC().save($scope.model, idVenta, idCarga).$promise.then(
                 function(response){
                     console.log("wii");
+                    console.log(response);
+                },
+                function(response){
+                    console.log("uuu");
                     console.log(response);
                 }
 
