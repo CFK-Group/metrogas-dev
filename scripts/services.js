@@ -73,7 +73,7 @@ angular.module('metrogas')
             );
         };
 
-        this.getCargas = function (token) {
+        this.getCargas = function (token)   {
             $resource(baseURL+"getcargas", {token: token}).query(
                 function (response) {
                     window.localStorage.setItem('cargas', angular.toJson(response));
@@ -84,6 +84,15 @@ angular.module('metrogas')
 
         this.edit = function (data){
             return $resource(baseURL+"save");
+        };
+
+        this.getAcciones = function (){
+            $resource(baseURL+"gettipoacciones").query(
+                function (response) {
+                    window.localStorage.setItem('tac', angular.toJson(response));
+                    return true;
+                }
+            );
         }
     }])
 ;

@@ -10,9 +10,7 @@
                         Accion Comercial
                     </div>
                     <select>
-                        <option ng-model="model.accion" ng-value="0">Blue 1</option>
-                        <option ng-model="model.accion" ng-value="1">Blue 2</option>
-                        <option ng-model="model.accion" ng-value="2">Blue 3</option>
+                        <option ng-repeat="(key, value) in tac" ng-model="model.accion" ng-value="tac.id">tac.tipo_accion</option>
                     </select>
                 </label>
 

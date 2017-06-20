@@ -37,6 +37,7 @@ angular.module('metrogas')
                     ventasService.getCalles(_token);
                     ventasService.getGrillas(_token);
                     ventasService.getCargas(_token);
+                    ventasService.getAcciones();
                     $ionicLoading.hide();
                     $rootScope.loginShow = false;
                     $state.go('app');
@@ -192,7 +193,7 @@ angular.module('metrogas')
                         if($scope.step !== '6'){
                             $state.go('app.asignadas');
                         }else{
-                            $state.go('app.accioncomercial', {id: $scope.direccion.id, from: "edit"});
+                            $state.go('app.accioncomercial', {idVenta: $scope.direccion.id, idCarga: $scope.direccion.carga_id, from: "edit"});
                         }
 
                     },
@@ -311,6 +312,7 @@ angular.module('metrogas')
 
     .controller('AccionCtrl',['$scope', '$ionicModal', '$stateParams', function($scope, $ionicModal, $stateParams) {
         var id = $stateParams.id;
+        $scope.tac = localStorage.getItem("tac");
         console.log(id);
 
         $ionicModal.fromTemplateUrl('views/filtermodal.html',{
