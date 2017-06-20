@@ -38,6 +38,7 @@ angular.module('metrogas')
                     ventasService.getGrillas(_token);
                     ventasService.getCargas(_token);
                     ventasService.getAcciones();
+                    ventasService.getTipoAcciones();
                     $ionicLoading.hide();
                     $rootScope.loginShow = false;
                     $state.go('app');
@@ -309,7 +310,7 @@ angular.module('metrogas')
     }*/
 
 }])
-    .controller('AccionCtrl',['$scope', '$ionicModal', '$stateParams', '$ionicLoading', 'ventasService', function($scope, $ionicModal, $stateParams, $ionicLoading, ventasService) {
+    .controller('AccionCtrl',['$scope', '$ionicModal', '$stateParams', '$ionicLoading', 'ventasService', '$ionicPopup', function($scope, $ionicModal, $stateParams, $ionicLoading, ventasService, $ionicPopup) {
         var idVenta = $stateParams.idVenta;
         var idCarga = $stateParams.idCarga;
         $scope.model = {
@@ -356,13 +357,24 @@ angular.module('metrogas')
             ventasService.saveAC().save($scope.model).$promise.then(
                 function(response){
                     $ionicLoading.hide();
-                    console.log("wii");
-                    console.log(response);
+                    $ionicPopup.alert({
+                        title: 'Guardado',
+                        template: 'Accion añadida correctamente'
+                    });
+                    $ionicLoading.show();
+                    ventasService.getAcciones().$promise.then(
+                        function(data){
+                            $ionicLoading.hide();
+                            $scope.modal.close();
+                        },
+                        function(data){
+                            $ionicLoading.hide();
+                            $scope.modal.close();
+                        }
+                    );
                 },
                 function(response){
                     $ionicLoading.hide();
-                    console.log("uuu");
-                    console.log(response);
                 }
 
             );

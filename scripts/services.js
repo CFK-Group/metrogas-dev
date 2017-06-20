@@ -82,19 +82,30 @@ angular.module('metrogas')
             );
         };
 
-        this.edit = function (){
-            return $resource(baseURL+"save");
-        };
-
-        this.getAcciones = function (){
+        this.getTipoAcciones = function (){
             $resource(baseURL+"gettipoacciones").query(
                 function (response) {
                     window.localStorage.setItem('tac', angular.toJson(response));
                     return true;
                 }
             );
-        }
+        };
 
+        this.getAcciones = function(){
+            $resource(baseURL+"getacciones").query(
+                function (response) {
+                    window.localStorage.setItem('ac', angular.toJson(response));
+                    return true;
+                }
+            );
+        };
+
+        //guardar las modificaciones a la venta/direccion
+        this.edit = function (){
+            return $resource(baseURL+"save");
+        };
+
+        //guardar las acciones comerciales para la venta
         this.saveAC = function(){
             return $resource(baseURL+"saveac");
         }
