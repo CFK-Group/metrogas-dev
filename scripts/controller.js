@@ -319,6 +319,11 @@ angular.module('metrogas')
                           resultado: "",
                           fecha_resultado: ""
                         };
+
+        $scope.printmodel = function(){
+            console.log($scope.model);
+        };
+
         $scope.tac = JSON.parse(localStorage.getItem("tac"));
 
         console.log("Venta: " + idVenta);
