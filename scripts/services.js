@@ -96,7 +96,7 @@ angular.module('metrogas')
         }
 
         this.saveAC = function(){
-            return $resource(baseURL+"saveAC");
+            return $resource(baseURL+"saveac");
         }
     }])
 ;
