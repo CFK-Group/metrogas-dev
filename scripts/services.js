@@ -102,7 +102,7 @@ angular.module('metrogas')
 
         //guardar las modificaciones a la venta/direccion
         this.edit = function (){
-            return $resource(baseURL+"save");
+            return $resource(baseURL+"save", null, {'query': {isArray: true}});
         };
 
         //guardar las acciones comerciales para la venta
