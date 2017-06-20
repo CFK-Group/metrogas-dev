@@ -167,7 +167,7 @@ angular.module('metrogas')
     ventasService.getById(id).get().$promise.then(
         //funcion correctamente ejecutada
         function(response){
-            console.log(JSON.parse(response));
+            console.log(response);
             $scope.direccion = response;
             $ionicLoading.hide();
             $scope.step = '1';
