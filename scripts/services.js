@@ -114,13 +114,13 @@ angular.module('metrogas')
                     for(var i = 0; i < response.length ; i++){
                         switch (response[i].tipo_motivo_id){
                             case 1:
-                                contacto[i] = response[i];
+                                contacto.push(response[i]);
                                 break;
                             case 2:
-                                interes[i] = response[i];
+                                interes.push(response[i]);
                                 break;
                             case 3:
-                                justificacion[i] = response[i];
+                                justificacion.push(response[i]);
                                 break;
                         }
                     }
