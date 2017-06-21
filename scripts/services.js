@@ -103,6 +103,11 @@ angular.module('metrogas')
         this.getMotivos = function(){
             $resource(baseURL+"getmotivos").query(
                 function (response) {
+                    //motivos
+                    //1	contacto rechazado
+                    //2	no hay interes
+                    //3	justificacion
+
                     console.log(response);
                     var a = JSON.parse(response);
                     console.log(a);
