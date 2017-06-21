@@ -124,11 +124,10 @@ angular.module('metrogas')
                                 break;
                         }
                     }
-                    //console.log(angular.toJson(response));
-                    console.log(contacto);
-                    console.log(interes);
-                    console.log(justificacion);
-                    //window.localStorage.setItem('motivos', angular.toJson(response));
+
+                    window.localStorage.setItem('motivos_no_contacto', angular.toJson(contacto));
+                    window.localStorage.setItem('motivos_no_interes', angular.toJson(interes));
+                    window.localStorage.setItem('motivos_justificacion', angular.toJson(justificacion));
                     return true;
                 }
             );
