@@ -92,12 +92,7 @@ angular.module('metrogas')
         };
 
         this.getAcciones = function(ventaid){
-            $resource(baseURL+"getacciones", {ventaid: ventaid}).query(
-                function (response) {
-                    window.localStorage.setItem('ac', angular.toJson(response));
-                    return true;
-                }
-            );
+            return $resource(baseURL+"getacciones", {ventaid: ventaid});
         };
 
         this.getMotivos = function(){

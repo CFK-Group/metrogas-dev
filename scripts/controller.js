@@ -384,10 +384,11 @@ angular.module('metrogas')
         if (from !== "edit"){
             $ionicLoading.show();
         }
-        ventasService.getAcciones(idVenta).$promise.then(
+        ventasService.getAcciones(idVenta).query(
             function(data){
                 $ionicLoading.hide();
-                $scope.accionesComerciales = JSON.parse(angular.toJson(data));
+                window.localStorage.setItem('ac', angular.toJson(response));
+                $scope.accionesComerciales = JSON.parse(localStorage.getItem('ac'));
                 console.log($scope.accionesComerciales);
             },
             function(data){
