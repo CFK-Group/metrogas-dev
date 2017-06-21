@@ -39,6 +39,7 @@ angular.module('metrogas')
                     ventasService.getCargas(_token);
                     ventasService.getAcciones();
                     ventasService.getTipoAcciones();
+                    ventasService.getMotivos();
                     $ionicLoading.hide();
                     $rootScope.loginShow = false;
                     $state.go('app');
