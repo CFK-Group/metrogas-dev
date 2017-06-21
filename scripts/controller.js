@@ -2,7 +2,9 @@
 angular.module('metrogas')
 
 .controller('LoginCtrl', ['$rootScope', '$scope', 'LoginService', '$state', '$ionicPopup', 'UserService', 'ventasService', '$ionicLoading', function($rootScope, $scope, LoginService, $state, $ionicPopup, UserService, ventasService, $ionicLoading){
-
+    $scope.motivos_no_contacto = JSON.parse(localStorage.getItem('motivos_no_contacto'));
+    $scope.motivos_no_interes = JSON.parse(localStorage.getItem('motivos_no_interes'));
+    $scope.motivos_justificacion = JSON.parse(localStorage.getItem('motivos_justificacion'));
     $scope.data = {
         username: "test",
         password: "test",

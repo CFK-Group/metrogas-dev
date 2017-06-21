@@ -54,9 +54,7 @@
                 <div class="list">
                     <label class="item item-input item-select label-big">
                         <select ng-model="model.motivo_contacto">
-                            <option value="no sabe">No se</option>
-                            <option value="no importa">No importa</option>
-                            <option value="salu2">Paq kieres saber eso jaja salu2!</option>
+                            <option ng-value="{{motivoC.id}}" ng-repeat="motivoC in motivos_no_contacto" >{{motivoC.motivo}}</option>
                         </select>
                     </label>
                 </div>
