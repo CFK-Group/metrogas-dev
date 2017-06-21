@@ -251,15 +251,13 @@ angular.module('metrogas')
                     function (response2) {
                         console.log(response2);
                         $ionicLoading.hide();
-                        var alert = $ionicPopup.alert({
+                        var a = $ionicPopup.alert({
                             title: 'Ok',
                             template: 'Información guardada correctamente'
                         });
-                        alert.then(
-                            function(){
+                        a.then(function(res){
                                 $ionicLoading.show();
-                            }
-                        );
+                        });
                         if($scope.step !== '6'){
                             $state.go('app.asignadas');
                         }else{
