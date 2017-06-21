@@ -132,9 +132,7 @@
                 <div class="list">
                     <label class="item item-input item-select label-big">
                         <select ng-model="model.motivo_interes">
-                            <option ng-value="0">No se</option>
-                            <option ng-value="1">No importa</option>
-                            <option ng-value="2">Paq kieres saber eso jaja salu2!</option>
+                            <option ng-value="{{motivoI.id}}" ng-repeat="motivoI in motivos_no_interes" >{{motivoI.motivo}}</option>
                         </select>
                     </label>
                 </div>
