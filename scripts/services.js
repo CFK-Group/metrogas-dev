@@ -100,6 +100,16 @@ angular.module('metrogas')
             );
         };
 
+        this.getMotivos = function(){
+            $resource(baseURL+"getmotivos").query(
+                function (response) {
+                    response.
+                    window.localStorage.setItem('motivos', angular.toJson(response));
+                    return true;
+                }
+            );
+        };
+
         //guardar las modificaciones a la venta/direccion
         this.edit = function (){
             return $resource(baseURL+"save", null, {'query': {isArray: true}});
