@@ -107,8 +107,27 @@ angular.module('metrogas')
                     //1	contacto rechazado
                     //2	no hay interes
                     //3	justificacion
+                    var contacto = [];
+                    var interes = [];
+                    var justificacion = [];
 
-                    console.log(angular.toJson(response));
+                    for(var i = 0; i < response.length ; i++){
+                        switch (response[i].tipo_motivo_id){
+                            case 1:
+                                contacto[i] = response[i];
+                                break;
+                            case 2:
+                                interes[i] = response[i];
+                                break;
+                            case 3:
+                                justificacion[i] = response[i];
+                                break;
+                        }
+                    }
+                    //console.log(angular.toJson(response));
+                    console.log(contacto);
+                    console.log(interes);
+                    console.log(justificacion);
                     //window.localStorage.setItem('motivos', angular.toJson(response));
                     return true;
                 }
