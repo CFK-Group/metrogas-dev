@@ -2,12 +2,6 @@
 angular.module('metrogas')
 
 .controller('LoginCtrl', ['$rootScope', '$scope', 'LoginService', '$state', '$ionicPopup', 'UserService', 'ventasService', '$ionicLoading', function($rootScope, $scope, LoginService, $state, $ionicPopup, UserService, ventasService, $ionicLoading){
-    $scope.motivos_no_contacto = JSON.parse(localStorage.getItem('motivos_no_contacto'));
-    console.log($scope.motivos_no_contacto);
-    $scope.motivos_no_interes = JSON.parse(localStorage.getItem('motivos_no_interes'));
-    console.log($scope.motivos_no_interes);
-    $scope.motivos_justificacion = JSON.parse(localStorage.getItem('motivos_justificacion'));
-    console.log($scope.motivos_justificacion);
     $scope.data = {
         username: "test",
         password: "test",
@@ -161,6 +155,15 @@ angular.module('metrogas')
 }])
 
 .controller('EditCtrl',['$scope', '$stateParams', '$state', 'ventasService', '$ionicLoading', '$ionicPopup', function($scope, $stateParams, $state, ventasService, $ionicLoading, $ionicPopup){
+
+    $scope.motivos_no_contacto = JSON.parse(localStorage.getItem('motivos_no_contacto'));
+    console.log($scope.motivos_no_contacto);
+
+    $scope.motivos_no_interes = JSON.parse(localStorage.getItem('motivos_no_interes'));
+    console.log($scope.motivos_no_interes);
+
+    $scope.motivos_justificacion = JSON.parse(localStorage.getItem('motivos_justificacion'));
+    console.log($scope.motivos_justificacion);
 
     var id = parseInt($stateParams.id,10); //get Id parameter;
     $ionicLoading.show({
