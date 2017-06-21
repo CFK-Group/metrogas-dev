@@ -255,9 +255,6 @@ angular.module('metrogas')
                             title: 'Ok',
                             template: 'Información guardada correctamente'
                         });
-                        a.then(function(res){
-                                $ionicLoading.show();
-                        });
                         if($scope.step !== '6'){
                             $state.go('app.asignadas');
                         }else{
@@ -381,10 +378,7 @@ angular.module('metrogas')
         var idVenta = $stateParams.idVenta;
         var idCarga = $stateParams.idCarga;
         var from = $stateParams.from;
-        if (from !== "edit"){
-            console.log("aa");
-            $ionicLoading.show();
-        }
+        $ionicLoading.show();
         ventasService.getAcciones(idVenta).query(
             function(data){
                 console.log("qq");
