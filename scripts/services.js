@@ -103,7 +103,9 @@ angular.module('metrogas')
         this.getMotivos = function(){
             $resource(baseURL+"getmotivos").query(
                 function (response) {
-                    response.
+                    console.log(response);
+                    var a = JSON.parse(response);
+                    console.log(a);
                     window.localStorage.setItem('motivos', angular.toJson(response));
                     return true;
                 }
