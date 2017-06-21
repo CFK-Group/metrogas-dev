@@ -108,10 +108,8 @@ angular.module('metrogas')
                     //2	no hay interes
                     //3	justificacion
 
-                    console.log(response);
-                    var a = JSON.parse(response);
-                    console.log(a);
-                    window.localStorage.setItem('motivos', angular.toJson(response));
+                    console.log(angular.toJson(response));
+                    //window.localStorage.setItem('motivos', angular.toJson(response));
                     return true;
                 }
             );
