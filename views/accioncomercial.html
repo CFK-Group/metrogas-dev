@@ -6,8 +6,8 @@
 </ion-header-bar>
 <ion-content style="margin-bottom: 50px;">
     <ion-list>
-        <ion-item>
-
+        <ion-item ng-repeat="accion in accionesComerciales">
+            {{accion.accion}}
         </ion-item>
     </ion-list>
 </ion-content>

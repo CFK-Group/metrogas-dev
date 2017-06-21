@@ -382,11 +382,14 @@ angular.module('metrogas')
         var idCarga = $stateParams.idCarga;
         var from = $stateParams.from;
         if (from !== "edit"){
+            console.log("aa");
             $ionicLoading.show();
         }
         ventasService.getAcciones(idVenta).query(
             function(data){
+                console.log("qq");
                 $ionicLoading.hide();
+                console.log("qq");
                 window.localStorage.setItem('ac', angular.toJson(data));
                 $scope.accionesComerciales = JSON.parse(localStorage.getItem('ac'));
                 console.log($scope.accionesComerciales);
