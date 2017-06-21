@@ -157,7 +157,6 @@ angular.module('metrogas')
 .controller('EditCtrl',['$scope', '$stateParams', '$state', 'ventasService', '$ionicLoading', '$ionicPopup', function($scope, $stateParams, $state, ventasService, $ionicLoading, $ionicPopup){
 
     var id = parseInt($stateParams.id,10); //get Id parameter;
-    $scope.model = {};
     $ionicLoading.show({
           content: 'Obteniendo Información...',
           animation: 'fade-in',
@@ -169,6 +168,7 @@ angular.module('metrogas')
         function(response){
             console.log(response);
             $scope.direccion = response;
+            $scope.model = JSON.parse(JSON.stringify($scope.direccion));
             $ionicLoading.hide();
             $scope.step = '1';
 
@@ -177,7 +177,7 @@ angular.module('metrogas')
             };
 
             $scope.cancel = function(){
-                $scope.model = {};
+                $scope.model = JSON.parse(JSON.stringify($scope.direccion));
                 $state.go('app.asignadas');
             };
 
