@@ -384,7 +384,7 @@ angular.module('metrogas')
         if (from !== "edit"){
             $ionicLoading.show();
         }
-        ventasService.getAcciones(idVenta).then(
+        ventasService.getAcciones(idVenta).$promise.then(
             function(data){
                 $ionicLoading.hide();
                 $scope.accionesComerciales = JSON.parse(angular.toJson(data));
