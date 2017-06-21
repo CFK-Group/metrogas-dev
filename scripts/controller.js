@@ -252,16 +252,20 @@ angular.module('metrogas')
                     function (response2) {
                         console.log(response2);
                         $ionicLoading.hide();
-                        $ionicPopup.alert({
+                        var alert = $ionicPopup.alert({
                             title: 'Ok',
                             template: 'Información guardada correctamente'
                         });
-
 
                         if($scope.step !== '6'){
                             $state.go('app.asignadas');
                         }else{
                             $state.go('app.accioncomercial', {idVenta: $scope.direccion.id, idCarga: $scope.direccion.carga_id, from: "edit"});
+                            alert.then(
+                                function(){
+                                    $ionicLoading.show();
+                                }
+                            );
                         }
 
                     },
@@ -380,6 +384,20 @@ angular.module('metrogas')
     .controller('AccionCtrl',['$scope', '$ionicModal', '$stateParams', '$ionicLoading', 'ventasService', '$ionicPopup', function($scope, $ionicModal, $stateParams, $ionicLoading, ventasService, $ionicPopup) {
         var idVenta = $stateParams.idVenta;
         var idCarga = $stateParams.idCarga;
+        var from = $stateParams.from;
+        if (from !== "edit"){
+            $ionicLoading.show();
+        }
+        ventasService.getAcciones(idVenta).then(
+            function(data){
+                $ionicLoading.hide();
+                $scope.accionesComerciales = JSON.parse(angular.toJson(data));
+                console.log($scope.accionesComerciales);
+            },
+            function(data){
+
+            }
+        );
         $scope.model = {
             accion_id: null,
             fecha_accion: "",
@@ -427,16 +445,7 @@ angular.module('metrogas')
                     alert.then(
                         function(){
                             $ionicLoading.show();
-                            ventasService.getAcciones().then(
-                                function(data){
-                                    $ionicLoading.hide();
-                                    $scope.modal.close();
-                                },
-                                function(data){
-                                    $ionicLoading.hide();
-                                    $scope.modal.close();
-                                }
-                            );
+
                         }
                     );
                 },
