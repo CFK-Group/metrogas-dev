@@ -36,7 +36,6 @@ angular.module('metrogas')
                     ventasService.getCalles(_token);
                     ventasService.getGrillas(_token);
                     ventasService.getCargas(_token);
-                    ventasService.getAcciones();
                     ventasService.getTipoAcciones();
                     ventasService.getMotivos();
                     $ionicLoading.hide();
@@ -256,16 +255,15 @@ angular.module('metrogas')
                             title: 'Ok',
                             template: 'Información guardada correctamente'
                         });
-
+                        alert.then(
+                            function(){
+                                $ionicLoading.show();
+                            }
+                        );
                         if($scope.step !== '6'){
                             $state.go('app.asignadas');
                         }else{
                             $state.go('app.accioncomercial', {idVenta: $scope.direccion.id, idCarga: $scope.direccion.carga_id, from: "edit"});
-                            alert.then(
-                                function(){
-                                    $ionicLoading.show();
-                                }
-                            );
                         }
 
                     },
