@@ -258,7 +258,7 @@ angular.module('metrogas')
                         if($scope.step !== '6'){
                             $state.go('app.asignadas');
                         }else{
-                            $state.go('app.accioncomercial', {idVenta: $scope.direccion.id, idCarga: $scope.direccion.carga_id, from: "edit"});
+                            $state.go('app.accioncomercial', {idVenta: $scope.direccion.id, idCarga: $scope.direccion.carga_id, from: "edit", direccion: $scope.direccion.direccion + " " + $scope.direccion.numero});
                         }
 
                     },
@@ -377,6 +377,7 @@ angular.module('metrogas')
     .controller('AccionCtrl',['$scope', '$ionicModal', '$stateParams', '$ionicLoading', 'ventasService', '$ionicPopup', function($scope, $ionicModal, $stateParams, $ionicLoading, ventasService, $ionicPopup) {
         var idVenta = $stateParams.idVenta;
         var idCarga = $stateParams.idCarga;
+        var direccion = $stateParams.direccion;
         $ionicLoading.show();
 
         ventasService.getAcciones(idVenta).query(

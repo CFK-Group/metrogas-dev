@@ -46,7 +46,7 @@ angular.module('metrogas', ['ionic','ui.router','ngCordova','angular.filter','ng
             })
 
         .state('app.accioncomercial',{
-            url: '/accioncomercial/:idVenta/:idCarga/:from',
+            url: '/accioncomercial/:idVenta/:idCarga/:from/:direccion',
             views: {
                 'content@': {
                     templateUrl: 'views/accioncomercial.html',
