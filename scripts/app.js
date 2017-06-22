@@ -54,6 +54,17 @@ angular.module('metrogas', ['ionic','ui.router','ngCordova','angular.filter','ng
                 }
             }
         })
+
+        .state('app.historial',{
+            url: '/asignadas',
+            views: {
+                'content@': {
+                    templateUrl: 'views/asignadas.html',
+                    controller: 'HistorialCtrl'
+                }
+            }
+        })
+
     ;
 
     $urlRouterProvider.otherwise('login');

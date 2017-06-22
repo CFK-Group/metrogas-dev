@@ -1,0 +1,37 @@
+<ion-header-bar class="bar-metrogas" align-title="center">
+    <button class="button button-icon" ng-click="toggleMenu()">
+        <i class="icon ion-navicon"></i>
+    </button>
+    <h1 class="title">Historial</h1>
+     <button class="button button-small button-clear" ng-click="openModal()" style="font-size: 13px;">Filtrar <i class="icon ion-funnel"></i></button>
+</ion-header-bar>
+<ion-content>
+    <ion-list>
+
+        <ion-item ng-repeat="dir in direcciones | filter: search" ui-sref="app.edit({id: dir.id})">
+            <div class="row">
+                <div class="col col-100">
+                    <h2>{{dir.direccion}} {{dir.numero}}
+                        <br>
+                        <span ng-if="dir.casa!==null">Casa {{dir.casa}}</span>
+                        <span ng-if="dir.block!==null">Block {{dir.block}}</span>
+                        <span ng-if="dir.dpto!==null">Depto. {{dir.dpto}}</span></h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col col-50">
+                    <p class="bold">{{dir.comuna}}</p>
+                    <p>IC: {{dir.IC}}</p>
+                    <p>Grilla: {{dir.grilla}}</p>  
+                </div>
+                <div class="col col-50">
+                    <p>Nombre: {{dir.nombre}}</p>
+                    <p>Contactada: <span ng-if="dir.contactada">Si</span><span ng-if="!dir.contactada">No</span></p>
+                    <p>Interesa: <span ng-if="dir.interesa">Si</span><span ng-if="!dir.interesa">No</span></p>
+                </div>   
+            </div>
+        </ion-item>
+
+       
+    </ion-list>
+</ion-content>
