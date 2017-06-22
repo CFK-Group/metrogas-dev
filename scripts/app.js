@@ -59,7 +59,7 @@ angular.module('metrogas', ['ionic','ui.router','ngCordova','angular.filter','ng
             url: '/asignadas',
             views: {
                 'content@': {
-                    templateUrl: 'views/asignadas.html',
+                    templateUrl: 'views/historial.html',
                     controller: 'HistorialCtrl'
                 }
             }
