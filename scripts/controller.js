@@ -379,9 +379,9 @@ angular.module('metrogas')
         var idCarga = $stateParams.idCarga;
         $scope.direccion = $stateParams.direccion;
         $ionicLoading.show();
-        this.getAcciones();
+        getAcciones();
 
-        this.getAcciones = function() {
+        getAcciones = function() {
             ventasService.getAcciones(idVenta).query(
                 function (data) {
                     $ionicLoading.hide();
