@@ -379,16 +379,26 @@ angular.module('metrogas')
         var idCarga = $stateParams.idCarga;
         $scope.direccion = $stateParams.direccion;
         $ionicLoading.show();
+        this.getAcciones();
 
-        ventasService.getAcciones(idVenta).query(
-            function(data){
-                $ionicLoading.hide();
-                $scope.accionesComerciales = JSON.parse(angular.toJson(data));
-            },
-            function(data){
-
-            }
-        );
+        this.getAcciones = function() {
+            ventasService.getAcciones(idVenta).query(
+                function (data) {
+                    $ionicLoading.hide();
+                    localStorage.setItem('ac', angular.toJson(data));
+                    $scope.accionesComerciales = JSON.parse(localStorage.getItem('ac'));
+                },
+                function (data) {
+                    var alert = $ionicPopup.alert({
+                        title: 'Ups!',
+                        template: 'Algo ha pasado, intentaremos nuevamente'
+                    });
+                    alert.then(function () {
+                        getAcciones();
+                    })
+                }
+            );
+        };
 
         $scope.model = {
             accion_id: null,
