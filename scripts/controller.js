@@ -377,20 +377,18 @@ angular.module('metrogas')
     .controller('AccionCtrl',['$scope', '$ionicModal', '$stateParams', '$ionicLoading', 'ventasService', '$ionicPopup', function($scope, $ionicModal, $stateParams, $ionicLoading, ventasService, $ionicPopup) {
         var idVenta = $stateParams.idVenta;
         var idCarga = $stateParams.idCarga;
-        var from = $stateParams.from;
         $ionicLoading.show();
+
         ventasService.getAcciones(idVenta).query(
             function(data){
-                console.log("qq");
                 $ionicLoading.hide();
-                console.log("qq");
                 $scope.accionesComerciales = JSON.parse(angular.toJson(data));
-                console.log($scope.accionesComerciales);
             },
             function(data){
 
             }
         );
+
         $scope.model = {
             accion_id: null,
             fecha_accion: "",
@@ -431,19 +429,22 @@ angular.module('metrogas')
                 function(response){
                     console.log(response);
                     $ionicLoading.hide();
-                    var alert = $ionicPopup.alert({
+                    $ionicPopup.alert({
                         title: 'Guardado',
                         template: 'Accion añadida correctamente'
                     });
-                    alert.then(
-                        function(){
-                            $ionicLoading.show();
-
-                        }
-                    );
                 },
                 function(response){
+                    console.log(response);
                     $ionicLoading.hide();
+                    var alert = $ionicPopup.alert({
+                        title: 'Ups!',
+                        template: 'Algo ha pasado, intentaremos nuevamente'
+                    });
+
+                    alert.then(function(){
+                        $scope.enviar();
+                    });
                 }
 
             );
