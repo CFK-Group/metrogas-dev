@@ -377,7 +377,7 @@ angular.module('metrogas')
     .controller('AccionCtrl',['$scope', '$ionicModal', '$stateParams', '$ionicLoading', 'ventasService', '$ionicPopup', function($scope, $ionicModal, $stateParams, $ionicLoading, ventasService, $ionicPopup) {
         var idVenta = $stateParams.idVenta;
         var idCarga = $stateParams.idCarga;
-        var direccion = $stateParams.direccion;
+        $scope.direccion = $stateParams.direccion;
         $ionicLoading.show();
 
         ventasService.getAcciones(idVenta).query(
