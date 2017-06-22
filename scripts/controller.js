@@ -301,6 +301,10 @@ angular.module('metrogas')
             $scope.executeSaving= function () {
                 $ionicLoading.show();
                 $scope.editarVenta();
+                var userData = JSON.parse(localStorage.getItem('user'));
+                var _token = userData.api_token;
+                ventasService.getVentas(_token);
+                ventasService.getHistorial(_token);
             }
 
 
@@ -448,6 +452,10 @@ angular.module('metrogas')
                     alert.then(function(){
                         $scope.closeModal();
                         $scope.acciones();
+                        var userData = JSON.parse(localStorage.getItem('user'));
+                        var _token = userData.api_token;
+                        ventasService.getVentas(_token);
+                        ventasService.getHistorial(_token);
                     });
                 },
                 function(response){

@@ -8,7 +8,7 @@
 <ion-content>
     <ion-list>
 
-        <ion-item ng-repeat="dir in direcciones | filter: search" ng-click="go(dir.contactada, dir.interesa, dir.id, dir.carga_id, 'historial', dir.direccion, dir.numero)">
+        <ion-item ng-repeat="dir in direcciones | filter: search" ng-click="go(dir.contactada, dir.interes, dir.id, dir.carga_id, 'historial', dir.direccion, dir.numero)">
             <div class="row">
                 <div class="col col-100">
                     <h2>{{dir.direccion}} {{dir.numero}}
@@ -26,7 +26,7 @@
                 </div>
                 <div class="col col-50">
                     <p>Contactada: <span ng-if="dir.contactada">Si</span><span ng-if="!dir.contactada">No</span></p>
-                    <p>Interesa: <span ng-if="dir.interesa">Si</span><span ng-if="!dir.interesa">No</span></p>
+                    <p>Interesa: <span ng-if="dir.interes">Si</span><span ng-if="!dir.interes">No</span></p>
                 </div>   
             </div>
             <div class="row" ng-if="dir.contactada">
