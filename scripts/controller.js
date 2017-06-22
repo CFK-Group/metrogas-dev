@@ -161,6 +161,7 @@ angular.module('metrogas')
     $scope.motivos_justificacion = JSON.parse(localStorage.getItem('motivos_justificacion'));
     console.log($scope.motivos_justificacion);
 
+
     var id = parseInt($stateParams.id,10); //get Id parameter;
     $ionicLoading.show({
           content: 'Obteniendo Información...',
@@ -173,35 +174,39 @@ angular.module('metrogas')
         function(response){
             console.log(response);
             $scope.direccion = response;
-            $scope.model = {
-                IC: $scope.direccion.IC,
-                block: $scope.direccion.block,
-                carga_id: $scope.direccion.carga_id,
-                casa: $scope.direccion.casa,
-                comuna: $scope.direccion.comuna,
-                consumo_invierno: $scope.direccion.consumo_invierno,
-                contactada: null,
-                correo_BBDD: $scope.direccion.correo_BBDD,
-                correo_actualizado: null,
-                direccion: $scope.direccion.direccion,
-                dpto: $scope.direccion.dpto,
-                fecha: $scope.direccion.fecha,
-                fono_BBDD: $scope.direccion.fono_BBDD,
-                fono_actualizado: null,
-                grilla: $scope.direccion.grilla,
-                id: $scope.direccion.id,
-                interes: null,
-                justificacion: $scope.direccion.justificacion,
-                motivo_contacto: null,
-                motivo_interes: null,
-                nombre: null,
-                numero: $scope.direccion.numero,
-                observacion: $scope.direccion.observacion,
-                recorrida: null,
-                rut: null,
-                tipo_vivienda: $scope.direccion.tipo_vivienda,
-                usuarios_id: $scope.direccion.usuarios_id
-            };
+            if($stateParams.from === "historial"){
+                $scope.model = JSON.parse(JSON.stringify($scope.direccion));
+            }else {
+                $scope.model = {
+                    IC: $scope.direccion.IC,
+                    block: $scope.direccion.block,
+                    carga_id: $scope.direccion.carga_id,
+                    casa: $scope.direccion.casa,
+                    comuna: $scope.direccion.comuna,
+                    consumo_invierno: $scope.direccion.consumo_invierno,
+                    contactada: null,
+                    correo_BBDD: $scope.direccion.correo_BBDD,
+                    correo_actualizado: null,
+                    direccion: $scope.direccion.direccion,
+                    dpto: $scope.direccion.dpto,
+                    fecha: $scope.direccion.fecha,
+                    fono_BBDD: $scope.direccion.fono_BBDD,
+                    fono_actualizado: null,
+                    grilla: $scope.direccion.grilla,
+                    id: $scope.direccion.id,
+                    interes: null,
+                    justificacion: $scope.direccion.justificacion,
+                    motivo_contacto: null,
+                    motivo_interes: null,
+                    nombre: null,
+                    numero: $scope.direccion.numero,
+                    observacion: $scope.direccion.observacion,
+                    recorrida: null,
+                    rut: null,
+                    tipo_vivienda: $scope.direccion.tipo_vivienda,
+                    usuarios_id: $scope.direccion.usuarios_id
+                };
+            }
             $ionicLoading.hide();
             $scope.step = '1';
 
@@ -523,6 +528,14 @@ angular.module('metrogas')
             angular.lowercase(row.carga_id).toString().indexOf(angular.lowercase($scope.filterOptions.carga) || "") !== -1
             //angular.lowercase(row.IC).toString().indexOf(angular.lowercase($scope.filterOptions.ic) || "") !== -1
         );
+    };
+
+    $scope.go = function(contactada, interesa, id, carga_id, from, direccion, numero){
+        if (contactada === 1 && interesa === 1){
+            $state.go('app.accioncomercial', {idVenta: id, idCarga: carga_id, from: from, direccion: direccion + " " + numero});
+        }else{
+            $state.go('app.accioncomercial', {id: id});
+        }
     };
 }])
 
