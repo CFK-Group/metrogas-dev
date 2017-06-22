@@ -429,9 +429,12 @@ angular.module('metrogas')
                 function(response){
                     console.log(response);
                     $ionicLoading.hide();
-                    $ionicPopup.alert({
+                    var alert = $ionicPopup.alert({
                         title: 'Guardado',
                         template: 'Accion añadida correctamente'
+                    });
+                    alert.then(function(){
+                        $scope.closeModal();
                     });
                 },
                 function(response){
