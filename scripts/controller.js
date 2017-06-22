@@ -445,6 +445,7 @@ angular.module('metrogas')
                     });
                     alert.then(function(){
                         $scope.closeModal();
+                        $scope.acciones();
                     });
                 },
                 function(response){
