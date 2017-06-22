@@ -56,7 +56,7 @@ angular.module('metrogas', ['ionic','ui.router','ngCordova','angular.filter','ng
         })
 
         .state('app.historial',{
-            url: '/asignadas',
+            url: '/historial',
             views: {
                 'content@': {
                     templateUrl: 'views/historial.html',
