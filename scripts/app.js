@@ -87,6 +87,14 @@ angular.module('metrogas', ['ionic','ui.router','ngCordova','angular.filter','ng
                     $state.go('app.asignadas');
                 }
             }
+            else if($state.current.name==="app.asignadas")
+            {
+                if($ionicSideMenuDelegate.isOpen()) {
+                    $ionicSideMenuDelegate.toggleLeft(false);
+                }else {
+                    $state.go('app');
+                }
+            }
             else {
                 if($ionicSideMenuDelegate.isOpen()) {
                     $ionicSideMenuDelegate.toggleLeft(false);

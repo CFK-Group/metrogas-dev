@@ -384,8 +384,7 @@ angular.module('metrogas')
                 console.log("qq");
                 $ionicLoading.hide();
                 console.log("qq");
-                window.localStorage.setItem('ac', angular.toJson(data));
-                $scope.accionesComerciales = JSON.parse(localStorage.getItem('ac'));
+                $scope.accionesComerciales = JSON.parse(angular.toJson(data));
                 console.log($scope.accionesComerciales);
             },
             function(data){
