@@ -17,7 +17,7 @@
 
                 <label class="item item-input item-stacked-label">
                     <h2 class="input-label">Número</h2>
-                    <input type="tel" placeholder="500" ng-model="model.numero">
+                    <input type="number" placeholder="500" ng-model="model.numero">
                 </label>
 
                 <label class="item item-input item-stacked-label">
@@ -62,7 +62,7 @@
 
                 <label class="item item-input item-stacked-label">
                     <h2 class="input-label">Rut</h2>
-                    <input type="number" placeholder="A" ng-model="model.rut">
+                    <input type="text" placeholder="12.345.345-K" ng-model="model.rut">
                 </label>
 
                 <label class="item item-input item-stacked-label">
@@ -81,7 +81,7 @@
                 <button class="button button-assertive" ng-click="cancel()">Anular</button>
             </div>
             <div class="col padding-horizontal">
-                <button class="button button-metrogas" ng-class="{disabled: (model.recorrida == '' || model.recorrida == undefined || model.recorrida == 0)}" ng-click="stepForward('2')">Siguiente</button>
+                <button class="button button-metrogas" ng-class="{disabled: (model.direccion == '' && model.numero == '' && model.comuna == '' ||)}" ng-click="enviar()">Siguiente</button>
             </div>
         </div>
 

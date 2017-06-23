@@ -547,7 +547,7 @@ angular.module('metrogas')
     };
 }])
 
-.controller('NewCtrl', ['$scope', function($scope){
+.controller('NewCtrl', ['$scope', 'ventasService', '$ionicPopup', '$state', function($scope, ventasService, $ionicPopup, $state){
     $scope.model = {
         IC: "",
         block: "",
@@ -576,6 +576,25 @@ angular.module('metrogas')
         rut: "",
         tipo_vivienda: "",
         usuarios_id: (JSON.parse(localStorage.getItem('user'))).api_token
+    };
+    $scope.enviar = function (){
+        ventasService.guardar().save($scope.model).$promise.then(
+            function(response){
+                var alert = $ionicPopup.alert({
+                    title: '¡Exito!',
+                    template: 'Datos guardados correctamente'
+                });
+                alert.then(function(){
+                    $state.go('app');
+                });
+            },
+            function(response){
+                var alert = $ionicPopup.alert({
+                    title: 'Ups!',
+                    template: response
+                });
+            }
+        );
     };
 }])
 ;

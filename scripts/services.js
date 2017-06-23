@@ -150,6 +150,11 @@ angular.module('metrogas')
         //guardar las acciones comerciales para la venta
         this.saveAC = function(){
             return $resource(baseURL+"saveac");
+        };
+
+        //guardar direccion nueva
+        this.guardar= function(){
+            return $resource(baseURL+"new");
         }
     }])
 ;
