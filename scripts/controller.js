@@ -150,7 +150,7 @@ angular.module('metrogas')
     };
 }])
 
-.controller('EditCtrl',['$scope', '$stateParams', '$state', 'ventasService', '$ionicLoading', '$ionicPopup', function($scope, $stateParams, $state, ventasService, $ionicLoading, $ionicPopup){
+.controller('EditCtrl',['$scope', '$stateParams', '$state', 'ventasService', '$ionicLoading', '$ionicPopup', function($scope, $stateParams, $state, ventasService, $ionicLoading, $ionicPopup) {
 
     $scope.motivos_no_contacto = JSON.parse(localStorage.getItem('motivos_no_contacto'));
     console.log($scope.motivos_no_contacto);
@@ -207,6 +207,7 @@ angular.module('metrogas')
                     usuarios_id: $scope.direccion.usuarios_id
                 };
             }
+            console.log($scope.model);
             $ionicLoading.hide();
             $scope.step = '1';
 
@@ -253,7 +254,7 @@ angular.module('metrogas')
                     function (response2) {
                         console.log(response2);
                         $ionicLoading.hide();
-                        var a = $ionicPopup.alert({
+                        $ionicPopup.alert({
                             title: 'Ok',
                             template: 'Información guardada correctamente'
                         });
@@ -298,7 +299,7 @@ angular.module('metrogas')
                 });
             };
 
-            $scope.executeSaving= function () {
+            $scope.executeSaving = function () {
                 $ionicLoading.show();
                 $scope.editarVenta();
                 var userData = JSON.parse(localStorage.getItem('user'));
@@ -380,7 +381,7 @@ angular.module('metrogas')
     }*/
 
 }])
-    .controller('AccionCtrl',['$scope', '$ionicModal', '$stateParams', '$ionicLoading', 'ventasService', '$ionicPopup', function($scope, $ionicModal, $stateParams, $ionicLoading, ventasService, $ionicPopup) {
+.controller('AccionCtrl',['$scope', '$ionicModal', '$stateParams', '$ionicLoading', 'ventasService', '$ionicPopup', function($scope, $ionicModal, $stateParams, $ionicLoading, ventasService, $ionicPopup) {
         var idVenta = $stateParams.idVenta;
         var idCarga = $stateParams.idCarga;
         $scope.direccion = $stateParams.direccion;
