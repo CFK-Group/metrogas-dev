@@ -1,0 +1,81 @@
+<ion-header-bar class="bar-metrogas" align-title="center">
+    <button class="button button-icon" ng-click="toggleMenu()">
+        <i class="icon ion-navicon"></i>
+    </button>
+    <h1 class="title">Crear Dirección</h1>
+</ion-header-bar>
+<ion-content style="margin-bottom: 50px;">
+
+    <form>
+        <div class="card">
+            <div class="item item-text-wrap">
+                <h2>Dirección</h2>
+                <label class="item item-input item-stacked-label">
+                    <h2 class="input-label">Calle</h2>
+                    <input type="text" placeholder="Avenida Libertador Bernardo O'Higgins" ng-model="model.direccion">
+                </label>
+
+                <label class="item item-input item-stacked-label">
+                    <h2 class="input-label">Número</h2>
+                    <input type="tel" placeholder="500" ng-model="model.numero">
+                </label>
+
+                <label class="item item-input item-stacked-label">
+                    <h2 class="input-label">Tipo de Vivienda</h2>
+                    <input type="text" placeholder="CASA SIN CT" ng-model="model.tipo_vivienda">
+                </label>
+
+                <label class="item item-input item-stacked-label">
+                    <h2 class="input-label">Departamento</h2>
+                    <input type="text" placeholder="45" ng-model="model.dpto">
+                </label>
+
+                <label class="item item-input item-stacked-label">
+                    <h2 class="input-label">Casa</h2>
+                    <input type="text" placeholder="25" ng-model="model.casa">
+                </label>
+
+                <label class="item item-input item-stacked-label">
+                    <h2 class="input-label">Block</h2>
+                    <input type="text" placeholder="A" ng-model="model.block">
+                </label>
+
+                <label class="item item-input item-stacked-label">
+                    <h2 class="input-label">Comuna</h2>
+                    <input type="text" placeholder="Recoleta" ng-model="model.comuna">
+                </label>
+
+                <label class="item item-input item-stacked-label">
+                    <h2 class="input-label">Grilla</h2>
+                    <input type="text" placeholder="08-09" ng-model="model.grilla">
+                </label>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="item item-text-wrap">
+                <h2>Contacto</h2>
+                <label class="item item-input item-stacked-label">
+                    <h2 class="input-label">Nombre</h2>
+                    <input type="text" placeholder="Juan Perez" ng-model="model.nombre">
+                </label>
+
+                <label class="item item-input item-stacked-label">
+                    <h2 class="input-label">Rut</h2>
+                    <input type="number" placeholder="A" ng-model="model.rut">
+                </label>
+
+                <label class="item item-input item-stacked-label">
+                    <h2 class="input-label">Correo</h2>
+                    <input type="email" placeholder="A" ng-model="model.correo_BBDD">
+                </label>
+
+                <label class="item item-input item-stacked-label">
+                    <h2 class="input-label">Teléfono</h2>
+                    <input type="tel" placeholder="+56 (9) 12345678" ng-model="model.fono_BBDD">
+                </label>
+            </div>
+        </div>
+
+    </form>
+</ion-content>

@@ -75,6 +75,16 @@ angular.module('metrogas', ['ionic','ui.router','ngCordova','angular.filter','ng
             }
         })
 
+        .state('app.new',{
+            url: '/new',
+            views: {
+                'content@': {
+                    templateUrl: 'views/create.html',
+                    controller: 'NewCtrl'
+                }
+            }
+        })
+
     ;
 
     $urlRouterProvider.otherwise('login');

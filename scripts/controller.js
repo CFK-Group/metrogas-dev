@@ -216,7 +216,7 @@ angular.module('metrogas')
             };
 
             $scope.cancel = function(){
-                $scope.model = $scope.model = {
+                $scope.model = {
                     IC: $scope.direccion.IC,
                     block: $scope.direccion.block,
                     carga_id: $scope.direccion.carga_id,
@@ -387,7 +387,6 @@ angular.module('metrogas')
         $scope.direccion = $stateParams.direccion;
         $ionicLoading.show();
 
-
         $scope.acciones = function () {
             ventasService.getAcciones(idVenta).query(
                 function (data) {
@@ -548,4 +547,35 @@ angular.module('metrogas')
     };
 }])
 
+.controller('NewCtrl', ['$scope', function($scope){
+    $scope.model = {
+        IC: "",
+        block: "",
+        carga_id: 0,
+        casa: "",
+        comuna: "",
+        consumo_invierno: "",
+        contactada: "",
+        correo_BBDD: "",
+        correo_actualizado: "",
+        direccion: "",
+        dpto: "",
+        fecha: "",
+        fono_BBDD: "",
+        fono_actualizado: "",
+        grilla: "",
+        id: null,
+        interes: "",
+        justificacion: "",
+        motivo_contacto: "",
+        motivo_interes: "",
+        nombre: "",
+        numero: "",
+        observacion: "",
+        recorrida: "",
+        rut: "",
+        tipo_vivienda: "",
+        usuarios_id: (JSON.parse(localStorage.getItem('user'))).api_token
+    };
+}])
 ;
