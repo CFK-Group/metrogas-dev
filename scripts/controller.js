@@ -150,7 +150,26 @@ angular.module('metrogas')
     };
 }])
 
-.controller('EditCtrl',['$scope', '$stateParams', '$state', 'ventasService', '$ionicLoading', '$ionicPopup', function($scope, $stateParams, $state, ventasService, $ionicLoading, $ionicPopup) {
+.controller('EditCtrl',['$scope', '$stateParams', '$state', 'ventasService', '$ionicLoading', '$ionicPopup', '$ionicPlatform', function($scope, $stateParams, $state, ventasService, $ionicLoading, $ionicPopup, $ionicPlatform) {
+
+    $ionicPlatform.registerBackButtonAction(function (event) {
+        if($state.current.name==="app.edit")
+        {
+            if($ionicSideMenuDelegate.isOpen()) {
+                $ionicSideMenuDelegate.toggleLeft(false);
+            }else {
+                $state.go('app.asignadas');
+            }
+        }
+        else if($state.current.name==="app.edit" && $stateParams.from === 'historial')
+        {
+            if($ionicSideMenuDelegate.isOpen()) {
+                $ionicSideMenuDelegate.toggleLeft(false);
+            }else {
+                $state.go('app.historial');
+            }
+        }
+    });
 
     $scope.motivos_no_contacto = JSON.parse(localStorage.getItem('motivos_no_contacto'));
     console.log($scope.motivos_no_contacto);
