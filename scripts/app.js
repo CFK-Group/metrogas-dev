@@ -80,7 +80,7 @@ angular.module('metrogas', ['ionic','ui.router','ngCordova','angular.filter','ng
     $urlRouterProvider.otherwise('login');
 
 }).run(
-    function($rootScope, $ionicSideMenuDelegate, $ionicPlatform, $state, $stateParams){
+    function($rootScope, $ionicSideMenuDelegate, $ionicPlatform, $state){
         $rootScope.loginShow= true;
         $rootScope.user = "";
         $ionicPlatform.registerBackButtonAction(function (event) {
@@ -108,14 +108,14 @@ angular.module('metrogas', ['ionic','ui.router','ngCordova','angular.filter','ng
                     $state.go('app.historial');
                 }
             }
-            /*else if($state.current.name==="app.accioncomercial" && $stateParams.from === "edit" )
+            else if($state.current.name==="app.accioncomercial")
             {
                 if($ionicSideMenuDelegate.isOpen()) {
                     $ionicSideMenuDelegate.toggleLeft(false);
                 }else {
-                    $state.go('app.asignadas');
+                    $state.go('app');
                 }
-            }*/
+            }
             else if($state.current.name==="app.asignadas")
             {
                 if($ionicSideMenuDelegate.isOpen()) {
