@@ -560,7 +560,6 @@ angular.module('metrogas')
         correo_actualizado: "",
         direccion: "",
         dpto: "",
-        fecha: "",
         fono_BBDD: "",
         fono_actualizado: "",
         grilla: "",
