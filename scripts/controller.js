@@ -216,41 +216,45 @@ angular.module('metrogas')
             };
 
             $scope.cancel = function(){
-                $scope.model = {
-                    IC: $scope.direccion.IC,
-                    block: $scope.direccion.block,
-                    carga_id: $scope.direccion.carga_id,
-                    casa: $scope.direccion.casa,
-                    comuna: $scope.direccion.comuna,
-                    consumo_invierno: $scope.direccion.consumo_invierno,
-                    contactada: null,
-                    correo_BBDD: $scope.direccion.correo_BBDD,
-                    correo_actualizado: null,
-                    direccion: $scope.direccion.direccion,
-                    dpto: $scope.direccion.dpto,
-                    fecha: $scope.direccion.fecha,
-                    fono_BBDD: $scope.direccion.fono_BBDD,
-                    fono_actualizado: null,
-                    grilla: $scope.direccion.grilla,
-                    id: $scope.direccion.id,
-                    interes: null,
-                    justificacion: $scope.direccion.justificacion,
-                    motivo_contacto: null,
-                    motivo_interes: null,
-                    nombre: null,
-                    numero: $scope.direccion.numero,
-                    observacion: $scope.direccion.observacion,
-                    recorrida: null,
-                    rut: null,
-                    tipo_vivienda: $scope.direccion.tipo_vivienda,
-                    usuarios_id: $scope.direccion.usuarios_id
-                };
+                if($stateParams.from === "historial"){
+                    $scope.model = JSON.parse(JSON.stringify($scope.direccion));
+                }else {
+                    $scope.model = {
+                        IC: $scope.direccion.IC,
+                        block: $scope.direccion.block,
+                        carga_id: $scope.direccion.carga_id,
+                        casa: $scope.direccion.casa,
+                        comuna: $scope.direccion.comuna,
+                        consumo_invierno: $scope.direccion.consumo_invierno,
+                        contactada: null,
+                        correo_BBDD: $scope.direccion.correo_BBDD,
+                        correo_actualizado: null,
+                        direccion: $scope.direccion.direccion,
+                        dpto: $scope.direccion.dpto,
+                        fecha: $scope.direccion.fecha,
+                        fono_BBDD: $scope.direccion.fono_BBDD,
+                        fono_actualizado: null,
+                        grilla: $scope.direccion.grilla,
+                        id: $scope.direccion.id,
+                        interes: null,
+                        justificacion: $scope.direccion.justificacion,
+                        motivo_contacto: null,
+                        motivo_interes: null,
+                        nombre: null,
+                        numero: $scope.direccion.numero,
+                        observacion: $scope.direccion.observacion,
+                        recorrida: null,
+                        rut: null,
+                        tipo_vivienda: $scope.direccion.tipo_vivienda,
+                        usuarios_id: $scope.direccion.usuarios_id
+                    };
+                }
                 $state.go('app.asignadas');
             };
 
             $scope.editarVenta = function (){
-                var data = [$scope.model, $scope.direccion];
-                ventasService.edit().save(data).$promise.then(
+                console.log($scope.model);
+                ventasService.edit().save($scope.model).$promise.then(
                     function (response2) {
                         console.log(response2);
                         $ionicLoading.hide();
@@ -473,8 +477,6 @@ angular.module('metrogas')
 
             );
         }
-
-
     }])
 
 .controller('HistorialCtrl', ['$scope', '$state', '$ionicLoading', '$ionicModal', function($scope, $state, $ionicLoading, $ionicModal){
@@ -562,7 +564,7 @@ angular.module('metrogas')
         dpto: null,
         fono_BBDD: "",
         fono_actualizado: "",
-        grilla: "",
+        grilla: "no identificada",
         id: null,
         interes: 0,
         justificacion: "",
