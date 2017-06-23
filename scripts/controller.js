@@ -543,7 +543,7 @@ angular.module('metrogas')
         if (contactada === 1 && interesa === 1){
             $state.go('app.accioncomercial', {idVenta: id, idCarga: carga_id, from: from, direccion: direccion + " " + numero});
         }else{
-            $state.go('app.edit', {id: id, from:from});
+            $state.go('app.modify', {id: id, from:from});
         }
     };
 }])
