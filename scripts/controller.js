@@ -571,7 +571,7 @@ angular.module('metrogas')
         nombre: "",
         numero: "",
         observacion: "",
-        recorrida: "",
+        recorrida: 0,
         rut: "",
         tipo_vivienda: "",
         usuarios_id: (JSON.parse(localStorage.getItem('user'))).id
@@ -580,15 +580,20 @@ angular.module('metrogas')
         console.log($scope.model);
         ventasService.guardar().save($scope.model).$promise.then(
             function(response){
+                if (response){
                 console.log(response);
                 var alert = $ionicPopup.alert({
                     title: '¡Exito!',
                     template: 'Datos guardados correctamente'
                 });
                 alert.then(function(){
+                    var userData = JSON.parse(localStorage.getItem('user'));
+                    var _token = userData.api_token;
+                    ventasService.getVentas(_token);
+                    ventasService.getHistorial(_token);
                     $state.go('app');
                 });
-            },
+            }},
             function(response){
                 var alert = $ionicPopup.alert({
                     title: 'Ups!',
