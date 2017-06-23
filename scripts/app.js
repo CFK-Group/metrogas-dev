@@ -36,7 +36,7 @@ angular.module('metrogas', ['ionic','ui.router','ngCordova','angular.filter','ng
             })
 
         .state('app.edit',{
-                url: '/edit/:id',
+                url: '/edit/:id/:from',
                 views: {
                     'content@': {
                         templateUrl: 'views/edit.html',
