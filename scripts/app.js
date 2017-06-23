@@ -108,14 +108,14 @@ angular.module('metrogas', ['ionic','ui.router','ngCordova','angular.filter','ng
                     $state.go('app.historial');
                 }
             }
-            else if($state.current.name==="app.accioncomercial" && $stateParams.from === "edit" )
+            /*else if($state.current.name==="app.accioncomercial" && $stateParams.from === "edit" )
             {
                 if($ionicSideMenuDelegate.isOpen()) {
                     $ionicSideMenuDelegate.toggleLeft(false);
                 }else {
                     $state.go('app.asignadas');
                 }
-            }
+            }*/
             else if($state.current.name==="app.asignadas")
             {
                 if($ionicSideMenuDelegate.isOpen()) {
