@@ -65,6 +65,16 @@ angular.module('metrogas', ['ionic','ui.router','ngCordova','angular.filter','ng
             }
         })
 
+        .state('app.modify',{
+            url: '/modify/:id/:from',
+            views: {
+                'content@': {
+                    templateUrl: 'views/modify.html',
+                    controller: 'EditCtrl'
+                }
+            }
+        })
+
     ;
 
     $urlRouterProvider.otherwise('login');
@@ -90,7 +100,7 @@ angular.module('metrogas', ['ionic','ui.router','ngCordova','angular.filter','ng
                     $state.go('app.asignadas');
                 }
             }
-            else if($state.current.name==="app.edit" && $stateParams.from === 'historial')
+            else if($state.current.name==="app.modify")
             {
                 if($ionicSideMenuDelegate.isOpen()) {
                     $ionicSideMenuDelegate.toggleLeft(false);

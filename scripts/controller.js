@@ -540,8 +540,6 @@ angular.module('metrogas')
     };
 
     $scope.go = function(contactada, interesa, id, carga_id, from, direccion, numero){
-        console.log(contactada === 1);
-        console.log(interesa === 1);
         if (contactada === 1 && interesa === 1){
             $state.go('app.accioncomercial', {idVenta: id, idCarga: carga_id, from: from, direccion: direccion + " " + numero});
         }else{
