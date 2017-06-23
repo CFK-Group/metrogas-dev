@@ -75,6 +75,7 @@ angular.module('metrogas', ['ionic','ui.router','ngCordova','angular.filter','ng
         $rootScope.user = "";
         $rootScope.params = $stateParams;
         console.log($rootScope.params);
+        console.log($stateParams);
         $ionicPlatform.registerBackButtonAction(function (event) {
 
             if($state.current.name==="app" || $state.current.name==="login"){
