@@ -4,7 +4,7 @@
     </button>
     <h1 class="title">Crear Dirección</h1>
 </ion-header-bar>
-<ion-content style="margin-bottom: 50px;">
+<ion-content>
 
     <form>
         <div class="card">
@@ -74,6 +74,14 @@
                     <h2 class="input-label">Teléfono</h2>
                     <input type="tel" placeholder="+56 (9) 12345678" ng-model="model.fono_BBDD">
                 </label>
+            </div>
+        </div>
+        <div class="item item-divider text-center row">
+            <div class="col padding-horizontal">
+                <button class="button button-assertive" ng-click="cancel()">Anular</button>
+            </div>
+            <div class="col padding-horizontal">
+                <button class="button button-metrogas" ng-class="{disabled: (model.recorrida == '' || model.recorrida == undefined || model.recorrida == 0)}" ng-click="stepForward('2')">Siguiente</button>
             </div>
         </div>
 
