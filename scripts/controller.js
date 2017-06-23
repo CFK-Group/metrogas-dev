@@ -556,7 +556,7 @@ angular.module('metrogas')
         carga_id: 0,
         casa: null,
         comuna: "",
-        consumo_invierno: "",
+        consumo_invierno: null,
         contactada: 0,
         correo_BBDD: "",
         correo_actualizado: "",
