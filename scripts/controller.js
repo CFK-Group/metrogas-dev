@@ -578,8 +578,10 @@ angular.module('metrogas')
         usuarios_id: (JSON.parse(localStorage.getItem('user'))).api_token
     };
     $scope.enviar = function (){
+        console.log($scope.model);
         ventasService.guardar().save($scope.model).$promise.then(
             function(response){
+                console.log(response);
                 var alert = $ionicPopup.alert({
                     title: '¡Exito!',
                     template: 'Datos guardados correctamente'
