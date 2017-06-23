@@ -73,6 +73,8 @@ angular.module('metrogas', ['ionic','ui.router','ngCordova','angular.filter','ng
     function($rootScope, $ionicSideMenuDelegate, $ionicPlatform, $state, $stateParams){
         $rootScope.loginShow= true;
         $rootScope.user = "";
+        $rootScope.params = $stateParams;
+        console.log($rootScope.params);
         $ionicPlatform.registerBackButtonAction(function (event) {
 
             if($state.current.name==="app" || $state.current.name==="login"){
@@ -98,7 +100,7 @@ angular.module('metrogas', ['ionic','ui.router','ngCordova','angular.filter','ng
                     $state.go('app.historial');
                 }
             }
-            else if($state.current.name==="app.edit" && $stateParams.from === "edit" )
+            else if($state.current.name==="app.accioncomercial" && $stateParams.from === "edit" )
             {
                 if($ionicSideMenuDelegate.isOpen()) {
                     $ionicSideMenuDelegate.toggleLeft(false);
