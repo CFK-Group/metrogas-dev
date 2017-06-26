@@ -497,6 +497,7 @@ angular.module('metrogas')
             }).then(function(modal){
                 $scope.modal = modal;
                 $scope.direcciones = JSON.parse(JSON.stringify(response));
+                console.log($scope.direcciones);
                 $scope.allComunas = JSON.parse(localStorage.getItem('comunas'));
                 $scope.allCalles = JSON.parse(localStorage.getItem('calles'));
                 $scope.allGrilla = JSON.parse(localStorage.getItem('grillas'));
