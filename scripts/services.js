@@ -30,12 +30,7 @@ angular.module('metrogas')
 
     .service('ventasService', ['$resource', 'baseURL', function($resource, baseURL){
         this.getVentas = function(token){
-            return $resource(baseURL+"getventas", {token: token}).query(
-                function (response) {
-                    localStorage.setItem('direcciones', angular.toJson(response));
-                    return true;
-                }
-            );
+            return $resource(baseURL+"getventas", {token: token});
         };
 
         this.getHistorial = function(token){
