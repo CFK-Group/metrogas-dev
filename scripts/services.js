@@ -34,12 +34,7 @@ angular.module('metrogas')
         };
 
         this.getHistorial = function(token){
-            return $resource(baseURL+"gethistorial", {token: token}).query(
-                function (response) {
-                    localStorage.setItem('historial', angular.toJson(response));
-                    return true;
-                }
-            );
+            return $resource(baseURL+"gethistorial", {token: token});
         };
 
         //uses only if user has internet connection

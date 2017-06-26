@@ -85,70 +85,75 @@ angular.module('metrogas')
 
 }])
 
-.controller('AsignCtrl',['$scope', '$ionicModal', 'ventasService', function($scope, $ionicModal, ventasService){
+.controller('AsignCtrl',['$scope', '$ionicModal', 'ventasService', '$ionicLoading', function($scope, $ionicModal, ventasService, $ionicLoading){
 
+    $ionicLoading.show();
+    var _token = JSON.parse(localStorage.getItem('user')).api_token;
     //llamar a la api con solicitudes para ver las ventas...
+    ventasService.getVentas(_token).$promise.then(
+        function(response){
+            $ionicLoading.hide();
+            $ionicModal.fromTemplateUrl('views/filtermodal.html',{
+                scope: $scope,
+                animation: 'slide-in-up'
+            }).then(function(modal){
+                $scope.modal = modal;
+                $scope.direcciones = JSON.parse(localStorage.getItem('direcciones'));
+                $scope.allComunas = JSON.parse(localStorage.getItem('comunas'));
+                $scope.allCalles = JSON.parse(localStorage.getItem('calles'));
+                $scope.allGrilla = JSON.parse(localStorage.getItem('grillas'));
+                $scope.allCargas = JSON.parse(localStorage.getItem('cargas'));
+            });
 
-    ventasService.getVentas(_token);
-    $ionicModal.fromTemplateUrl('views/filtermodal.html',{
-        scope: $scope,
-        animation: 'slide-in-up'
-    }).then(function(modal){
-        $scope.modal = modal;
-        $scope.direcciones = JSON.parse(localStorage.getItem('direcciones'));
-        $scope.allComunas = JSON.parse(localStorage.getItem('comunas'));
-        $scope.allCalles = JSON.parse(localStorage.getItem('calles'));
-        $scope.allGrilla = JSON.parse(localStorage.getItem('grillas'));
-        $scope.allCargas = JSON.parse(localStorage.getItem('cargas'));
-    });
-    
-    $scope.openModal = function() {
-        $scope.modal.show();
-    };
-   
-    $scope.closeModal = function() {
-        $scope.modal.hide();
-    };
-   
-    // Cleanup the modal when we're done with it!
-    $scope.$on('$destroy', function() {
-        $scope.modal.remove();
-    });
-   
-    $scope.resetFilter = function () {
-        $scope.filterOptions={
-            calle: "",
-            comuna: "",
-            grilla: "",
-            recorrida: "",
-            contactada: "",
-            //ic: "",
-            carga: ""
-        };
-    };
-    
-    $scope.filterOptions={
-        calle: "",
-        comuna: "",
-        grilla: "",
-        recorrida: "",
-        contactada: "",
-        //ic: "",
-        carga: ""
-    };
+            $scope.openModal = function() {
+                $scope.modal.show();
+            };
 
-    $scope.search = function(row) {
-        //console.log(row);
-        return (
-            angular.lowercase(row.direccion).toString().indexOf(angular.lowercase($scope.filterOptions.calle) || "") !== -1 &&
-            angular.lowercase(row.comuna).toString().indexOf(angular.lowercase($scope.filterOptions.comuna) || "") !== -1 &&
-            angular.lowercase(row.grilla).toString().indexOf(angular.lowercase($scope.filterOptions.grilla) || "") !== -1 &&
-            angular.lowercase(row.recorrida).toString().indexOf(angular.lowercase($scope.filterOptions.recorrida) || "") !== -1 &&
-            angular.lowercase(row.contactada).toString().indexOf(angular.lowercase($scope.filterOptions.contactada) || "") !== -1 &&
-            angular.lowercase(row.carga_id).toString().indexOf(angular.lowercase($scope.filterOptions.carga) || "") !== -1
-            //angular.lowercase(row.IC).toString().indexOf(angular.lowercase($scope.filterOptions.ic) || "") !== -1
-        );
-    };
+            $scope.closeModal = function() {
+                $scope.modal.hide();
+            };
+
+            // Cleanup the modal when we're done with it!
+            $scope.$on('$destroy', function() {
+                $scope.modal.remove();
+            });
+
+            $scope.resetFilter = function () {
+                $scope.filterOptions={
+                    calle: "",
+                    comuna: "",
+                    grilla: "",
+                    recorrida: "",
+                    contactada: "",
+                    //ic: "",
+                    carga: ""
+                };
+            };
+
+            $scope.filterOptions={
+                calle: "",
+                comuna: "",
+                grilla: "",
+                recorrida: "",
+                contactada: "",
+                //ic: "",
+                carga: ""
+            };
+
+            $scope.search = function(row) {
+                //console.log(row);
+                return (
+                    angular.lowercase(row.direccion).toString().indexOf(angular.lowercase($scope.filterOptions.calle) || "") !== -1 &&
+                    angular.lowercase(row.comuna).toString().indexOf(angular.lowercase($scope.filterOptions.comuna) || "") !== -1 &&
+                    angular.lowercase(row.grilla).toString().indexOf(angular.lowercase($scope.filterOptions.grilla) || "") !== -1 &&
+                    angular.lowercase(row.recorrida).toString().indexOf(angular.lowercase($scope.filterOptions.recorrida) || "") !== -1 &&
+                    angular.lowercase(row.contactada).toString().indexOf(angular.lowercase($scope.filterOptions.contactada) || "") !== -1 &&
+                    angular.lowercase(row.carga_id).toString().indexOf(angular.lowercase($scope.filterOptions.carga) || "") !== -1
+                    //angular.lowercase(row.IC).toString().indexOf(angular.lowercase($scope.filterOptions.ic) || "") !== -1
+                );
+            };
+        }
+    );
 }])
 
 .controller('EditCtrl',['$scope', '$stateParams', '$state', 'ventasService', '$ionicLoading', '$ionicPopup', function($scope, $stateParams, $state, ventasService, $ionicLoading, $ionicPopup) {
