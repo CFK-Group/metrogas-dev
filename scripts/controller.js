@@ -482,6 +482,7 @@ angular.module('metrogas')
 
 .controller('HistorialCtrl', ['$scope', '$state', '$ionicLoading', '$ionicModal', 'ventasService', function($scope, $state, $ionicLoading, $ionicModal, ventasService){
     $ionicLoading.show();
+    var _token = JSON.parse(localStorage.getItem('user')).api_token;
     ventasService.getHistorial(_token).$promise.then(
         function(response){
             $ionicLoading.hide();
