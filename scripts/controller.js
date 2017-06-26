@@ -98,7 +98,7 @@ angular.module('metrogas')
                 animation: 'slide-in-up'
             }).then(function(modal){
                 $scope.modal = modal;
-                $scope.direcciones = JSON.parse(localStorage.getItem('direcciones'));
+                $scope.direcciones = JSON.parse(JSON.stringify(response));
                 $scope.allComunas = JSON.parse(localStorage.getItem('comunas'));
                 $scope.allCalles = JSON.parse(localStorage.getItem('calles'));
                 $scope.allGrilla = JSON.parse(localStorage.getItem('grillas'));
