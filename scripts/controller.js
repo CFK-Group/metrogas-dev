@@ -89,6 +89,7 @@ angular.module('metrogas')
 
     $ionicLoading.show();
     var _token = JSON.parse(localStorage.getItem('user')).api_token;
+    console.log(_token);
     //llamar a la api con solicitudes para ver las ventas...
     ventasService.getVentas(_token).then(
         function(response){
