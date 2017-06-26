@@ -89,9 +89,8 @@ angular.module('metrogas')
 
     $ionicLoading.show();
     var _token = JSON.parse(localStorage.getItem('user')).api_token;
-    console.log(_token);
     //llamar a la api con solicitudes para ver las ventas...
-    ventasService.getVentas(_token).then(
+    ventasService.getVentas(_token).get().$promise.then(
         function(response){
             $ionicLoading.hide();
             $ionicModal.fromTemplateUrl('views/filtermodal.html',{
@@ -489,7 +488,7 @@ angular.module('metrogas')
 .controller('HistorialCtrl', ['$scope', '$state', '$ionicLoading', '$ionicModal', 'ventasService', function($scope, $state, $ionicLoading, $ionicModal, ventasService){
     $ionicLoading.show();
     var _token = JSON.parse(localStorage.getItem('user')).api_token;
-    ventasService.getHistorial(_token).then(
+    ventasService.getHistorial(_token).get().$promise.then(
         function(response){
             $ionicLoading.hide();
             $ionicModal.fromTemplateUrl('views/filtermodal.html',{
