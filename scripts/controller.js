@@ -489,10 +489,12 @@ angular.module('metrogas')
             console.log($scope.model);
             ventasService.updateAC().save($scope.model).$promise.then(
                 function(response){
-
+                    console.log("11");
+                    console.log(response);
                 },
                 function(response){
-
+                    console.log("22");
+                    console.log(response);
                 }
             );
         };
