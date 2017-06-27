@@ -30,21 +30,11 @@ angular.module('metrogas')
 
     .service('ventasService', ['$resource', 'baseURL', function($resource, baseURL){
         this.getVentas = function(token){
-            return $resource(baseURL+"getventas", {token: token}).query(
-                function (response) {
-                    localStorage.setItem('direcciones', angular.toJson(response));
-                    return true;
-                }
-            );
+            return $resource(baseURL+"getventas", {token: token});
         };
 
         this.getHistorial = function(token){
-            return $resource(baseURL+"gethistorial", {token: token}).query(
-                function (response) {
-                    localStorage.setItem('historial', angular.toJson(response));
-                    return true;
-                }
-            );
+            return $resource(baseURL+"gethistorial", {token: token});
         };
 
         //uses only if user has internet connection
