@@ -145,6 +145,10 @@ angular.module('metrogas')
         //guardar direccion nueva
         this.guardar= function(){
             return $resource(baseURL+"new");
+        };
+
+        this.updateAC = function(){
+            return $resource(baseURL+"updateac");
         }
     }])
 ;
