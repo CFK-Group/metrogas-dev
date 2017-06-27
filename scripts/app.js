@@ -123,7 +123,7 @@ angular.module('metrogas', ['ionic','ui.router','ngCordova','angular.filter','ng
                 if($ionicSideMenuDelegate.isOpen()) {
                     $ionicSideMenuDelegate.toggleLeft(false);
                 }else {
-                    $state.go('app');
+                    $state.go('app.historial');
                 }
             }
             else if($state.current.name==="app.asignadas")

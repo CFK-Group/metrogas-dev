@@ -452,7 +452,7 @@ angular.module('metrogas')
             }
         };
 
-        $scope.closeModal = function() {
+        $scope.closeModal = function(index) {
             if (index === 1){
                 $scope.modal_1.hide();
             }else{
