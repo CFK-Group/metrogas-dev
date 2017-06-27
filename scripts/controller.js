@@ -401,7 +401,7 @@ angular.module('metrogas')
             ventasService.getAcciones(idVenta).query(
                 function (data) {
                     $ionicLoading.hide();
-                    $scope.accionesComerciales = JSON.parse(JSON.stringify(localStorage.getItem('ac')));
+                    $scope.accionesComerciales = JSON.parse(JSON.stringify(data));
                 },
                 function (data) {
                     $ionicPopup.alert({
