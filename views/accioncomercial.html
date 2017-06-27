@@ -8,6 +8,22 @@
     <ion-list>
         <ion-item ng-repeat="accion in accionesComerciales" ng-click="chooseModal(2, accion)">
             <pre>{{accion}}</pre>
+            <div class="row">
+                <div class="col">
+                    <p>Accion:</p>
+                    <p>Fecha:</p>
+                    <br>
+                    <p>Resultado: </p>
+                    <p>Fecha: </p>
+                </div>
+                <div class="col">
+                    <p>{{accion.accion}}</p>
+                    <p>{{accion.fecha_accion}}</p>
+                    <br>
+                    <p>{{accion.resultado}}</p>
+                    <p>{{accion.fecha_resultado}}</p>
+                </div>
+            </div>
             <p>{{accion.accion}}</p>
             <p>{{accion.id}}</p>
         </ion-item>

@@ -467,7 +467,7 @@ angular.module('metrogas')
         });
 
         $scope.chooseModal= function (index, model){
-            model = model | null;
+            model = model || null;
             if (model !== null){
                 $scope.model = model;
                 console.log($scope.model);
