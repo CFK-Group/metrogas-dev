@@ -474,11 +474,7 @@ angular.module('metrogas')
                 $scope.model = {
                     id: model.id,
                     accion_id: model.tipo_accion_comercial_id,
-                   // fecha_accion:  fecha_a,
-                    resultado: model.resultado,
-                  //  fecha_resultado: fecha_r,
-                    idVenta: model.idVenta,
-                    idCarga: model.idCarga,
+                    resultado: model.resultado
                 };
                 console.log($scope.model);
             }

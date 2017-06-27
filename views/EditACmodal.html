@@ -11,7 +11,7 @@
                             Accion Comercial
                         </div>
                         <select name="action_id">
-                            <option ng-repeat="data in tac" value="{{data.id}}" ng-selected="{{data.id === model.accion_id}}">{{data.tipo_accion}}</option>
+                            <option ng-repeat="data in tac" value="{{data.id}}" ng-selected="data.id === model.accion_id">{{data.tipo_accion}}</option>
                         </select>
                         <input type="hidden" ng-value="">
                     </label>
