@@ -485,7 +485,15 @@ angular.module('metrogas')
         };
 
         $scope.editar = function(){
+            console.log($scope.model);
+            /*ventasService.updateAC().save($scope.model).$promise.then(
+                function(response){
 
+                },
+                function(response){
+
+                }
+            );*/
         };
 
         $scope.enviar = function(){
