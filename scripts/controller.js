@@ -395,8 +395,7 @@ angular.module('metrogas')
             ventasService.getAcciones(idVenta).query(
                 function (data) {
                     $ionicLoading.hide();
-                    localStorage.setItem('ac', angular.toJson(data));
-                    $scope.accionesComerciales = JSON.parse(localStorage.getItem('ac'));
+                    $scope.accionesComerciales = JSON.parse(JSON.stringify(localStorage.getItem('ac')));
                 },
                 function (data) {
                     $ionicPopup.alert({
@@ -424,24 +423,49 @@ angular.module('metrogas')
         console.log("Carga: " + idCarga);
 
         $ionicModal.fromTemplateUrl('views/AddACmodal.html',{
+            id: 1,
             scope: $scope,
             animation: 'slide-in-up'
         }).then(function(modal){
-            $scope.modal = modal;
+            $scope.modal_1 = modal;
         });
 
-        $scope.openModal = function() {
-            $scope.modal.show();
+        $ionicModal.fromTemplateUrl('views/EditACmodal.html',{
+            id: 2,
+            scope: $scope,
+            animation: 'slide-in-up'
+        }).then(function(modal){
+            $scope.modal_2 = modal;
+        });
+
+        $scope.openModal = function(index) {
+            if (index === 1){
+                $scope.modal_1.show();
+            }else{
+                $scope.modal_2.show();
+            }
         };
 
         $scope.closeModal = function() {
-            $scope.modal.hide();
+            if (index === 1){
+                $scope.modal_1.hide();
+            }else{
+                $scope.modal_2.hide();
+            }
         };
 
         // Cleanup the modal when we're done with it!
         $scope.$on('$destroy', function() {
-            $scope.modal.remove();
+            $scope.modal_1.remove();
+            $scope.modal_2.remove();
         });
+
+        $scope.createAC = function (){
+
+        };
+        $scope.editar = function(){
+
+        };
 
         $scope.enviar = function(){
             $ionicLoading.show();

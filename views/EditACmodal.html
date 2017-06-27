@@ -1,7 +1,7 @@
     <ion-modal-view>
         <ion-header-bar>
             <h1 class="title">Filtrar</h1>
-            <button class="button button-small" ng-click="closeModal(1)">X</button>
+            <button class="button button-small" ng-click="closeModal(2)">X</button>
         </ion-header-bar>
         <ion-content>
             <form>
@@ -41,7 +41,7 @@
                             <button class="button button-assertive" ng-click="closeModal()">Anular</button>
                         </div>
                         <div class="col padding-horizontal">
-                            <button class="button button-metrogas" ng-class="{disabled: (model.accion_id == '' || model.accion_id == undefined) || (model.fecha_accion == '' || model.fecha_accion == undefined || model.fecha_accion == null)}" ng-click="enviar()">Enviar</button>
+                            <button class="button button-metrogas" ng-class="{disabled: (model.accion_id == '' || model.accion_id == undefined) || (model.fecha_accion == '' || model.fecha_accion == undefined || model.fecha_accion == null)}" ng-click="editar()">Enviar</button>
                         </div>
                     </div>
                 </div>

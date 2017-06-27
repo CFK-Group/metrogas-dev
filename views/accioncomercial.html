@@ -6,7 +6,8 @@
 </ion-header-bar>
 <ion-content style="margin-bottom: 50px;">
     <ion-list>
-        <ion-item ng-repeat="accion in accionesComerciales">
+        <ion-item ng-repeat="accion in accionesComerciales" ng-click="openModal(2)">
+            <p>{{accion.id}}</p>
             {{accion.accion}}
         </ion-item>
     </ion-list>
@@ -14,7 +15,7 @@
 
 <div class="bar bar-footer row">
     <div class="col col-50">
-        <button class="button icon-left ion-plus-circled" ng-click="openModal()">Acciones Comerciales</button>
+        <button class="button icon-left ion-plus-circled" ng-click="openModal(1)">Acciones Comerciales</button>
     </div>
     <div class="col col-50">
         <button class="button icon-left ion-checkmark-round" ui-sref="app">Terminar</button>
