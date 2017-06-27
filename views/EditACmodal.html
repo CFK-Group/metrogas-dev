@@ -10,7 +10,7 @@
                         <div class="input-label">
                             Accion Comercial
                         </div>
-                        <select name="action_id" ng-model="model.accion_id">
+                        <select name="action_id">
                             <option value="">Selecciona</option>
                             <option ng-repeat="data in tac" value="{{data.id}}" ng-selected="{{data.id === model.accion_id}}">{{data.tipo_accion}}</option>
                         </select>
