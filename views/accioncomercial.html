@@ -6,8 +6,7 @@
 </ion-header-bar>
 <ion-content style="margin-bottom: 50px;">
     <ion-list>
-        <ion-item ng-repeat="accion in accionesComerciales track by id" ng-click="openModal(2)">
-            <p>{{accion.id}}</p>
+        <ion-item ng-repeat="accion in accionesComerciales" ng-click="openModal(2)">
             <p>{{accion.accion}}</p>
         </ion-item>
     </ion-list>
