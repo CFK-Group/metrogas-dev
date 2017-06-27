@@ -7,6 +7,7 @@
 <ion-content style="margin-bottom: 50px;">
     <ion-list>
         <ion-item ng-repeat="accion in accionesComerciales" ng-click="chooseModal(2, accion)">
+            <pre>{{accion}}</pre>
             <p>{{accion.accion}}</p>
             <p>{{accion.id}}</p>
         </ion-item>

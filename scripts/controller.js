@@ -470,6 +470,7 @@ angular.module('metrogas')
             model = model | null;
             if (model !== null){
                 $scope.model = model;
+                console.log($scope.model);
             }
             $scope.openModal(index);
         };
