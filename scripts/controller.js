@@ -466,9 +466,14 @@ angular.module('metrogas')
             $scope.modal_2.remove();
         });
 
-        $scope.createAC = function (){
-
+        $scope.chooseModal= function (index, model){
+            model = model | null;
+            if (model !== null){
+                $scope.model = model;
+            }
+            $scope.openModal(index);
         };
+
         $scope.editar = function(){
 
         };
