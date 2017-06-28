@@ -487,15 +487,52 @@ angular.module('metrogas')
         };
 
         $scope.editar = function(){
-            console.log($scope.model);
+            $ionicLoading.show();
+            switch  ($scope.model.accion_id){
+                case 1:
+                    $scope.model.accion = "Contactar Telefónicamente";
+                    break;
+                case 2:
+                    $scope.model.accion = "Agendar Visita";
+                    break;
+                case 3:
+                    $scope.model.accion = "Reagendar Visita";
+                    break;
+                case 4:
+                    $scope.model.accion = "Enviar Correo";
+                    break;
+                default:
+                    $scope.model.accion = null;
+                    break;
+            }
             ventasService.updateAC().save($scope.model).$promise.then(
                 function(response){
-                    console.log("11");
                     console.log(response);
+                    $ionicLoading.hide();
+                    var alert = $ionicPopup.alert({
+                        title: 'Guardado',
+                        template: 'Accion añadida correctamente'
+                    });
+                    alert.then(function(){
+                        $scope.closeModal();
+                        $scope.acciones();
+                        var userData = JSON.parse(localStorage.getItem('user'));
+                        var _token = userData.api_token;
+                        ventasService.getVentas(_token);
+                        ventasService.getHistorial(_token);
+                    });
                 },
                 function(response){
-                    console.log("22");
                     console.log(response);
+                    $ionicLoading.hide();
+                    var alert = $ionicPopup.alert({
+                        title: 'Ups!',
+                        template: 'Algo ha pasado, intentaremos nuevamente'
+                    });
+
+                    alert.then(function(){
+                        $scope.enviar();
+                    });
                 }
             );
         };
@@ -504,6 +541,23 @@ angular.module('metrogas')
 
         $scope.enviar = function(){
             $ionicLoading.show();
+            switch  ($scope.model.accion_id){
+                case 1:
+                    $scope.model.accion = "Contactar Telefónicamente";
+                    break;
+                case 2:
+                    $scope.model.accion = "Agendar Visita";
+                    break;
+                case 3:
+                    $scope.model.accion = "Reagendar Visita";
+                    break;
+                case 4:
+                    $scope.model.accion = "Enviar Correo";
+                    break;
+                default:
+                    $scope.model.accion = null;
+                    break;
+            }
             ventasService.saveAC().save($scope.model).$promise.then(
                 function(response){
                     console.log(response);
