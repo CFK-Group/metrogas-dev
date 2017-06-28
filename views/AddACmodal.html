@@ -10,7 +10,7 @@
                         <div class="input-label">
                             Accion Comercial
                         </div>
-                        <select name="action_id" ng-model="model.accion_id" id="ddlViewBy">
+                        <select name="action_id" ng-model="model.accion_id" id="ddlViewBy" onchange="giveValue()">
                             <option value="">Selecciona</option>
                             <option ng-repeat="data in tac" value="{{data.id}}">{{data.tipo_accion}}</option>
                         </select>
@@ -49,7 +49,9 @@
         </ion-content>
     </ion-modal-view>
     <script>
-        var e = document.getElementById("ddlViewBy");
-        txt = e.options[e.selectedIndex].text;
-        document.getElementById("hidden").value = txt;
+        function giveValue(){
+            var e = document.getElementById("ddlViewBy");
+            txt = e.options[e.selectedIndex].text;
+            document.getElementById("hidden").value = txt;
+        }
     </script>
