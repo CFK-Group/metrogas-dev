@@ -526,7 +526,7 @@ angular.module('metrogas')
         $scope.enviar = function(){
             $ionicLoading.show();
             switch  ($scope.model.accion_id){
-                case "1";
+                case "1":
                     $scope.model.accion = "Contactar Telefónicamente";
                     break;
                 case "2":
