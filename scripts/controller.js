@@ -495,8 +495,12 @@ angular.module('metrogas')
             );
         };
 
+
+
         $scope.enviar = function(){
             $ionicLoading.show();
+            var e = document.getElementById("ddlViewBy");
+            $scope.model.accion = e.options[e.selectedIndex].text;
             ventasService.saveAC().save($scope.model).$promise.then(
                 function(response){
                     console.log(response);
