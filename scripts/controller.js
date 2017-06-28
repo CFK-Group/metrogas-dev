@@ -488,23 +488,6 @@ angular.module('metrogas')
 
         $scope.editar = function(){
             $ionicLoading.show();
-            switch  ($scope.model.accion_id){
-                case 1:
-                    $scope.model.accion = "Contactar Telefónicamente";
-                    break;
-                case 2:
-                    $scope.model.accion = "Agendar Visita";
-                    break;
-                case 3:
-                    $scope.model.accion = "Reagendar Visita";
-                    break;
-                case 4:
-                    $scope.model.accion = "Enviar Correo";
-                    break;
-                default:
-                    $scope.model.accion = null;
-                    break;
-            }
             console.log($scope.model);
             ventasService.updateAC().save($scope.model).$promise.then(
                 function(response){
@@ -543,16 +526,16 @@ angular.module('metrogas')
         $scope.enviar = function(){
             $ionicLoading.show();
             switch  ($scope.model.accion_id){
-                case 1:
+                case "1";
                     $scope.model.accion = "Contactar Telefónicamente";
                     break;
-                case 2:
+                case "2":
                     $scope.model.accion = "Agendar Visita";
                     break;
-                case 3:
+                case "3":
                     $scope.model.accion = "Reagendar Visita";
                     break;
-                case 4:
+                case "4":
                     $scope.model.accion = "Enviar Correo";
                     break;
                 default:
