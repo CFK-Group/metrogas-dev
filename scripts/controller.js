@@ -505,6 +505,7 @@ angular.module('metrogas')
                     $scope.model.accion = null;
                     break;
             }
+            console.log($scope.model);
             ventasService.updateAC().save($scope.model).$promise.then(
                 function(response){
                     console.log(response);
