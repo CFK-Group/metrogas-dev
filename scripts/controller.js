@@ -416,9 +416,7 @@ angular.module('metrogas')
 
         $scope.model = {
             accion_id: null,
-            //fecha_accion: "",
             resultado: "",
-            //fecha_resultado: "",
             idVenta: idVenta,
             idCarga: idCarga
         };
@@ -477,6 +475,13 @@ angular.module('metrogas')
                     resultado: model.resultado
                 };
                 console.log($scope.model);
+            }else{
+                $scope.model = {
+                    accion_id: null,
+                    resultado: "",
+                    idVenta: idVenta,
+                    idCarga: idCarga
+                };
             }
             $scope.openModal(index);
         };
