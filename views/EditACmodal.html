@@ -10,10 +10,10 @@
                         <div class="input-label">
                             Accion Comercial
                         </div>
-                        <select name="action_id" id="ddlViewBy">
+                        <select name="action_id">
                             <option ng-repeat="data in tac" value="{{data.id}}" ng-selected="data.id === model.accion_id">{{data.tipo_accion}}</option>
                         </select>
-                        <input type="hidden" ng-value="">
+                        <input type="hidden" name="accion" id="hidden" ng-model="model.accion">
                     </label>
 
                     <!--<label class="item item-input">
@@ -47,3 +47,8 @@
             </form>
         </ion-content>
     </ion-modal-view>
+    <script>
+        var e = document.getElementById("ddlViewBy");
+        txt = e.options[e.selectedIndex].text;
+        document.getElementById("hidden").value = txt;
+    </script>
