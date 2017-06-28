@@ -25,3 +25,11 @@
         <button class="button icon-left ion-checkmark-round" ui-sref="app">Terminar</button>
     </div>
 </div>
+
+<script>
+    function giveValue(){
+        var e = document.getElementById("ddlViewBy");
+        txt = e.options[e.selectedIndex].text;
+        document.getElementById("hidden").value = txt;
+    }
+</script>
