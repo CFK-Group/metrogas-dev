@@ -536,10 +536,10 @@ angular.module('metrogas')
                     $scope.model.accion = "Reagendar Visita";
                     break;
                 case "4":
-                    $scope.model.accion = "Enviar Correo";
+                    $scope.model.accion = "Generar Presupuesto";
                     break;
                 case "5":
-                    $scope.model.accion = "Generar Presupuesto";
+                    $scope.model.accion = "Enviar Correo";
                     break;
                 default:
                     $scope.model.accion = null;
