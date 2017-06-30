@@ -594,7 +594,7 @@ angular.module('metrogas')
             }).then(function(modal){
                 $scope.modal = modal;
                 $scope.direcciones = JSON.parse(JSON.stringify(response));
-                console.log($scope.direcciones);
+                //console.log($scope.direcciones);
                 $scope.allComunas = JSON.parse(localStorage.getItem('comunas'));
                 $scope.allCalles = JSON.parse(localStorage.getItem('calles'));
                 $scope.allGrilla = JSON.parse(localStorage.getItem('grillas'));
@@ -645,7 +645,7 @@ angular.module('metrogas')
                     angular.lowercase(row.recorrida).toString().indexOf(angular.lowercase($scope.filterOptions.recorrida) || "") !== -1 &&
                     angular.lowercase(row.contactada).toString().indexOf(angular.lowercase($scope.filterOptions.contactada) || "") !== -1 &&
                     angular.lowercase(row.carga_id).toString().indexOf(angular.lowercase($scope.filterOptions.carga) || "") !== -1  &&
-                    angular.lowercase(row.presupuestada).toString().indexOf(angular.lowercase($scope.filterOptions.presupuestada) || "")
+                    angular.lowercase(row.presupuestada).toString().indexOf(angular.lowercase($scope.filterOptions.presupuestada) || "") !== -1
                 );
             };
 
