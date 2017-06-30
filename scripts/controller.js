@@ -467,12 +467,11 @@ angular.module('metrogas')
         $scope.chooseModal= function (index, model){
             model = model || null;
             if (model !== null){
-                //var fecha_a = new Date(model.fecha_accion).toISOString();
-                //var fecha_r = new Date(model.fecha_resultado).toISOString();
                 $scope.model = {
                     id: model.id,
                     accion_id: model.tipo_accion_comercial_id,
-                    resultado: model.resultado
+                    resultado: model.resultado,
+                    observacion: model.observacion
                 };
                 console.log($scope.model);
             }else{
@@ -480,7 +479,8 @@ angular.module('metrogas')
                     accion_id: null,
                     resultado: "",
                     idVenta: idVenta,
-                    idCarga: idCarga
+                    idCarga: idCarga,
+                    observacion : ""
                 };
             }
             $scope.openModal(index);
