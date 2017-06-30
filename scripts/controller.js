@@ -527,7 +527,7 @@ angular.module('metrogas')
 
         $scope.enviar = function(){
             $ionicLoading.show();
-            switch  ($scope.model.accion_id){
+            switch($scope.model.accion_id){
                 case "1":
                     $scope.model.accion = "Contactar Telefónicamente";
                     break;
@@ -621,7 +621,7 @@ angular.module('metrogas')
                     grilla: "",
                     recorrida: "",
                     contactada: "",
-                    //ic: "",
+                    presupuestada: "",
                     carga: ""
                 };
             };
@@ -632,7 +632,7 @@ angular.module('metrogas')
                 grilla: "",
                 recorrida: "",
                 contactada: "",
-                //ic: "",
+                presupuestada: "",
                 carga: ""
             };
 
@@ -644,8 +644,8 @@ angular.module('metrogas')
                     angular.lowercase(row.grilla).toString().indexOf(angular.lowercase($scope.filterOptions.grilla) || "") !== -1 &&
                     angular.lowercase(row.recorrida).toString().indexOf(angular.lowercase($scope.filterOptions.recorrida) || "") !== -1 &&
                     angular.lowercase(row.contactada).toString().indexOf(angular.lowercase($scope.filterOptions.contactada) || "") !== -1 &&
-                    angular.lowercase(row.carga_id).toString().indexOf(angular.lowercase($scope.filterOptions.carga) || "") !== -1
-                    //angular.lowercase(row.IC).toString().indexOf(angular.lowercase($scope.filterOptions.ic) || "") !== -1
+                    angular.lowercase(row.carga_id).toString().indexOf(angular.lowercase($scope.filterOptions.carga) || "") !== -1  &&
+                    angular.lowercase(row.presupuestada).toString().indexOf(angular.lowercase($scope.filterOptions.presupuestada) || "")
                 );
             };
 

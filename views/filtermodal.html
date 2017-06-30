@@ -59,6 +59,17 @@
 
                 <label class="item item-input item-select">
                     <div class="input-label">
+                        Presupuestada
+                    </div>
+                    <select ng-model="filterOptions.presupuestada">
+                        <option value="">Todos</option>
+                        <option value="1">Si</option>
+                        <option value="0">No</option>
+                    </select>
+                </label>
+
+                <label class="item item-input item-select">
+                    <div class="input-label">
                         Carga de datos
                     </div>
                     <select ng-model="filterOptions.carga">
