@@ -475,7 +475,7 @@ angular.module('metrogas')
                     resultado: model.resultado,
                     observacion: model.observacion
                 };
-                console.log($scope.model);
+                //console.log($scope.model);
             }else{
                 $scope.model = {
                     accion_id: null,
