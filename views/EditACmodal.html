@@ -19,8 +19,12 @@
                         <div class="input-label">
                             Resultado
                         </div>
-                        <select name="action_id" disabled>
-                            <option ng-repeat="data in tac" value="{{data.id}}" ng-selected="data.id === model.accion_id">{{data.tipo_accion}}</option>
+                        <select name="action_id" ng-model="model.resultado">
+                            <option value="">Selecciona</option>
+                            <option value="Ejecutado">Ejecutado</option>
+                            <option value="Volver a Ejecutar">Volver a Ejecutar</option>
+                            <option value="Pendiente">Pendiente</option>
+                            <option value="Desiste">Desiste</option>
                         </select>
                     </label>
 
@@ -48,7 +52,7 @@
                             <button class="button button-assertive" ng-click="closeModal()">Anular</button>
                         </div>
                         <div class="col padding-horizontal">
-                            <button class="button button-metrogas" ng-class="{disabled: (model.resultado == '' || model.resultado== undefined)}" ng-click="editar()">Enviar</button>
+                            <button class="button button-metrogas" ng-class="{disabled: (model.resultado == '' || model.resultado== undefined || model.observacion == undefined model.observacion == '')}" ng-click="editar()">Enviar</button>
                         </div>
                     </div>
                 </div>
