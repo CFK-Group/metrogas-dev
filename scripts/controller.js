@@ -159,13 +159,13 @@ angular.module('metrogas')
 .controller('EditCtrl',['$scope', '$stateParams', '$state', 'ventasService', '$ionicLoading', '$ionicPopup', function($scope, $stateParams, $state, ventasService, $ionicLoading, $ionicPopup) {
 
     $scope.motivos_no_contacto = JSON.parse(localStorage.getItem('motivos_no_contacto'));
-    console.log($scope.motivos_no_contacto);
+    //console.log($scope.motivos_no_contacto);
 
     $scope.motivos_no_interes = JSON.parse(localStorage.getItem('motivos_no_interes'));
-    console.log($scope.motivos_no_interes);
+    //console.log($scope.motivos_no_interes);
 
     $scope.motivos_justificacion = JSON.parse(localStorage.getItem('motivos_justificacion'));
-    console.log($scope.motivos_justificacion);
+    //console.log($scope.motivos_justificacion);
 
 
     var id = parseInt($stateParams.id,10); //get Id parameter;
@@ -178,7 +178,7 @@ angular.module('metrogas')
     ventasService.getById(id).get().$promise.then(
         //funcion correctamente ejecutada
         function(response){
-            console.log(response);
+            //console.log(response);
             $scope.direccion = response;
             if($stateParams.from === "historial"){
                 $scope.model = JSON.parse(JSON.stringify($scope.direccion));
@@ -213,7 +213,9 @@ angular.module('metrogas')
                     usuarios_id: $scope.direccion.usuarios_id
                 };
             }
-            console.log($scope.model);
+            $scope.model.correo_actualizado = $scope.direccion.correo_BBDD;
+            $scope.model.fono_actualizado = $scope.direccion.fono_BBDD;
+            //console.log($scope.model);
             $ionicLoading.hide();
             $scope.step = '1';
 
