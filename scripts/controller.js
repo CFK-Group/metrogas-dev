@@ -226,6 +226,7 @@ angular.module('metrogas')
             $scope.cancel = function(){
                 if($stateParams.from === "historial"){
                     $scope.model = JSON.parse(JSON.stringify($scope.direccion));
+                    $state.go('app.historial');
                 }else {
                     $scope.model = {
                         IC: $scope.direccion.IC,
@@ -256,8 +257,8 @@ angular.module('metrogas')
                         tipo_vivienda: $scope.direccion.tipo_vivienda,
                         usuarios_id: $scope.direccion.usuarios_id
                     };
+                    $state.go('app.asignadas');
                 }
-                $state.go('app.asignadas');
             };
 
             $scope.editarVenta = function (){
