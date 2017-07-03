@@ -156,7 +156,7 @@ angular.module('metrogas')
     );
 }])
 
-.controller('EditCtrl',['$scope', '$stateParams', '$state', 'ventasService', '$ionicLoading', '$ionicPopup', function($scope, $stateParams, $state, ventasService, $ionicLoading, $ionicPopup) {
+.controller('EditCtrl',['$scope', '$stateParams', '$state', 'ventasService', '$ionicLoading', '$ionicPopup', '$cordovaGeolocation', function($scope, $stateParams, $state, ventasService, $ionicLoading, $ionicPopup, $cordovaGeolocation) {
 
     $scope.motivos_no_contacto = JSON.parse(localStorage.getItem('motivos_no_contacto'));
     //console.log($scope.motivos_no_contacto);
@@ -262,10 +262,19 @@ angular.module('metrogas')
             };
 
             $scope.editarVenta = function (){
-                console.log($scope.model);
+                $cordovaGeolocation.getCurrentPosition().then(
+                    function (position) {
+                        var lat = position.coords.latitude;
+                        var long = position.coords.longitude;
+                        console.log(lat);
+                        console.log(long);
+                    },
+                    function (error) {
+                        console.log(error);
+                    }
+                );
                 ventasService.edit().save($scope.model).$promise.then(
                     function (response2) {
-                        console.log(response2);
                         $ionicLoading.hide();
                         $ionicPopup.alert({
                             title: 'Ok',
