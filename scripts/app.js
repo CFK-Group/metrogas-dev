@@ -92,7 +92,7 @@ angular.module('metrogas', ['ionic','ui.router','ngCordova','angular.filter','ng
 }).run(
     function($rootScope, $ionicSideMenuDelegate, $ionicPlatform, $state, $cordovaDevice){
         $ionicPlatform.ready(function(){
-            $rootScope.device = $cordovaDevice.getDevice();
+            $rootScope.model = $cordovaDevice.getModel();
             $rootScope.uuid = $cordovaDevice.getUUID();
             console.log($rootScope.device);
             console.log($rootScope.uuid);
