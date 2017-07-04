@@ -271,38 +271,31 @@ angular.module('metrogas')
             };
 
             $scope.editarVenta = function (){
-                $cordovaGeolocation.getCurrentPosition().then(
-                    function (position) {
-                        $scope.model.latitud = (position.coords.latitude).toString();
-                        $scope.model.longitud = (position.coords.longitude).toString();
+                ventasService.edit().save($scope.model).$promise.then(
+                    function (response2) {
+                        $ionicLoading.hide();
+                        $ionicPopup.alert({
+                            title: 'Ok',
+                            template: 'Información guardada correctamente'
+                        });
+                        if($scope.step !== '6'){
+                            $state.go('app.asignadas');
+                        }else{
+                            $state.go('app.accioncomercial', {idVenta: $scope.direccion.id, idCarga: $scope.direccion.carga_id, from: "edit", direccion: $scope.direccion.direccion + " " + $scope.direccion.numero});
+                        }
 
-                        ventasService.edit().save($scope.model).$promise.then(
-                            function (response2) {
-                                $ionicLoading.hide();
-                                $ionicPopup.alert({
-                                    title: 'Ok',
-                                    template: 'Información guardada correctamente'
-                                });
-                                if($scope.step !== '6'){
-                                    $state.go('app.asignadas');
-                                }else{
-                                    $state.go('app.accioncomercial', {idVenta: $scope.direccion.id, idCarga: $scope.direccion.carga_id, from: "edit", direccion: $scope.direccion.direccion + " " + $scope.direccion.numero});
-                                }
-
-                            },
-                            function (response_){
-                                $ionicLoading.hide();
-                                $ionicPopup.alert({
-                                    title: 'UPS!!',
-                                    template: 'Algo pasó, intentaremos nuevamente' + response_
-                                });
-                                $scope.editarVenta();
-                                $ionicLoading.show();
-                            }
-
-                        )
+                    },
+                    function (response_){
+                        $ionicLoading.hide();
+                        $ionicPopup.alert({
+                            title: 'UPS!!',
+                            template: 'Algo pasó, intentaremos nuevamente' + response_
+                        });
+                        $scope.editarVenta();
+                        $ionicLoading.show();
                     }
-                );
+
+                )
             };
 
             $scope.addAccionComercial = function() {
@@ -408,7 +401,7 @@ angular.module('metrogas')
     }*/
 
 }])
-.controller('AccionCtrl',['$scope', '$ionicModal', '$stateParams', '$ionicLoading', 'ventasService', '$ionicPopup', function($scope, $ionicModal, $stateParams, $ionicLoading, ventasService, $ionicPopup) {
+.controller('AccionCtrl',['$cordovaGeolocation', '$scope', '$ionicModal', '$stateParams', '$ionicLoading', 'ventasService', '$ionicPopup', function($cordovaGeolocation, $scope, $ionicModal, $stateParams, $ionicLoading, ventasService, $ionicPopup) {
         var idVenta = $stateParams.idVenta;
         var idCarga = $stateParams.idCarga;
         $scope.direccion = $stateParams.direccion;
@@ -505,37 +498,42 @@ angular.module('metrogas')
 
         $scope.editar = function(){
             $ionicLoading.show();
-            console.log($scope.model);
-            ventasService.updateAC().save($scope.model).$promise.then(
-                function(response){
-                    console.log(response);
-                    $ionicLoading.hide();
-                    var alert = $ionicPopup.alert({
-                        title: 'Guardado',
-                        template: 'Accion añadida correctamente'
-                    });
-                    alert.then(function(){
-                        $scope.closeModal();
-                        $scope.acciones();
-                        var userData = JSON.parse(localStorage.getItem('user'));
-                        var _token = userData.api_token;
-                        ventasService.getVentas(_token);
-                        ventasService.getHistorial(_token);
-                    });
-                },
-                function(response){
-                    console.log(response);
-                    $ionicLoading.hide();
-                    var alert = $ionicPopup.alert({
-                        title: 'Ups!',
-                        template: 'Algo ha pasado, intentaremos nuevamente'
-                    });
+            $cordovaGeolocation.getCurrentPosition().then(
+            function (position) {
+                $scope.model.latitud = (position.coords.latitude).toString();
+                $scope.model.longitud = (position.coords.longitude).toString();
+                console.log($scope.model);
+                ventasService.updateAC().save($scope.model).$promise.then(
+                    function (response) {
+                        console.log(response);
+                        $ionicLoading.hide();
+                        var alert = $ionicPopup.alert({
+                            title: 'Guardado',
+                            template: 'Accion añadida correctamente'
+                        });
+                        alert.then(function () {
+                            $scope.closeModal();
+                            $scope.acciones();
+                            var userData = JSON.parse(localStorage.getItem('user'));
+                            var _token = userData.api_token;
+                            ventasService.getVentas(_token);
+                            ventasService.getHistorial(_token);
+                        });
+                    },
+                    function (response) {
+                        console.log(response);
+                        $ionicLoading.hide();
+                        var alert = $ionicPopup.alert({
+                            title: 'Ups!',
+                            template: 'Algo ha pasado, intentaremos nuevamente'
+                        });
 
-                    alert.then(function(){
-                        $scope.enviar();
-                    });
-                }
-            );
+                        alert.then(function () {
+                            $scope.enviar();
+                        });
+                    }
+                );
+            });
         };
 
 
@@ -562,38 +560,43 @@ angular.module('metrogas')
                     $scope.model.accion = null;
                     break;
             }
-            console.log($scope.model);
-            ventasService.saveAC().save($scope.model).$promise.then(
-                function(response){
-                    console.log(response);
-                    $ionicLoading.hide();
-                    var alert = $ionicPopup.alert({
-                        title: 'Guardado',
-                        template: 'Accion añadida correctamente'
-                    });
-                    alert.then(function(){
-                        $scope.closeModal();
-                        $scope.acciones();
-                        var userData = JSON.parse(localStorage.getItem('user'));
-                        var _token = userData.api_token;
-                        ventasService.getVentas(_token);
-                        ventasService.getHistorial(_token);
-                    });
-                },
-                function(response){
-                    console.log(response);
-                    $ionicLoading.hide();
-                    var alert = $ionicPopup.alert({
-                        title: 'Ups!',
-                        template: 'Algo ha pasado, intentaremos nuevamente'
-                    });
 
-                    alert.then(function(){
-                        $scope.enviar();
-                    });
-                }
+            $cordovaGeolocation.getCurrentPosition().then(
+                function (position) {
+                    $scope.model.latitud = (position.coords.latitude).toString();
+                    $scope.model.longitud = (position.coords.longitude).toString();
+                    console.log($scope.model);
+                    ventasService.saveAC().save($scope.model).$promise.then(
+                        function (response) {
+                            console.log(response);
+                            $ionicLoading.hide();
+                            var alert = $ionicPopup.alert({
+                                title: 'Guardado',
+                                template: 'Accion añadida correctamente'
+                            });
+                            alert.then(function () {
+                                $scope.closeModal();
+                                $scope.acciones();
+                                var userData = JSON.parse(localStorage.getItem('user'));
+                                var _token = userData.api_token;
+                                ventasService.getVentas(_token);
+                                ventasService.getHistorial(_token);
+                            });
+                        },
+                        function (response) {
+                            console.log(response);
+                            $ionicLoading.hide();
+                            var alert = $ionicPopup.alert({
+                                title: 'Ups!',
+                                template: 'Algo ha pasado, intentaremos nuevamente'
+                            });
 
-            );
+                            alert.then(function () {
+                                $scope.enviar();
+                            });
+                        }
+                    );
+                });
         }
     }])
 
