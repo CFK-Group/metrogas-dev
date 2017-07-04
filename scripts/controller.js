@@ -4,6 +4,7 @@ angular.module('metrogas')
 .controller('LoginCtrl', ['$ionicPlatform', '$cordovaDevice', '$rootScope', '$scope', 'LoginService', '$state', '$ionicPopup', 'UserService', 'ventasService', '$ionicLoading', '$cordovaDevice', function($ionicPlatform, $cordovaDevice, $rootScope, $scope, LoginService, $state, $ionicPopup, UserService, ventasService, $ionicLoading){
 
     $ionicPlatform.ready(function() {
+        console.log($cordovaDevice.device);
         var model = $cordovaDevice.getModel();
         var uuid = $cordovaDevice.getUUID();
 
