@@ -1,18 +1,16 @@
 'use strict';
 angular.module('metrogas')
 
-.controller('LoginCtrl', ['$rootScope', '$scope', 'LoginService', '$state', '$ionicPopup', 'UserService', 'ventasService', '$ionicLoading', '$cordovaDevice', function($rootScope, $scope, LoginService, $state, $ionicPopup, UserService, ventasService, $ionicLoading, $cordovaDevice){
+.controller('LoginCtrl', ['$rootScope', '$scope', 'LoginService', '$state', '$ionicPopup', 'UserService', 'ventasService', '$ionicLoading', '$cordovaDevice', function($rootScope, $scope, LoginService, $state, $ionicPopup, UserService, ventasService, $ionicLoading){
 
-    var device = $cordovaDevice.getDevice();
-    var uuid = $cordovaDevice.getUUID();
     $scope.data = {
         username: "test",
         password: "test",
-        deviceModel : device,
-        deviceId: uuid
+        deviceModel : $rootScope.device,
+        deviceId: $rootScope.uuid
     };
 
-        console.log($scope.data);
+    console.log($scope.data);
 
     $scope.login = function() {
         $ionicLoading.show({
