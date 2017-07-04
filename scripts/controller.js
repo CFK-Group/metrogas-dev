@@ -6,8 +6,10 @@ angular.module('metrogas')
     $scope.data = {
         username: "test",
         password: "test",
-        deviceModel : $rootScope.device,
-        deviceId: $rootScope.uuid
+        deviceModel: "",
+        deviceId: ""
+        //deviceModel : $rootScope.device,
+        //deviceId: $rootScope.uuid
     };
 
     console.log($scope.data);
