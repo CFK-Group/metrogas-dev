@@ -1,61 +1,66 @@
 'use strict';
 angular.module('metrogas')
 
-.controller('LoginCtrl', ['$rootScope', '$scope', 'LoginService', '$state', '$ionicPopup', 'UserService', 'ventasService', '$ionicLoading', '$cordovaDevice', function($rootScope, $scope, LoginService, $state, $ionicPopup, UserService, ventasService, $ionicLoading){
+.controller('LoginCtrl', ['$ionicPlatform', '$rootScope', '$scope', 'LoginService', '$state', '$ionicPopup', 'UserService', 'ventasService', '$ionicLoading', '$cordovaDevice', function($ionicPlatform, $rootScope, $scope, LoginService, $state, $ionicPopup, UserService, ventasService, $ionicLoading){
 
-    $scope.data = {
-        username: "test",
-        password: "test",
-        deviceModel : $rootScope.model,
-        deviceId: $rootScope.uuid
-    };
+    $ionicPlatform.ready(function() {
+        var model = $cordovaDevice.getModel();
+        var uuid = $cordovaDevice.getUUID();
 
-    console.log($scope.data);
+        $scope.data = {
+            username: "test",
+            password: "test",
+            deviceModel: model,
+            deviceId: uuid
+        };
 
-    $scope.login = function() {
-        $ionicLoading.show({
-            template: 'Iniciando Sesión...',
-            animation: 'fade-in',
-            showBackdrop: true
-        });
-        $scope.loginVar = LoginService.loginUser($scope.data.username, $scope.data.password, $scope.data.deviceModel, $scope.data.deviceId).query(
-            function(response){
+        console.log($scope.data);
 
-                $scope.loginInfo = response;
+        $scope.login = function () {
+            $ionicLoading.show({
+                template: 'Iniciando Sesión...',
+                animation: 'fade-in',
+                showBackdrop: true
+            });
+            $scope.loginVar = LoginService.loginUser($scope.data.username, $scope.data.password, $scope.data.deviceModel, $scope.data.deviceId).query(
+                function (response) {
 
-                if($scope.loginInfo.statusCode === 0){
-                    
-                    sessionStorage.userSession = angular.toJson($scope.loginInfo);
-                    
-                    var _token = JSON.parse(sessionStorage.userSession).sessionToken;
+                    $scope.loginInfo = response;
 
-                    $scope.userData = UserService.getUserData(_token);
-                    ventasService.getComunas(_token);
-                    ventasService.getCalles(_token);
-                    ventasService.getGrillas(_token);
-                    ventasService.getCargas(_token);
-                    ventasService.getTipoAcciones();
-                    ventasService.getMotivos();
-                    $ionicLoading.hide();
-                    $rootScope.loginShow = false;
-                    $state.go('app');
-                }else{
+                    if ($scope.loginInfo.statusCode === 0) {
+
+                        sessionStorage.userSession = angular.toJson($scope.loginInfo);
+
+                        var _token = JSON.parse(sessionStorage.userSession).sessionToken;
+
+                        $scope.userData = UserService.getUserData(_token);
+                        ventasService.getComunas(_token);
+                        ventasService.getCalles(_token);
+                        ventasService.getGrillas(_token);
+                        ventasService.getCargas(_token);
+                        ventasService.getTipoAcciones();
+                        ventasService.getMotivos();
+                        $ionicLoading.hide();
+                        $rootScope.loginShow = false;
+                        $state.go('app');
+                    } else {
+                        $ionicLoading.hide();
+                        $ionicPopup.alert({
+                            title: 'Ups!',
+                            template: $scope.loginInfo.errorDesc
+                        });
+                    }
+                },
+                function (response) {
                     $ionicLoading.hide();
                     $ionicPopup.alert({
                         title: 'Ups!',
-                        template: $scope.loginInfo.errorDesc
+                        template: 'Algo ha pasado, vuelve a intentar más tarde'
                     });
                 }
-            },
-            function(response){
-                $ionicLoading.hide();
-                $ionicPopup.alert({
-                    title: 'Ups!',
-                    template: 'Algo ha pasado, vuelve a intentar más tarde'
-                });
-            }
-        );
-    };
+            );
+        };
+    });
 }])
 
 .controller('SideNavCtrl', ['$rootScope', '$scope', '$ionicSideMenuDelegate', '$state', function ($rootScope, $scope, $ionicSideMenuDelegate, $state) {
