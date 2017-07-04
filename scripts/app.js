@@ -91,11 +91,13 @@ angular.module('metrogas', ['ionic','ui.router','ngCordova','angular.filter','ng
 
 }).run(
     function ($ionicPlatform, $cordovaDevice, $rootScope){
-        $ionicPlatform.ready(function(){
+        /*$ionicPlatform.ready(function(){
             $rootScope.device = $cordovaDevice.getDevice();
             $rootScope.uuid = $cordovaDevice.getUUID();
-        });
-
+            console.log($rootScope.device );
+            console.log($rootScope.uuid );
+        });*/
+    console.log("aaa");
     },
     function($rootScope, $ionicSideMenuDelegate, $ionicPlatform, $state){
         $rootScope.loginShow= true;
