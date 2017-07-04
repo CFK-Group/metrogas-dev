@@ -278,6 +278,7 @@ angular.module('metrogas')
                         console.log(error);
                     }
                 );
+
                 ventasService.edit().save($scope.model).$promise.then(
                     function (response2) {
                         $ionicLoading.hide();
