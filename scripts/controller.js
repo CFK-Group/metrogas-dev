@@ -1,7 +1,7 @@
 'use strict';
 angular.module('metrogas')
 
-.controller('LoginCtrl', ['$ionicPlatform', '$rootScope', '$scope', 'LoginService', '$state', '$ionicPopup', 'UserService', 'ventasService', '$ionicLoading', '$cordovaDevice', function($ionicPlatform, $rootScope, $scope, LoginService, $state, $ionicPopup, UserService, ventasService, $ionicLoading){
+.controller('LoginCtrl', ['$ionicPlatform', '$cordovaDevice', '$rootScope', '$scope', 'LoginService', '$state', '$ionicPopup', 'UserService', 'ventasService', '$ionicLoading', '$cordovaDevice', function($ionicPlatform, $cordovaDevice, $rootScope, $scope, LoginService, $state, $ionicPopup, UserService, ventasService, $ionicLoading){
 
     $ionicPlatform.ready(function() {
         var model = $cordovaDevice.getModel();
