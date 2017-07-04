@@ -273,8 +273,8 @@ angular.module('metrogas')
             $scope.editarVenta = function (){
                 $cordovaGeolocation.getCurrentPosition().then(
                     function (position) {
-                        $scope.model.latitud = position.coords.latitude;
-                        $scope.model.longitud = position.coords.longitude;
+                        $scope.model.latitud = (position.coords.latitude).toString();
+                        $scope.model.longitud = (position.coords.longitude).toString();
 
                         ventasService.edit().save($scope.model).$promise.then(
                             function (response2) {
