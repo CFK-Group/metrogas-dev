@@ -11,8 +11,8 @@ angular.module('metrogas')
         $scope.data = {
             username: "test",
             password: "test",
-            deviceModel: model,
-            deviceId: uuid
+            deviceId: uuid,
+            deviceModel: model
         };
 
         console.log($scope.data);
@@ -273,41 +273,36 @@ angular.module('metrogas')
             $scope.editarVenta = function (){
                 $cordovaGeolocation.getCurrentPosition().then(
                     function (position) {
-                        var lat = position.coords.latitude;
-                        var long = position.coords.longitude;
-                        console.log(lat);
-                        console.log(long);
-                    },
-                    function (error) {
-                        console.log(error);
+                        $scope.model.lat = position.coords.latitude;
+                        $scope.model.long = position.coords.longitude;
+
+                        ventasService.edit().save($scope.model).$promise.then(
+                            function (response2) {
+                                $ionicLoading.hide();
+                                $ionicPopup.alert({
+                                    title: 'Ok',
+                                    template: 'Información guardada correctamente'
+                                });
+                                if($scope.step !== '6'){
+                                    $state.go('app.asignadas');
+                                }else{
+                                    $state.go('app.accioncomercial', {idVenta: $scope.direccion.id, idCarga: $scope.direccion.carga_id, from: "edit", direccion: $scope.direccion.direccion + " " + $scope.direccion.numero});
+                                }
+
+                            },
+                            function (response_){
+                                $ionicLoading.hide();
+                                $ionicPopup.alert({
+                                    title: 'UPS!!',
+                                    template: 'Algo pasó, intentaremos nuevamente' + response_
+                                });
+                                $scope.editarVenta();
+                                $ionicLoading.show();
+                            }
+
+                        )
                     }
                 );
-
-                ventasService.edit().save($scope.model).$promise.then(
-                    function (response2) {
-                        $ionicLoading.hide();
-                        $ionicPopup.alert({
-                            title: 'Ok',
-                            template: 'Información guardada correctamente'
-                        });
-                        if($scope.step !== '6'){
-                            $state.go('app.asignadas');
-                        }else{
-                            $state.go('app.accioncomercial', {idVenta: $scope.direccion.id, idCarga: $scope.direccion.carga_id, from: "edit", direccion: $scope.direccion.direccion + " " + $scope.direccion.numero});
-                        }
-
-                    },
-                    function (response_){
-                        $ionicLoading.hide();
-                        $ionicPopup.alert({
-                            title: 'UPS!!',
-                            template: 'Algo pasó, intentaremos nuevamente' + response_
-                        });
-                        $scope.editarVenta();
-                        $ionicLoading.show();
-                    }
-
-                )
             };
 
             $scope.addAccionComercial = function() {
