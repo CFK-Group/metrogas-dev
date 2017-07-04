@@ -23,7 +23,7 @@ angular.module('metrogas')
                 animation: 'fade-in',
                 showBackdrop: true
             });
-            $scope.loginVar = LoginService.loginUser($scope.data.username, $scope.data.password, $scope.data.deviceModel, $scope.data.deviceId).query(
+            $scope.loginVar = LoginService.loginUser($scope.data.username, $scope.data.password, $scope.data.deviceId, $scope.data.deviceModel).query(
                 function (response) {
 
                     $scope.loginInfo = response;
