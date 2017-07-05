@@ -4,18 +4,18 @@ angular.module('metrogas')
 .controller('LoginCtrl', ['$ionicPlatform', '$cordovaDevice', '$rootScope', '$scope', 'LoginService', '$state', '$ionicPopup', 'UserService', 'ventasService', '$ionicLoading', '$cordovaDevice', function($ionicPlatform, $cordovaDevice, $rootScope, $scope, LoginService, $state, $ionicPopup, UserService, ventasService, $ionicLoading){
 
     $ionicPlatform.ready(function() {
-        console.log($cordovaDevice.getDevice());
+        //console.log($cordovaDevice.getDevice());
         var model = $cordovaDevice.getModel();
         var uuid = $cordovaDevice.getUUID();
 
         $scope.data = {
-            username: "test",
-            password: "test",
+            username: "",
+            password: "",
             deviceId: uuid,
             deviceModel: model
         };
 
-        console.log($scope.data);
+        //console.log($scope.data);
 
         $scope.login = function () {
             $ionicLoading.show({
@@ -433,8 +433,8 @@ angular.module('metrogas')
 
         $scope.tac = JSON.parse(localStorage.getItem("tac"));
 
-        console.log("Venta: " + idVenta);
-        console.log("Carga: " + idCarga);
+        //console.log("Venta: " + idVenta);
+        //console.log("Carga: " + idCarga);
 
         $ionicModal.fromTemplateUrl('views/AddACmodal.html',{
             id: 1,
@@ -502,10 +502,10 @@ angular.module('metrogas')
             function (position) {
                 $scope.model.latitud = (position.coords.latitude).toString();
                 $scope.model.longitud = (position.coords.longitude).toString();
-                console.log($scope.model);
+                //console.log($scope.model);
                 ventasService.updateAC().save($scope.model).$promise.then(
                     function (response) {
-                        console.log(response);
+                        //console.log(response);
                         $ionicLoading.hide();
                         var alert = $ionicPopup.alert({
                             title: 'Guardado',
@@ -521,7 +521,7 @@ angular.module('metrogas')
                         });
                     },
                     function (response) {
-                        console.log(response);
+                        //console.log(response);
                         $ionicLoading.hide();
                         var alert = $ionicPopup.alert({
                             title: 'Ups!',
@@ -565,10 +565,10 @@ angular.module('metrogas')
                 function (position) {
                     $scope.model.latitud = (position.coords.latitude).toString();
                     $scope.model.longitud = (position.coords.longitude).toString();
-                    console.log($scope.model);
+                    //console.log($scope.model);
                     ventasService.saveAC().save($scope.model).$promise.then(
                         function (response) {
-                            console.log(response);
+                            //console.log(response);
                             $ionicLoading.hide();
                             var alert = $ionicPopup.alert({
                                 title: 'Guardado',
@@ -584,7 +584,7 @@ angular.module('metrogas')
                             });
                         },
                         function (response) {
-                            console.log(response);
+                            //console.log(response);
                             $ionicLoading.hide();
                             var alert = $ionicPopup.alert({
                                 title: 'Ups!',
@@ -708,11 +708,11 @@ angular.module('metrogas')
         usuarios_id: (JSON.parse(localStorage.getItem('user'))).id
     };
     $scope.enviar = function (){
-        console.log($scope.model);
+        //console.log($scope.model);
         ventasService.guardar().save($scope.model).$promise.then(
             function(response){
                 if (response){
-                console.log(response);
+                //console.log(response);
                 var alert = $ionicPopup.alert({
                     title: '¡Exito!',
                     template: 'Datos guardados correctamente'
