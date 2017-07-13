@@ -123,6 +123,7 @@
                     <button class="button button-assertive" ng-click="cancel()">Anular</button>
                 </div>
                 <div class="col padding-horizontal">
+                    <button class="button button-metrogas" ng-class="{disabled: (model.interes == '' || model.interes == undefined)}" ng-if="model.interes==undefined">Siguiente</button>
                     <button class="button button-metrogas" ng-class="{disabled: (model.interes == '' || model.interes == undefined)}" ng-click="stepForward('5A')" ng-if="model.interes==1">Siguiente</button>
                     <button class="button button-metrogas" ng-class="{disabled: (model.interes == '' || model.interes == undefined)}" ng-click="stepForward('5B')" ng-if="model.interes==0">Siguiente</button>
                 </div>
