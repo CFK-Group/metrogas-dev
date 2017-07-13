@@ -708,7 +708,7 @@ angular.module('metrogas')
         usuarios_id: (JSON.parse(localStorage.getItem('user'))).id
     };
     $scope.enviar = function (){
-        console.log($scope.model);
+        //console.log($scope.model);
         ventasService.guardar().save($scope.model).$promise.then(
             function(response){
                 if (response){
