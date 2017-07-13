@@ -123,6 +123,27 @@
                     <button class="button button-assertive" ng-click="cancel()">Anular</button>
                 </div>
                 <div class="col padding-horizontal">
+                    <button class="button button-metrogas" ng-class="{disabled: (model.interes == '' || model.interes == undefined)}" ng-click="stepForward('5A')" ng-if="model.interes==1">Siguiente</button>
+                    <button class="button button-metrogas" ng-class="{disabled: (model.interes == '' || model.interes == undefined)}" ng-click="stepForward('5B')" ng-if="model.interes==0">Siguiente</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- PRODUCTO DE Interes -->
+        <div class="card" ng-show="step == '5A'">
+            <div class="item item-text-wrap">
+                <h2>Producto de Interés</h2>
+                <ion-list>
+                    <ion-radio ng-model="model.observacion" ng-value="RC" name="interes">RC</ion-radio>
+                    <ion-radio ng-model="model.observacion" ng-value="SCC" name="interes">SCC</ion-radio>
+                    <ion-radio ng-model="model.observacion" ng-value="ESTUFA" name="interes">ESTUFA</ion-radio>
+                </ion-list>
+            </div>
+            <div class="item item-divider text-center row">
+                <div class="col padding-horizontal">
+                    <button class="button button-assertive" ng-click="cancel()">Anular</button>
+                </div>
+                <div class="col padding-horizontal">
                     <button class="button button-metrogas" ng-class="{disabled: (model.interes == '' || model.interes == undefined)}" ng-if="model.interes==undefined" ng-click="addAccionComercial()">Terminar</button>
                     <button class="button button-metrogas" ng-class="{disabled: (model.interes == '' || model.interes == undefined)}" ng-click="addAccionComercial()" ng-if="model.interes==1">Siguiente</button>
                     <button class="button button-metrogas" ng-class="{disabled: (model.interes == '' || model.interes == undefined)}" ng-click="stepForward('5B')" ng-if="model.interes==0">Siguiente</button>
