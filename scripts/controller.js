@@ -405,6 +405,7 @@ angular.module('metrogas')
         var idVenta = $stateParams.idVenta;
         var idCarga = $stateParams.idCarga;
         $scope.direccion = $stateParams.direccion;
+        var posOptions = {timeout: 10000, enableHighAccuracy: false};
         $ionicLoading.show();
 
         $scope.acciones = function () {
@@ -498,7 +499,7 @@ angular.module('metrogas')
 
         $scope.editar = function(){
             $ionicLoading.show();
-            $cordovaGeolocation.getCurrentPosition().then(
+            $cordovaGeolocation.getCurrentPosition(posOptions).then(
             function (position) {
                 $scope.model.latitud = (position.coords.latitude).toString();
                 $scope.model.longitud = (position.coords.longitude).toString();
@@ -564,7 +565,8 @@ angular.module('metrogas')
             }
 
             console.log("GetCurentPosition");
-            $cordovaGeolocation.getCurrentPosition().then(
+
+            $cordovaGeolocation.getCurrentPosition(posOptions).then(
                 function (position) {
                     console.log("Starting GetCurentPosition");
                     console.log(position);
@@ -598,11 +600,7 @@ angular.module('metrogas')
                             $ionicLoading.hide();
                             var alert = $ionicPopup.alert({
                                 title: 'Ups!',
-                                template: 'Algo ha pasado, intentaremos nuevamente'
-                            });
-
-                            alert.then(function () {
-                                $scope.enviar();
+                                template: 'Algo ha pasado, verifica que la ubicacion esté encendida'
                             });
                         }
                     );
