@@ -604,6 +604,9 @@ angular.module('metrogas')
                             });
                         }
                     );
+                },
+                function(err){
+                    console.log(err);
                 });
         }
     }])
