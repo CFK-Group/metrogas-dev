@@ -563,12 +563,13 @@ angular.module('metrogas')
 
             $cordovaGeolocation.getCurrentPosition().then(
                 function (position) {
+                    console.log(position);
                     $scope.model.latitud = (position.coords.latitude).toString();
                     $scope.model.longitud = (position.coords.longitude).toString();
-                    //console.log($scope.model);
+                    console.log($scope.model);
                     ventasService.saveAC().save($scope.model).$promise.then(
                         function (response) {
-                            //console.log(response);
+                            console.log(response);
                             $ionicLoading.hide();
                             var alert = $ionicPopup.alert({
                                 title: 'Guardado',
@@ -584,7 +585,7 @@ angular.module('metrogas')
                             });
                         },
                         function (response) {
-                            //console.log(response);
+                            console.log(response);
                             $ionicLoading.hide();
                             var alert = $ionicPopup.alert({
                                 title: 'Ups!',
