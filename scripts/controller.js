@@ -539,7 +539,9 @@ angular.module('metrogas')
 
 
         $scope.enviar = function(){
+            console.log("starting loading modal");
             $ionicLoading.show();
+            console.log("start selecting data to add to model");
             switch($scope.model.accion_id){
                 case "1":
                     $scope.model.accion = "Contactar Telefónicamente";
@@ -561,15 +563,21 @@ angular.module('metrogas')
                     break;
             }
 
+            console.log("GetCurentPosition");
             $cordovaGeolocation.getCurrentPosition().then(
                 function (position) {
+                    console.log("Starting GetCurentPosition");
                     console.log(position);
+
                     $scope.model.latitud = (position.coords.latitude).toString();
                     $scope.model.longitud = (position.coords.longitude).toString();
+
+                    console.log("Coordenadas obtenidas");
                     console.log($scope.model);
+
                     ventasService.saveAC().save($scope.model).$promise.then(
                         function (response) {
-                            console.log(response);
+                            console.log("data enviada correctamente");
                             $ionicLoading.hide();
                             var alert = $ionicPopup.alert({
                                 title: 'Guardado',
@@ -585,6 +593,7 @@ angular.module('metrogas')
                             });
                         },
                         function (response) {
+                            console.log("ERROR:");
                             console.log(response);
                             $ionicLoading.hide();
                             var alert = $ionicPopup.alert({
