@@ -5,8 +5,19 @@ angular.module('metrogas')
 
     $ionicPlatform.ready(function() {
         //console.log($cordovaDevice.getDevice());
-        var model = $cordovaDevice.getModel();
-        var uuid = $cordovaDevice.getUUID();
+
+        var mode = 'develop'; //cambiar valor entre develop y produccion segun corresponda
+        var model = "";
+        var uuid = "";
+
+        //detecccion de modo para saltar la comprobación de dispositivo
+        if(mode === 'produccion'){
+            model = $cordovaDevice.getModel();
+            uuid = $cordovaDevice.getUUID();
+        }else{
+            model = "";
+            uuid = "";
+        }
 
         $scope.data = {
             username: "",
@@ -733,7 +744,7 @@ angular.module('metrogas')
                     var _token = userData.api_token;
                     ventasService.getVentas(_token);
                     ventasService.getHistorial(_token);
-                    $state.go('app');
+                    $state.go('app.asignadas');  //confirmar q este era el cambio que había q realizar
                 });
             }},
             function(response){
