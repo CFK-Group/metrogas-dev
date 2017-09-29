@@ -3,48 +3,50 @@
         <i class="icon ion-navicon"></i>
     </button>
     <h1 class="title">Historial</h1>
-     <button class="button button-small button-clear" ng-click="openModal()" style="font-size: 13px;">Filtrar <i class="icon ion-funnel"></i></button>
+     <button class="button button-small button-clear" ng-click="chooseModal(1)" style="font-size: 13px;">Filtrar <i class="icon ion-funnel"></i></button>
 </ion-header-bar>
 <ion-content>
     <ion-list>
-
-        <ion-item ng-repeat="dir in direcciones | filter: search" ng-click="go(dir.contactada, dir.interes, dir.id, dir.carga_id, 'historial', dir.direccion, dir.numero)">
+        <ion-item ng-repeat="dir in direcciones | filter: search">
             <div class="row">
-                <div class="col col-100">
+                <div class="col col-90">
                     <h2>{{dir.direccion}} {{dir.numero}}
                         <br>
                         <span ng-if="dir.casa!==null">Casa {{dir.casa}}</span>
                         <span ng-if="dir.block!==null">Block {{dir.block}}</span>
                         <span ng-if="dir.dpto!==null">Depto. {{dir.dpto}}</span></h2>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col col-50">
-                    <p class="bold">{{dir.comuna}}</p>
-                    <p>IC: {{dir.IC}}</p>
-                    <p>Grilla: {{dir.grilla}}</p>  
-                </div>
-                <div class="col col-50">
-                    <p>Contactada: <span ng-if="dir.contactada">Si</span><span ng-if="!dir.contactada">No</span></p>
-                    <p>Interesa: <span ng-if="dir.interes">Si</span><span ng-if="!dir.interes">No</span></p>
-                    <p>Presupuestada: <span ng-if="dir.presupuestada">Si</span><span ng-if="!dir.presupuestada">No</span></p>
+                <div class="col col-10">
+                    <button class="button button-clear" ng-click="chooseModal(2, dir)" style="font-size: 13px;"><i class="icon ion-android-create padding-left"></i></button>
                 </div>
             </div>
-            <div class="row" ng-if="dir.contactada">
-                <div class="col">
-                    <p>Nombre: {{dir.nombre}}</p>
-                    <p>Rut: {{dir.rut}}</p>
-                    <p>Telefono Actualizado: {{dir.fono_actualizado}}</p>
-                    <p>Correo Actualizado: {{dir.correo_actualizado}}</p>
+            <div ng-click="go(dir.contactada, dir.interes, dir.id, dir.carga_id, 'historial', dir.direccion, dir.numero)">
+                <div class="row">
+                    <div class="col col-50">
+                        <p class="bold">{{dir.comuna}}</p>
+                        <p>IC: {{dir.IC}}</p>
+                        <p>Grilla: {{dir.grilla}}</p>
+                    </div>
+                    <div class="col col-50">
+                        <p>Contactada: <span ng-if="dir.contactada">Si</span><span ng-if="!dir.contactada">No</span></p>
+                        <p>Interesa: <span ng-if="dir.interes">Si</span><span ng-if="!dir.interes">No</span></p>
+                        <p>Presupuestada: <span ng-if="dir.presupuestada">Si</span><span ng-if="!dir.presupuestada">No</span></p>
+                    </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <p>Producto de Interes: {{dir.observacion}}</p>
+                <div class="row">
+                    <div class="col">
+                        <p>Nombre: {{dir.nombre}}</p>
+                        <p>Rut: {{dir.rut}}</p>
+                        <p>Telefono Actualizado: {{dir.fono_actualizado}}</p>
+                        <p>Correo Actualizado: {{dir.correo_actualizado}}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <p>Producto de Interes: {{dir.observacion}}</p>
+                    </div>
                 </div>
             </div>
         </ion-item>
-
-       
     </ion-list>
 </ion-content>

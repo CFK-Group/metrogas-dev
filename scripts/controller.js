@@ -14,17 +14,22 @@ angular.module('metrogas')
         if(mode === 'produccion'){
             model = $cordovaDevice.getModel();
             uuid = $cordovaDevice.getUUID();
+            $scope.data = {
+                username: "",
+                password: "",
+                deviceId: uuid,
+                deviceModel: model
+            };
         }else{
             model = "";
             uuid = "";
+            $scope.data = {
+                username: "test",
+                password: "test",
+                deviceId: uuid,
+                deviceModel: model
+            };
         }
-
-        $scope.data = {
-            username: "",
-            password: "",
-            deviceId: uuid,
-            deviceModel: model
-        };
 
         //console.log($scope.data);
 
@@ -629,10 +634,11 @@ angular.module('metrogas')
         function(response){
             $ionicLoading.hide();
             $ionicModal.fromTemplateUrl('views/filtermodal.html',{
+                id: 1,
                 scope: $scope,
                 animation: 'slide-in-up'
             }).then(function(modal){
-                $scope.modal = modal;
+                $scope.modal_1 = modal;
                 $scope.direcciones = JSON.parse(JSON.stringify(response));
                 //console.log($scope.direcciones);
                 $scope.allComunas = JSON.parse(localStorage.getItem('comunas'));
@@ -641,18 +647,50 @@ angular.module('metrogas')
                 $scope.allCargas = JSON.parse(localStorage.getItem('cargas'));
             });
 
-            $scope.openModal = function() {
-                $scope.modal.show();
+            $ionicModal.fromTemplateUrl('views/EditDirModal.html',{
+                id: 2,
+                scope: $scope,
+                animation: 'slide-in-up'
+            }).then(function(modal){
+                $scope.modal_2 = modal;
+            });
+
+            $scope.openModal = function(index) {
+                if (index === 1){
+                    $scope.modal_1.show();
+                }else{
+                    $scope.modal_2.show();
+                }
             };
 
-            $scope.closeModal = function() {
-                $scope.modal.hide();
+            $scope.closeModal = function(index) {
+                if (index === 1){
+                    $scope.modal_1.hide();
+                }else{
+                    $scope.modal_2.hide();
+                }
             };
 
             // Cleanup the modal when we're done with it!
             $scope.$on('$destroy', function() {
-                $scope.modal.remove();
+                $scope.modal_1.remove();
+                $scope.modal_2.remove();
             });
+
+            $scope.chooseModal= function (index, dir){
+                dir = dir || null;
+                if (dir !== null){
+                    $scope.dir = {
+                        casa: dir.casa,
+                        block: dir.block,
+                        dpto: dir.dpto,
+                        comuna: dir.comuna,
+                        IC: dir.IC,
+                        grilla: dir.grilla
+                    };
+                }
+                $scope.openModal(index);
+            };
 
             $scope.resetFilter = function () {
                 $scope.filterOptions={
@@ -696,7 +734,7 @@ angular.module('metrogas')
                     $state.go('app.modify', {id: id, from:from});
                 }
             };
-                }
+        }
     );
 }])
 
