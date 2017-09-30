@@ -1,46 +1,44 @@
 <ion-modal-view>
-    <div class="card">
-        <div class="item item-text-wrap">
-            <h1>1{{dir.casa}}</h1>
-            <h1>2{{dir.block}}</h1>
-            <h1>3{{dir.dpto}}</h1>
-            <h1>4{{dir.comuna}}</h1>
-            <h1>5{{dir.IC}}</h1>
-            <h1>6{{dir.grilla}}</h1>
-            <div class="item item-divider">
-                <h4>Datos almacenados</h4>
-                <br>
-                <p>Telefono: {{direccion.fono_BBDD}}</p>
-                <p>Correo: {{direccion.correo_BBDD}}</p>
-            </div>
+    <div class="bar bar-header bar-light">
+        <h1 class="title">Modificar Datos</h1>
+    </div>
+    <br>
+    <br>
+    <h5 class="text-center">{{dir.direccion}} {{dir.numero}}
+        <span ng-if="dir.casa!==null">Casa {{dir.casa}}</span>
+        <span ng-if="dir.block!==null">Block {{dir.block}}</span>
+        <span ng-if="dir.dpto!==null">Depto. {{dir.dpto}}</span></h5>
+    <div class="item item-text-wrap">
+        <label class="item item-input item-stacked-label">
+            <h2 class="input-label">Nombre:</h2>
+            <input type="text" ng-model="dir.nombre">
+        </label>
 
-            <label class="item item-input item-stacked-label">
-                <h2 class="input-label">Nombre</h2>
-                <input type="text" placeholder="Juan Perez" ng-model="model.nombre">
-            </label>
+        <label class="item item-input item-stacked-label">
+            <h2 class="input-label">Rut:</h2>
+            <input type="text" ng-model="dir.rut">
+        </label>
 
-            <label class="item item-input item-stacked-label">
-                <h2 class="input-label">Rut</h2>
-                <input type="text" placeholder="12.123.123-K" ng-model="model.rut">
-            </label>
+        <label class="item item-input item-stacked-label">
+            <h2 class="input-label">Correo Actualizado:</h2>
+            <input type="text" ng-model="dir.correo_actualizado">
+        </label>
 
-            <label class="item item-input item-stacked-label">
-                <h2 class="input-label">Correo Actualizado</h2>
-                <input type="text" placeholder="correo@ejemplo.com" ng-model="model.correo_actualizado">
-            </label>
-
-            <label class="item item-input item-stacked-label">
-                <h2 class="input-label">Teléfono Actualizado</h2>
-                <input type="tel" placeholder="+56 9 1234 5678" ng-model="model.fono_actualizado">
-            </label>
+        <label class="item item-input item-stacked-label">
+            <h2 class="input-label">Telefono Actualizado:</h2>
+            <input type="tel" ng-model="dir.fono_actualizado">
+        </label>
+        <label class="item item-input item-stacked-label">
+            <h2 class="input-label">Producto de Interes:</h2>
+            <input type="text" ng-model="dir.observacion">
+        </label>
+    </div>
+    <div class="item item-divider text-center row">
+        <div class="col padding-horizontal">
+            <button class="button button-assertive" ng-click="closeModal(2)">Cancelar</button>
         </div>
-        <div class="item item-divider text-center row">
-            <div class="col padding-horizontal">
-                <button class="button button-assertive" ng-click="cancel()">Anular</button>
-            </div>
-            <div class="col padding-horizontal">
-                <button class="button button-metrogas" ng-class="{disabled: (model.contactada == '' || model.contactada == undefined)}" ng-click="stepForward('4')">Siguiente</button>
-            </div>
+        <div class="col padding-horizontal">
+            <button class="button button-metrogas" ng-click="editarDir()">Guardar</button>
         </div>
     </div>
 </ion-modal-view>

@@ -681,15 +681,41 @@ angular.module('metrogas')
                 dir = dir || null;
                 if (dir !== null){
                     $scope.dir = {
+                        direccion: dir.direccion,
                         casa: dir.casa,
                         block: dir.block,
                         dpto: dir.dpto,
                         comuna: dir.comuna,
                         IC: dir.IC,
-                        grilla: dir.grilla
+                        grilla: dir.grilla,
+                        nombre: dir.nombre,
+                        rut: dir.rut,
+                        fono_actualizado: dir.fono_actualizado,
+                        correo_actualizado: dir.correo_actualizado,
+                        observacion: dir.observacion
                     };
                 }
                 $scope.openModal(index);
+            };
+
+            $scope.editarDir = function () {
+                var confirmPopup = $ionicPopup.confirm({
+                    title: 'Continuar',
+                    template: '¿Guardar cambios?',
+                    cancelText: 'No',
+                    okText: 'Si'
+                });
+
+                confirmPopup.then(function(res) {
+                    if(res) {
+                        //si apreta si
+
+                        $scope.executeSaving();
+                    } else {
+                        //si apreta no
+                        $scope.executeSaving();
+                    }
+                });
             };
 
             $scope.resetFilter = function () {
