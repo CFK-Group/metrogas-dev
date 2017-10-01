@@ -110,7 +110,7 @@ angular.module('metrogas')
 
 }])
 
-.controller('AsignCtrl',['$scope', '$ionicModal', 'ventasService', '$ionicLoading', function($scope, $ionicModal, ventasService, $ionicLoading){
+.controller('AsignCtrl',['$scope', '$ionicModal', 'ventasService', '$ionicLoading', function($scope, $ionicModal, ventasService, $ionicLoading, $sessionStorage){
 
     $ionicLoading.show();
     var _token = JSON.parse(localStorage.getItem('user')).api_token;
@@ -135,6 +135,7 @@ angular.module('metrogas')
             };
 
             $scope.closeModal = function() {
+                var filtros = $scope.filterOptions;
                 $scope.modal.hide();
             };
 
@@ -699,23 +700,23 @@ angular.module('metrogas')
             };
 
             $scope.editarDir = function () {
-                var confirmPopup = $ionicPopup.confirm({
-                    title: 'Continuar',
-                    template: '¿Guardar cambios?',
-                    cancelText: 'No',
-                    okText: 'Si'
-                });
-
-                confirmPopup.then(function(res) {
-                    if(res) {
-                        //si apreta si
-
-                        $scope.executeSaving();
-                    } else {
-                        //si apreta no
-                        $scope.executeSaving();
-                    }
-                });
+                // var confirmPopup = $ionicPopup.confirm({
+                //     title: 'Continuar',
+                //     template: '¿Guardar cambios?',
+                //     cancelText: 'No',
+                //     okText: 'Si'
+                // });
+                //
+                // confirmPopup.then(function(res) {
+                //     if(res) {
+                //         //si apreta si
+                //
+                //         $scope.executeSaving();
+                //     } else {
+                //         //si apreta no
+                //         $scope.executeSaving();
+                //     }
+                // });
             };
 
             $scope.resetFilter = function () {
