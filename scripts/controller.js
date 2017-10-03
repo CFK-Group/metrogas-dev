@@ -113,6 +113,16 @@ angular.module('metrogas')
 .controller('AsignCtrl',['$scope', '$ionicModal', 'ventasService', '$ionicLoading', function($scope, $ionicModal, ventasService, $ionicLoading, $sessionStorage){
 
     $ionicLoading.show();
+    $scope.filterOptions={
+        calle: "",
+        comuna: "",
+        grilla: "",
+        recorrida: "",
+        contactada: "",
+        //ic: "",
+        carga: ""
+    };
+
     var _token = JSON.parse(localStorage.getItem('user')).api_token;
     //llamar a la api con solicitudes para ver las ventas...
     ventasService.getVentas(_token).query().$promise.then(
@@ -132,7 +142,20 @@ angular.module('metrogas')
 
             $scope.openModal = function() {
                 console.log($scope.filterOptions);
-                $scope.filterOptions = sessionStorage.filtros;
+                console.log(sessionStorage.filtros);
+                if(sessionStorage.filtros !== undefined){
+                    $scope.filterOptions = JSON.parse(sessionStorage.filtros);
+                }else{
+                    $scope.filterOptions={
+                        calle: "",
+                        comuna: "",
+                        grilla: "",
+                        recorrida: "",
+                        contactada: "",
+                        //ic: "",
+                        carga: ""
+                    };
+                }
                 $scope.modal.show();
             };
 
@@ -142,7 +165,8 @@ angular.module('metrogas')
 
             $scope.guardarFiltros = function () {
                 console.log('guardando filtros');
-                $sessionStorage.filtros = $scope.filterOptions;
+                sessionStorage.filtros = angular.toJson($scope.filterOptions);
+                console.log(sessionStorage.filtros);
             };
 
             // Cleanup the modal when we're done with it!
@@ -160,20 +184,12 @@ angular.module('metrogas')
                     //ic: "",
                     carga: ""
                 };
-            };
-
-            $scope.filterOptions={
-                calle: "",
-                comuna: "",
-                grilla: "",
-                recorrida: "",
-                contactada: "",
-                //ic: "",
-                carga: ""
+                console.log('borrando filtros');
+                console.log($scope.filterOptions);
             };
 
             $scope.search = function(row) {
-                //console.log(row);
+                // console.log(row);
                 return (
                     angular.lowercase(row.direccion).toString().indexOf(angular.lowercase($scope.filterOptions.calle) || "") !== -1 &&
                     angular.lowercase(row.comuna).toString().indexOf(angular.lowercase($scope.filterOptions.comuna) || "") !== -1 &&
