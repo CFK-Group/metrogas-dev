@@ -131,12 +131,18 @@ angular.module('metrogas')
             });
 
             $scope.openModal = function() {
+                console.log($scope.filterOptions);
+                $scope.filterOptions = sessionStorage.filtros;
                 $scope.modal.show();
             };
 
             $scope.closeModal = function() {
-                var filtros = $scope.filterOptions;
                 $scope.modal.hide();
+            };
+
+            $scope.guardarFiltros = function () {
+                console.log('guardando filtros');
+                $sessionStorage.filtros = $scope.filterOptions;
             };
 
             // Cleanup the modal when we're done with it!
@@ -713,6 +719,7 @@ angular.module('metrogas')
 
                         $scope.executeSaving();
                         state.go('app.historial');
+                        console.log('cargando el estado app.historial');
                     } else {
                         //si apreta no
                         //$scope.executeSaving();
