@@ -628,7 +628,7 @@ angular.module('metrogas')
         }
     }])
 
-.controller('HistorialCtrl', ['$scope', '$state', '$ionicLoading', '$ionicModal', 'ventasService', function($scope, $state, $ionicLoading, $ionicModal, ventasService){
+.controller('HistorialCtrl', ['$ionicPopup', '$scope', '$state', '$ionicLoading', '$ionicModal', 'ventasService', function($ionicPopup, $scope, $state, $ionicLoading, $ionicModal, ventasService){
     $ionicLoading.show();
     var _token = JSON.parse(localStorage.getItem('user')).api_token;
     ventasService.getHistorial(_token).query().$promise.then(
@@ -700,23 +700,61 @@ angular.module('metrogas')
             };
 
             $scope.editarDir = function () {
-                // var confirmPopup = $ionicPopup.confirm({
-                //     title: 'Continuar',
-                //     template: '¿Guardar cambios?',
-                //     cancelText: 'No',
-                //     okText: 'Si'
-                // });
-                //
-                // confirmPopup.then(function(res) {
-                //     if(res) {
-                //         //si apreta si
-                //
-                //         $scope.executeSaving();
-                //     } else {
-                //         //si apreta no
-                //         $scope.executeSaving();
-                //     }
-                // });
+                var confirmPopup = $ionicPopup.confirm({
+                    title: 'Continuar',
+                    template: '¿Guardar cambios?',
+                    cancelText: 'No',
+                    okText: 'Si'
+                });
+
+                confirmPopup.then(function(res) {
+                    if(res) {
+                        //si apreta si
+
+                        $scope.executeSaving();
+                        state.go('app.historial');
+                    } else {
+                        //si apreta no
+                        //$scope.executeSaving();
+                    }
+                });
+            };
+
+            $scope.editarVenta = function (){
+                ventasService.edit().save($scope.model).$promise.then(
+                    function (response2) {
+                        $ionicLoading.hide();
+                        $ionicPopup.alert({
+                            title: 'Ok',
+                            template: 'Información guardada correctamente'
+                        });
+                        if($scope.step !== '6'){
+                            $state.go('app.asignadas');
+                        }else{
+                            $state.go('app.accioncomercial', {idVenta: $scope.direccion.id, idCarga: $scope.direccion.carga_id, from: "edit", direccion: $scope.direccion.direccion + " " + $scope.direccion.numero});
+                        }
+
+                    },
+                    function (response_){
+                        $ionicLoading.hide();
+                        $ionicPopup.alert({
+                            title: 'UPS!!',
+                            template: 'Algo pasó, intente nuevamente ' + response_
+                        });
+                        // $scope.editarVenta();
+                        // $ionicLoading.show();
+                    }
+
+                )
+            };
+
+            $scope.executeSaving = function () {
+                $ionicLoading.show();
+                $scope.editarVenta();
+                var userData = JSON.parse(localStorage.getItem('user'));
+                var _token = userData.api_token;
+                ventasService.getVentas(_token);
+                ventasService.getHistorial(_token);
             };
 
             $scope.resetFilter = function () {

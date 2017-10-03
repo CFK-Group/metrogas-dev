@@ -1,5 +1,5 @@
 'use strict';
-angular.module('metrogas', ['ionic','ui.router','ngCordova', 'ngSorage', 'angular.filter','ngResource','ionic.wizard'])
+angular.module('metrogas', ['ionic','ui.router','ngCordova', 'ngStorage', 'angular.filter','ngResource','ionic.wizard'])
 .config(function($stateProvider, $urlRouterProvider){
     $stateProvider
         .state('login',{
