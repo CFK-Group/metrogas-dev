@@ -60,6 +60,37 @@ angular.module('metrogas')
                         $ionicLoading.hide();
                         $rootScope.loginShow = false;
                         $state.go('app');
+
+                        //borramos filtrosDA de direcciones asignadas al iniciar sesion
+                        $scope.filterOptions={
+                            calle: "",
+                            comuna: "",
+                            grilla: "",
+                            recorrida: "",
+                            contactada: "",
+                            //ic: "",
+                            carga: ""
+                        };
+                        console.log('borrando filtrosDA');
+                        console.log('guardando filtrosDA');
+                        sessionStorage.filtrosDA = angular.toJson($scope.filterOptions);
+                        console.log(sessionStorage.filtrosDA);
+
+                        //borramos filtros del historial al iniciar sesion
+                        $scope.filterOptions={
+                            calle: "",
+                            comuna: "",
+                            grilla: "",
+                            recorrida: "",
+                            contactada: "",
+                            //ic: "",
+                            carga: ""
+                        };
+                        console.log('borrando filtrosH');
+                        console.log('guardando filtrosH');
+                        sessionStorage.filtrosH = angular.toJson($scope.filterOptions);
+                        console.log(sessionStorage.filtrosH);
+
                     } else {
                         $ionicLoading.hide();
                         $ionicPopup.alert({
@@ -110,18 +141,23 @@ angular.module('metrogas')
 
 }])
 
-.controller('AsignCtrl',['$scope', '$ionicModal', 'ventasService', '$ionicLoading', function($scope, $ionicModal, ventasService, $ionicLoading, $sessionStorage){
+.controller('AsignCtrl',['$scope', '$ionicModal', 'ventasService', '$ionicLoading', function($scope, $ionicModal, ventasService, $ionicLoading){
 
     $ionicLoading.show();
-    $scope.filterOptions={
-        calle: "",
-        comuna: "",
-        grilla: "",
-        recorrida: "",
-        contactada: "",
-        //ic: "",
-        carga: ""
-    };
+
+    if(sessionStorage.filtrosDA !== undefined){
+        $scope.filterOptions = JSON.parse(sessionStorage.filtrosDA);
+    }else{
+        $scope.filterOptions={
+            calle: "",
+            comuna: "",
+            grilla: "",
+            recorrida: "",
+            contactada: "",
+            //ic: "",
+            carga: ""
+        };
+    }
 
     var _token = JSON.parse(localStorage.getItem('user')).api_token;
     //llamar a la api con solicitudes para ver las ventas...
@@ -129,6 +165,7 @@ angular.module('metrogas')
         function(response){
             $ionicLoading.hide();
             $ionicModal.fromTemplateUrl('views/filtermodal.html',{
+                id: 1,
                 scope: $scope,
                 animation: 'slide-in-up'
             }).then(function(modal){
@@ -140,11 +177,10 @@ angular.module('metrogas')
                 $scope.allCargas = JSON.parse(localStorage.getItem('cargas'));
             });
 
-            $scope.openModal = function() {
-                console.log($scope.filterOptions);
-                console.log(sessionStorage.filtros);
-                if(sessionStorage.filtros !== undefined){
-                    $scope.filterOptions = JSON.parse(sessionStorage.filtros);
+            $scope.openModal = function(index) {
+                console.log(sessionStorage.filtrosDA);
+                if(sessionStorage.filtrosDA !== undefined){
+                    $scope.filterOptions = JSON.parse(sessionStorage.filtrosDA);
                 }else{
                     $scope.filterOptions={
                         calle: "",
@@ -159,14 +195,14 @@ angular.module('metrogas')
                 $scope.modal.show();
             };
 
-            $scope.closeModal = function() {
+            $scope.closeModal = function(index) {
                 $scope.modal.hide();
             };
 
             $scope.guardarFiltros = function () {
-                console.log('guardando filtros');
-                sessionStorage.filtros = angular.toJson($scope.filterOptions);
-                console.log(sessionStorage.filtros);
+                console.log('guardando filtrosDA');
+                sessionStorage.filtrosDA = angular.toJson($scope.filterOptions);
+                console.log(sessionStorage.filtrosDA);
             };
 
             // Cleanup the modal when we're done with it!
@@ -184,7 +220,7 @@ angular.module('metrogas')
                     //ic: "",
                     carga: ""
                 };
-                console.log('borrando filtros');
+                console.log('borrando filtrosDA');
                 console.log($scope.filterOptions);
             };
 
@@ -651,7 +687,24 @@ angular.module('metrogas')
     }])
 
 .controller('HistorialCtrl', ['$ionicPopup', '$scope', '$state', '$ionicLoading', '$ionicModal', 'ventasService', function($ionicPopup, $scope, $state, $ionicLoading, $ionicModal, ventasService){
+
     $ionicLoading.show();
+
+    if(sessionStorage.filtrosH !== undefined){
+        $scope.filterOptions = JSON.parse(sessionStorage.filtrosH);
+    }else{
+        console.log('basiando filtros');
+        $scope.filterOptions={
+            calle: "",
+            comuna: "",
+            grilla: "",
+            recorrida: "",
+            contactada: "",
+            //ic: "",
+            carga: ""
+        };
+    }
+
     var _token = JSON.parse(localStorage.getItem('user')).api_token;
     ventasService.getHistorial(_token).query().$promise.then(
         function(response){
@@ -663,7 +716,6 @@ angular.module('metrogas')
             }).then(function(modal){
                 $scope.modal_1 = modal;
                 $scope.direcciones = JSON.parse(JSON.stringify(response));
-                //console.log($scope.direcciones);
                 $scope.allComunas = JSON.parse(localStorage.getItem('comunas'));
                 $scope.allCalles = JSON.parse(localStorage.getItem('calles'));
                 $scope.allGrilla = JSON.parse(localStorage.getItem('grillas'));
@@ -680,6 +732,20 @@ angular.module('metrogas')
 
             $scope.openModal = function(index) {
                 if (index === 1){
+                    console.log(sessionStorage.filtrosH);
+                    if(sessionStorage.filtrosH !== undefined){
+                        $scope.filterOptions = JSON.parse(sessionStorage.filtrosH);
+                    }else{
+                        $scope.filterOptions={
+                            calle: "",
+                            comuna: "",
+                            grilla: "",
+                            recorrida: "",
+                            contactada: "",
+                            //ic: "",
+                            carga: ""
+                        };
+                    }
                     $scope.modal_1.show();
                 }else{
                     $scope.modal_2.show();
@@ -694,11 +760,44 @@ angular.module('metrogas')
                 }
             };
 
+            $scope.guardarFiltros = function () {
+                console.log('guardando filtrosH');
+                sessionStorage.filtrosH = angular.toJson($scope.filterOptions);
+                console.log(sessionStorage.filtrosH);
+            };
+
             // Cleanup the modal when we're done with it!
             $scope.$on('$destroy', function() {
                 $scope.modal_1.remove();
                 $scope.modal_2.remove();
             });
+
+            $scope.resetFilter = function () {
+                $scope.filterOptions={
+                    calle: "",
+                    comuna: "",
+                    grilla: "",
+                    recorrida: "",
+                    contactada: "",
+                    //ic: "",
+                    carga: ""
+                };
+                console.log('borrando filtrosDA');
+                console.log($scope.filterOptions);
+            };
+
+            $scope.search = function(row) {
+                // console.log(row);
+                return (
+                    angular.lowercase(row.direccion).toString().indexOf(angular.lowercase($scope.filterOptions.calle) || "") !== -1 &&
+                    angular.lowercase(row.comuna).toString().indexOf(angular.lowercase($scope.filterOptions.comuna) || "") !== -1 &&
+                    angular.lowercase(row.grilla).toString().indexOf(angular.lowercase($scope.filterOptions.grilla) || "") !== -1 &&
+                    angular.lowercase(row.recorrida).toString().indexOf(angular.lowercase($scope.filterOptions.recorrida) || "") !== -1 &&
+                    angular.lowercase(row.contactada).toString().indexOf(angular.lowercase($scope.filterOptions.contactada) || "") !== -1 &&
+                    angular.lowercase(row.carga_id).toString().indexOf(angular.lowercase($scope.filterOptions.carga) || "") !== -1
+                    //angular.lowercase(row.IC).toString().indexOf(angular.lowercase($scope.filterOptions.ic) || "") !== -1
+                );
+            };
 
             $scope.chooseModal= function (index, dir){
                 dir = dir || null;
