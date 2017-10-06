@@ -806,7 +806,6 @@ angular.module('metrogas')
                         id: dir.id
                     };
                 }
-                console.log($scope.dir);
                 $scope.openModal(index);
             };
 
@@ -823,8 +822,8 @@ angular.module('metrogas')
                         //si apreta si
 
                         $scope.executeSaving();
-                        $state.go('app.historial');
-                        console.log('cargando el estado app.historial');
+                        $state.go('app');
+                        console.log('cargando el estado app');
                     } else {
                         //si apreta no
                         //$scope.executeSaving();
@@ -835,14 +834,11 @@ angular.module('metrogas')
             $scope.editarVenta = function (){
                 ventasService.edit().save($scope.dir).$promise.then(
                     function (response2) {
-
                         $ionicLoading.hide();
                         $ionicPopup.alert({
                             title: 'Ok',
                             template: 'Información guardada correctamente'
                         });
-                        $scope.closeModal(2);
-
                     },
                     function (response_){
                         $ionicLoading.hide();
