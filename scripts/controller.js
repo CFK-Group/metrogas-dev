@@ -802,9 +802,11 @@ angular.module('metrogas')
                         rut: dir.rut,
                         fono_actualizado: dir.fono_actualizado,
                         correo_actualizado: dir.correo_actualizado,
-                        observacion: dir.observacion
+                        observacion: dir.observacion,
+                        id: dir.id
                     };
                 }
+                console.log($scope.dir);
                 $scope.openModal(index);
             };
 
@@ -821,7 +823,7 @@ angular.module('metrogas')
                         //si apreta si
 
                         $scope.executeSaving();
-                        state.go('app.historial');
+                        $state.go('app.historial');
                         console.log('cargando el estado app.historial');
                     } else {
                         //si apreta no
@@ -831,18 +833,15 @@ angular.module('metrogas')
             };
 
             $scope.editarVenta = function (){
-                ventasService.edit().save($scope.model).$promise.then(
+                ventasService.edit().save($scope.dir).$promise.then(
                     function (response2) {
+
                         $ionicLoading.hide();
                         $ionicPopup.alert({
                             title: 'Ok',
                             template: 'Información guardada correctamente'
                         });
-                        if($scope.step !== '6'){
-                            $state.go('app.asignadas');
-                        }else{
-                            $state.go('app.accioncomercial', {idVenta: $scope.direccion.id, idCarga: $scope.direccion.carga_id, from: "edit", direccion: $scope.direccion.direccion + " " + $scope.direccion.numero});
-                        }
+                        $scope.closeModal(2);
 
                     },
                     function (response_){
@@ -851,6 +850,7 @@ angular.module('metrogas')
                             title: 'UPS!!',
                             template: 'Algo pasó, intente nuevamente ' + response_
                         });
+                        console.log(response_)
                         // $scope.editarVenta();
                         // $ionicLoading.show();
                     }
