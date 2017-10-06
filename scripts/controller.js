@@ -822,8 +822,6 @@ angular.module('metrogas')
                         //si apreta si
 
                         $scope.executeSaving();
-                        $state.go('app');
-                        console.log('cargando el estado app');
                     } else {
                         //si apreta no
                         //$scope.executeSaving();
@@ -861,6 +859,7 @@ angular.module('metrogas')
                 var _token = userData.api_token;
                 ventasService.getVentas(_token);
                 ventasService.getHistorial(_token);
+                $state.go('app.historial');
             };
 
             $scope.resetFilter = function () {
