@@ -859,7 +859,7 @@ angular.module('metrogas')
                 var _token = userData.api_token;
                 ventasService.getVentas(_token);
                 ventasService.getHistorial(_token);
-                $state.go('app.historial');
+                $state.reload();
             };
 
             $scope.resetFilter = function () {
