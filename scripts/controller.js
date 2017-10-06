@@ -860,9 +860,9 @@ angular.module('metrogas')
                 ventasService.getVentas(_token);
                 ventasService.getHistorial(_token);
                 $scope.closeModal(2);
-                $timeout(function() {
-                    $rootScope.$apply();
-                });
+                $scope.$apply(function () {
+                    $scope.direcciones = JSON.parse(JSON.stringify(response));
+                })
             };
 
             $scope.resetFilter = function () {
