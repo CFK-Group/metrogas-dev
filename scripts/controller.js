@@ -146,8 +146,10 @@ angular.module('metrogas')
     $ionicLoading.show();
 
     if(sessionStorage.filtrosDA !== undefined){
+        console.log('filter options = '+$scope.filterOptions);
         $scope.filterOptions = JSON.parse(sessionStorage.filtrosDA);
     }else{
+        console.log('blanqueando filtros');
         $scope.filterOptions={
             calle: "",
             comuna: "",
@@ -691,10 +693,10 @@ angular.module('metrogas')
     $ionicLoading.show();
 
     if(sessionStorage.filtrosH !== undefined){
-        console.log(sessionStorage.filtrosH);
+        console.log('filter options = '+$scope.filterOptions);
         $scope.filterOptions = JSON.parse(sessionStorage.filtrosH);
     }else{
-        console.log('basiando filtros');
+        console.log('blanqueando filtros');
         $scope.filterOptions={
             calle: "",
             comuna: "",
@@ -733,7 +735,7 @@ angular.module('metrogas')
 
             $scope.openModal = function(index) {
                 if (index === 1){
-                    console.log(sessionStorage.filtrosH);
+                    console.log($scope.filterOptions);
                     if(sessionStorage.filtrosH !== undefined){
                         $scope.filterOptions = JSON.parse(sessionStorage.filtrosH);
                     }else{
@@ -820,13 +822,23 @@ angular.module('metrogas')
                 confirmPopup.then(function(res) {
                     if(res) {
                         //si apreta si
-
                         $scope.executeSaving();
                     } else {
                         //si apreta no
-                        //$scope.executeSaving();
                     }
                 });
+            };
+
+            $scope.watch($scope.editarDir());
+
+            $scope.executeSaving = function () {
+                $ionicLoading.show();
+                $scope.editarVenta();
+                var userData = JSON.parse(localStorage.getItem('user'));
+                var _token = userData.api_token;
+                ventasService.getVentas(_token);
+                ventasService.getHistorial(_token);
+                $scope.closeModal(2);
             };
 
             $scope.editarVenta = function (){
@@ -848,21 +860,7 @@ angular.module('metrogas')
                         // $scope.editarVenta();
                         // $ionicLoading.show();
                     }
-
                 )
-            };
-
-            $scope.executeSaving = function () {
-                $ionicLoading.show();
-                $scope.editarVenta();
-                var userData = JSON.parse(localStorage.getItem('user'));
-                var _token = userData.api_token;
-                ventasService.getVentas(_token);
-                ventasService.getHistorial(_token);
-                $scope.closeModal(2);
-                $scope.$apply(function () {
-                    $scope.direcciones = JSON.parse(JSON.stringify(response));
-                })
             };
 
             $scope.resetFilter = function () {
