@@ -87,7 +87,11 @@ angular.module('metrogas', ['ionic','ui.router','ngCordova', 'ngStorage', 'angul
 
         .state('app.aux',{
             url:'/aux/:from',
-            controller: 'auxCtrl'
+            views: {
+                'content@': {
+                    controller: 'auxCtrl'
+                }
+            }
         })
 
     ;
