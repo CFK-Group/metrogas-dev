@@ -826,7 +826,11 @@ angular.module('metrogas')
                         $scope.executeSaving();
 
                         $scope.$watch($scope.dir, function(){
-                            $scope.dir  = $scope.dir;
+                            ventasService.getHistorial(_token).query().$promise.then(
+                                function(response){
+                                    $scope.direcciones = JSON.parse(JSON.stringify(response));
+                                }
+                            )
                         });
 
                     } else {
