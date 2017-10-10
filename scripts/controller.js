@@ -822,14 +822,12 @@ angular.module('metrogas')
                 confirmPopup.then(function(res) {
                     if(res) {
                         //si apreta si
-                        $scope.executeSaving();
+                        $scope.watch('$scope.dir',$scope.executeSaving());
                     } else {
                         //si apreta no
                     }
                 });
             };
-
-            $scope.watch($scope.editarDir());
 
             $scope.executeSaving = function () {
                 $ionicLoading.show();
