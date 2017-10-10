@@ -847,7 +847,7 @@ angular.module('metrogas')
                 ventasService.getVentas(_token);
                 ventasService.getHistorial(_token);
                 $scope.closeModal(2);
-                $state.go('app.aux');
+                $state.go('app.aux', {from:'goToHistorial'});
             };
 
             $scope.editarVenta = function (){
