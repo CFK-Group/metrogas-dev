@@ -826,7 +826,7 @@ angular.module('metrogas')
                         $scope.executeSaving();
 
                         $scope.$watch($scope.dir, function(){
-
+                            $scope.dir  = $scope.dir;
                         });
 
                     } else {
