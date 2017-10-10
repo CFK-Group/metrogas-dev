@@ -478,6 +478,7 @@ angular.module('metrogas')
     }*/
 
 }])
+
 .controller('AccionCtrl',['$cordovaGeolocation', '$scope', '$ionicModal', '$stateParams', '$ionicLoading', 'ventasService', '$ionicPopup', function($cordovaGeolocation, $scope, $ionicModal, $stateParams, $ionicLoading, ventasService, $ionicPopup) {
         var idVenta = $stateParams.idVenta;
         var idCarga = $stateParams.idCarga;
@@ -822,7 +823,12 @@ angular.module('metrogas')
                 confirmPopup.then(function(res) {
                     if(res) {
                         //si apreta si
-                        $scope.watch('$scope.dir',$scope.executeSaving());
+                        $scope.executeSaving();
+
+                        $scope.$watch($scope.dir, function(){
+
+                        });
+
                     } else {
                         //si apreta no
                     }
