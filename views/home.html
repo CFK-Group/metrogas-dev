@@ -3,7 +3,7 @@
         <i class="icon ion-navicon"></i>
     </button>
 </ion-header-bar>
-<ion-content>
+<ion-content overflow-scroll="false">
    <div class="container">
         <div class="text-center">
            <img src="images/metrogas-logo.png" alt="" style="margin-left: 7%">
@@ -19,5 +19,8 @@
         <div class="row">
             <div class="col col-80 col-offset-10"><a ui-sref="app.historial" class="button button-metrogas">MI HISTORIAL</a></div>
         </div>
+       <div class="row">
+           <div id="visitadas" class="title center"><h5>Direcciones Visitadas Hoy: {{visitadas}}</h5></div>
+       </div>
     </div>
 </ion-content>
