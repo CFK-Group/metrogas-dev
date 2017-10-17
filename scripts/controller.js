@@ -401,6 +401,7 @@ angular.module('metrogas')
             };
 
             $scope.executeSaving = function () {
+                $scope.incrementarVisitasDiarias();
                 $ionicLoading.show();
                 $scope.editarVenta();
                 var userData = JSON.parse(localStorage.getItem('user'));
