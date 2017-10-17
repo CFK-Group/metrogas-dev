@@ -352,6 +352,7 @@ angular.module('metrogas')
             };
 
             $scope.editarVenta = function (){
+                $scope.incrementarVisitasDiarias();
                 ventasService.edit().save($scope.model).$promise.then(
                     function (response2) {
                         $ionicLoading.hide();
