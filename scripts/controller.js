@@ -141,6 +141,10 @@ angular.module('metrogas')
 
 .controller('HomeCtrl',['$scope', 'UserService', function($scope, UserService){
 
+    $scope.incrementarVisitasDiarias = function () {
+        $rootScope.visitadas = $rootScope.visitadas + 1;
+    };
+
 }])
 
 .controller('AsignCtrl',['$scope', '$ionicModal', 'ventasService', '$ionicLoading', function($scope, $ionicModal, ventasService, $ionicLoading){
@@ -347,10 +351,6 @@ angular.module('metrogas')
                     };
                     $state.go('app.asignadas');
                 }
-            };
-
-            $scope.incrementarVisitasDiarias = function () {
-                $rootScope.visitadas = $rootScope.visitadas + 1;
             };
 
             $scope.editarVenta = function (){
