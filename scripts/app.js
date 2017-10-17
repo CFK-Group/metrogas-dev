@@ -100,6 +100,8 @@ angular.module('metrogas', ['ionic','ui.router','ngCordova', 'ngStorage', 'angul
 
 }).run(
     function($rootScope, $ionicSideMenuDelegate, $ionicPlatform, $state, $cordovaDevice){
+
+        $rootScope.visitadas = 0;
         $rootScope.loginShow= true;
         $rootScope.user = "";
         $ionicPlatform.registerBackButtonAction(function (event) {

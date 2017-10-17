@@ -113,8 +113,6 @@ angular.module('metrogas')
 
 .controller('SideNavCtrl', ['$rootScope', '$scope', '$ionicSideMenuDelegate', '$state', function ($rootScope, $scope, $ionicSideMenuDelegate, $state) {
 
-    $rootScope.visitadas = 0;
-
     $scope.$watch(function(){
         return window.localStorage.getItem('user');
     }, function(){
@@ -140,10 +138,6 @@ angular.module('metrogas')
 }])
 
 .controller('HomeCtrl',['$scope', 'UserService', function($scope, UserService){
-
-    $scope.incrementarVisitasDiarias = function () {
-        $rootScope.visitadas = $rootScope.visitadas + 1;
-    };
 
 }])
 
@@ -351,6 +345,10 @@ angular.module('metrogas')
                     };
                     $state.go('app.asignadas');
                 }
+            };
+
+            $scope.incrementarVisitasDiarias = function () {
+                $rootScope.visitadas = $rootScope.visitadas + 1;
             };
 
             $scope.editarVenta = function (){
