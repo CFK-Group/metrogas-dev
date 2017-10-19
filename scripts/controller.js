@@ -350,8 +350,8 @@ angular.module('metrogas')
             $scope.incrementarVisitasDiarias = function () {
                 $rootScope.visitadas += 1;
                 var fecha = new Date();
-                sessionStorage.fechaUltimaVisita = fecha.getDate().toString() + '/' + fecha.getMonth().toString() + '/' + fecha.getFullYear().toString();
-                sessionStorage.visitadas = $rootScope.visitadas;
+                localStorage.fechaUltimaVisita = fecha.getDate().toString() + '/' + fecha.getMonth().toString() + '/' + fecha.getFullYear().toString();
+                localStorage.visitadas = $rootScope.visitadas;
             };
 
             $scope.editarVenta = function (){
