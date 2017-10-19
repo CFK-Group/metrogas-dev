@@ -105,13 +105,10 @@ angular.module('metrogas', ['ionic','ui.router','ngCordova', 'ngStorage', 'angul
         var fechaActual = fecha.getDate().toString() + '/' + fecha.getMonth().toString() + '/' + fecha.getFullYear().toString();
         console.log('fecha actual: ' + fechaActual);
         console.log('fecha ultima visita: ' + localStorage.fechaUltimaVisita);
-        console.log('Visitadas Hoy: ' + $rootScope.visitadas);
+        console.log('Visitadas Hoy: ' + localStorage.visitadas);
 
         if(fechaActual !== localStorage.fechaUltimaVisita){
-            $rootScope.visitadas = 0;
-            localStorage.visitadas = $rootScope.visitadas;
-        }else{
-            $rootScope.visitadas = localStorage.visitadas;
+            localStorage.visitadas = 0;
         }
 
         $rootScope.loginShow= true;
