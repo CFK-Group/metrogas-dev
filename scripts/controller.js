@@ -357,13 +357,13 @@ angular.module('metrogas')
             $scope.editarVenta = function (){
                 ventasService.edit().save($scope.model).$promise.then(
                     function (response2) {
-                        $scope.incrementarVisitasDiarias();
                         $ionicLoading.hide();
                         $ionicPopup.alert({
                             title: 'Ok',
                             template: 'Información guardada correctamente'
                         });
                         if($scope.step !== '6'){
+                            $scope.incrementarVisitasDiarias();
                             $state.go('app.asignadas');
                         }else{
                             $state.go('app.accioncomercial', {idVenta: $scope.direccion.id, idCarga: $scope.direccion.carga_id, from: "edit", direccion: $scope.direccion.direccion + " " + $scope.direccion.numero});
