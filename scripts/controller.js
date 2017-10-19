@@ -138,7 +138,7 @@ angular.module('metrogas')
 }])
 
 .controller('HomeCtrl',['$scope', 'UserService', function($scope, UserService){
-
+    $scope.visitadas = localStorage.visitadas;
 }])
 
 .controller('AsignCtrl',['$scope', '$ionicModal', 'ventasService', '$ionicLoading', function($scope, $ionicModal, ventasService, $ionicLoading){
