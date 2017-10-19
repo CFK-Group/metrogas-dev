@@ -348,13 +348,16 @@ angular.module('metrogas')
             };
 
             $scope.incrementarVisitasDiarias = function () {
-                $rootScope.visitadas = $rootScope.visitadas + 1;
+                $rootScope.visitadas += 1;
+                var fecha = new Date();
+                sessionStorage.fechaUltimaVisita = fecha.getDate().toString() + '/' + fecha.getMonth().toString() + '/' + fecha.getFullYear().toString();
+                sessionStorage.visitadas = $rootScope.visitadas;
             };
 
             $scope.editarVenta = function (){
-                $scope.incrementarVisitasDiarias();
                 ventasService.edit().save($scope.model).$promise.then(
                     function (response2) {
+                        $scope.incrementarVisitasDiarias();
                         $ionicLoading.hide();
                         $ionicPopup.alert({
                             title: 'Ok',
@@ -365,7 +368,6 @@ angular.module('metrogas')
                         }else{
                             $state.go('app.accioncomercial', {idVenta: $scope.direccion.id, idCarga: $scope.direccion.carga_id, from: "edit", direccion: $scope.direccion.direccion + " " + $scope.direccion.numero});
                         }
-
                     },
                     function (response_){
                         $ionicLoading.hide();

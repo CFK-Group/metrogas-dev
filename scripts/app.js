@@ -101,7 +101,18 @@ angular.module('metrogas', ['ionic','ui.router','ngCordova', 'ngStorage', 'angul
 }).run(
     function($rootScope, $ionicSideMenuDelegate, $ionicPlatform, $state, $cordovaDevice){
 
-        $rootScope.visitadas = 0;
+        var fecha = new Date();
+        var fechaActual = fecha.getDate().toString() + '/' + fecha.getMonth().toString() + '/' + fecha.getFullYear().toString();
+        console.log('fecha actual: ' + fechaActual);
+        console.log('fecha actual: ' + fecha);
+        console.log('fecha ultima visita: ' + sessionStorage.fechaUltimaVisita);
+
+        if(fechaActual !== sessionStorage.fechaUltimaVisita){
+            $rootScope.visitadas = 0;
+        }else{
+            $rootScope.visitadas = sessionStorage.visitadas;
+        }
+
         $rootScope.loginShow= true;
         $rootScope.user = "";
         $ionicPlatform.registerBackButtonAction(function (event) {
