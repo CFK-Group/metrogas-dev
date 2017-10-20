@@ -361,8 +361,8 @@ angular.module('metrogas')
                             title: 'Ok',
                             template: 'Información guardada correctamente'
                         });
+                        $scope.incrementarVisitasDiarias();
                         if($scope.step !== '6'){
-                            $scope.incrementarVisitasDiarias();
                             $state.go('app.asignadas');
                         }else{
                             $state.go('app.accioncomercial', {idVenta: $scope.direccion.id, idCarga: $scope.direccion.carga_id, from: "edit", direccion: $scope.direccion.direccion + " " + $scope.direccion.numero});
@@ -814,6 +814,12 @@ angular.module('metrogas')
                     };
                 }
                 $scope.openModal(index);
+            };
+
+            $scope.incrementarVisitasDiarias = function () {
+                localStorage.visitadas = parseInt(localStorage.visitadas) + 1;
+                var fecha = new Date();
+                localStorage.fechaUltimaVisita = fecha.getDate().toString() + '/' + fecha.getMonth().toString() + '/' + fecha.getFullYear().toString();
             };
 
             $scope.editarDir = function () {
