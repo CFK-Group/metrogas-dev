@@ -348,7 +348,7 @@ angular.module('metrogas')
             };
 
             $scope.incrementarVisitasDiarias = function () {
-                localStorage.visitadas = localStorage.visitadas + 1;
+                localStorage.visitadas = parseInt(localStorage.visitadas) + 1;
                 var fecha = new Date();
                 localStorage.fechaUltimaVisita = fecha.getDate().toString() + '/' + fecha.getMonth().toString() + '/' + fecha.getFullYear().toString();
             };
@@ -372,10 +372,8 @@ angular.module('metrogas')
                         $ionicLoading.hide();
                         $ionicPopup.alert({
                             title: 'UPS!!',
-                            template: 'Algo pasó, intentaremos nuevamente' + response_
+                            template: 'Algo pasó, intente nuevamente' + response_
                         });
-                        $scope.editarVenta();
-                        $ionicLoading.show();
                     }
 
                 )
@@ -403,7 +401,6 @@ angular.module('metrogas')
             };
 
             $scope.executeSaving = function () {
-                $scope.incrementarVisitasDiarias();
                 $ionicLoading.show();
                 $scope.editarVenta();
                 var userData = JSON.parse(localStorage.getItem('user'));
