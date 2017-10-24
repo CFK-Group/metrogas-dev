@@ -717,6 +717,7 @@ angular.module('metrogas')
 .controller('HistorialCtrl', ['$ionicPopup', '$scope', '$state', '$ionicLoading', '$ionicModal', 'ventasService', function($ionicPopup, $scope, $state, $ionicLoading, $ionicModal, ventasService){
 
     $ionicLoading.show();
+    //console.log($scope.dir.id);
 
     if(sessionStorage.filtrosH !== undefined){
         console.log('filter options = '+$scope.filterOptions);
@@ -845,7 +846,7 @@ angular.module('metrogas')
                 }
             };
 
-            $scope.editarDir = function () {
+            $scope.editarDir = function (id) {
                 var confirmPopup = $ionicPopup.confirm({
                     title: 'Continuar',
                     template: '¿Guardar cambios?',
@@ -856,7 +857,7 @@ angular.module('metrogas')
                 confirmPopup.then(function(res) {
                     if(res) {
                         //si apreta si
-                        $scope.executeSaving();
+                        $scope.executeSaving(id);
 
                         $scope.$watch($scope.dir, function(){
                             ventasService.getHistorial(_token).query().$promise.then(
@@ -872,9 +873,9 @@ angular.module('metrogas')
                 });
             };
 
-            $scope.executeSaving = function () {
+            $scope.executeSaving = function (id) {
                 $ionicLoading.show();
-                $scope.editarVenta();
+                $scope.editarVenta(id);
                 var userData = JSON.parse(localStorage.getItem('user'));
                 var _token = userData.api_token;
                 ventasService.getVentas(_token);
@@ -883,7 +884,7 @@ angular.module('metrogas')
                 $state.go('app.aux', {from:'goToHistorial'});
             };
 
-            $scope.editarVenta = function (){
+            $scope.editarVenta = function (id){
                 ventasService.edit().save($scope.dir).$promise.then(
                     function (response2) {
                         $ionicLoading.hide();
@@ -892,7 +893,7 @@ angular.module('metrogas')
                             template: 'Información guardada correctamente'
                         });
                         alert.then(function (res) {
-                            $scope.incrementarVisitasDiarias($scope.direccion.id);
+                            $scope.incrementarVisitasDiarias(id);
                         });
                     },
                     function (response_){
