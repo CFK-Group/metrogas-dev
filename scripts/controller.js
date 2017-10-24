@@ -6,7 +6,7 @@ angular.module('metrogas')
     $ionicPlatform.ready(function() {
         //console.log($cordovaDevice.getDevice());
 
-        var mode = 'develop'; //cambiar valor entre develop y produccion segun corresponda
+        var mode = 'develop'; //cambiar valor entre develop y produccion según corresponda
         var model = "";
         var uuid = "";
 
@@ -244,6 +244,9 @@ angular.module('metrogas')
 
 .controller('EditCtrl',['$scope', '$stateParams', '$state', 'ventasService', '$ionicLoading', '$ionicPopup', '$cordovaGeolocation', '$rootScope', function($scope, $stateParams, $state, ventasService, $ionicLoading, $ionicPopup, $cordovaGeolocation, $rootScope) {
 
+    var horaUltimoIncremento = localStorage.horaUltimoIncremento;
+    var tiempoEntreVisitas = 30; //minutos
+
     $scope.motivos_no_contacto = JSON.parse(localStorage.getItem('motivos_no_contacto'));
     //console.log($scope.motivos_no_contacto);
 
@@ -347,10 +350,15 @@ angular.module('metrogas')
                 }
             };
 
-            $scope.incrementarVisitasDiarias = function () {
-                localStorage.visitadas = parseInt(localStorage.visitadas) + 1;
+            $scope.incrementarVisitasDiarias = function (idDir) {
                 var fecha = new Date();
-                localStorage.fechaUltimaVisita = fecha.getDate().toString() + '/' + fecha.getMonth().toString() + '/' + fecha.getFullYear().toString();
+                var horaActual = parseInt(fecha.getHours()) * 60 + parseInt(fecha.getMinutes()); //hora en minutos
+                if(horaActual - horaUltimoIncremento > tiempoEntreVisitas || idDir !== localStorage.idUltimaDir){
+                    localStorage.idUltimaDir = idDir;
+                    localStorage.visitadas = parseInt(localStorage.visitadas) + 1 ;
+                    localStorage.fechaUltimaVisita = fecha.getDate().toString() + '/' + fecha.getMonth().toString() + '/' + fecha.getFullYear().toString();
+                    localStorage.horaUltimoIncremento = horaActual;
+                }
             };
 
             $scope.editarVenta = function (){
@@ -361,7 +369,7 @@ angular.module('metrogas')
                             title: 'Ok',
                             template: 'Información guardada correctamente'
                         });
-                        $scope.incrementarVisitasDiarias();
+                        $scope.incrementarVisitasDiarias($scope.direccion.id);
                         if($scope.step !== '6'){
                             $state.go('app.asignadas');
                         }else{
@@ -493,7 +501,7 @@ angular.module('metrogas')
     $scope.$on('$stateChangeStart',
         function(event, toState, toParams, fromState, fromParams, options){
             if (fromState.name === 'app.accioncomercial') {
-                $scope.incrementarVisitasDiarias();
+                $scope.incrementarVisitasDiarias($scope.direccion.id);
             }
     });
 
@@ -587,10 +595,15 @@ angular.module('metrogas')
         $scope.openModal(index);
     };
 
-    $scope.incrementarVisitasDiarias = function () {
-        localStorage.visitadas = parseInt(localStorage.visitadas) + 1;
+    $scope.incrementarVisitasDiarias = function (idDir) {
         var fecha = new Date();
-        localStorage.fechaUltimaVisita = fecha.getDate().toString() + '/' + fecha.getMonth().toString() + '/' + fecha.getFullYear().toString();
+        var horaActual = parseInt(fecha.getHours()) * 60 + parseInt(fecha.getMinutes()); //hora en minutos
+        if(horaActual - horaUltimoIncremento > tiempoEntreVisitas || idDir !== localStorage.idUltimaDir){
+            localStorage.idUltimaDir = idDir;
+            localStorage.visitadas = parseInt(localStorage.visitadas) + 1 ;
+            localStorage.fechaUltimaVisita = fecha.getDate().toString() + '/' + fecha.getMonth().toString() + '/' + fecha.getFullYear().toString();
+            localStorage.horaUltimoIncremento = horaActual;
+        }
     };
 
     $scope.editar = function(){
@@ -609,7 +622,7 @@ angular.module('metrogas')
                         template: 'Accion añadida correctamente'
                     });
                     alert.then(function () {
-                        $scope.incrementarVisitasDiarias();
+                        $scope.incrementarVisitasDiarias($scope.direccion.id);
                         $scope.closeModal();
                         $scope.acciones();
                         var userData = JSON.parse(localStorage.getItem('user'));
@@ -684,7 +697,7 @@ angular.module('metrogas')
                         });
                         alert.then(function () {
                             $scope.closeModal();
-                            $scope.incrementarVisitasDiarias();
+                            $scope.incrementarVisitasDiarias($scope.direccion.id);
                             $scope.acciones();
                             var userData = JSON.parse(localStorage.getItem('user'));
                             var _token = userData.api_token;
@@ -832,10 +845,15 @@ angular.module('metrogas')
                 $scope.openModal(index);
             };
 
-            $scope.incrementarVisitasDiarias = function () {
-                localStorage.visitadas = parseInt(localStorage.visitadas) + 1;
+            $scope.incrementarVisitasDiarias = function (idDir) {
                 var fecha = new Date();
-                localStorage.fechaUltimaVisita = fecha.getDate().toString() + '/' + fecha.getMonth().toString() + '/' + fecha.getFullYear().toString();
+                var horaActual = parseInt(fecha.getHours()) * 60 + parseInt(fecha.getMinutes()); //hora en minutos
+                if(horaActual - horaUltimoIncremento > tiempoEntreVisitas || idDir !== localStorage.idUltimaDir){
+                    localStorage.idUltimaDir = idDir;
+                    localStorage.visitadas = parseInt(localStorage.visitadas) + 1 ;
+                    localStorage.fechaUltimaVisita = fecha.getDate().toString() + '/' + fecha.getMonth().toString() + '/' + fecha.getFullYear().toString();
+                    localStorage.horaUltimoIncremento = horaActual;
+                }
             };
 
             $scope.editarDir = function () {
@@ -885,7 +903,7 @@ angular.module('metrogas')
                             template: 'Información guardada correctamente'
                         });
                         alert.then(function (res) {
-                            $scope.incrementarVisitasDiarias();
+                            $scope.incrementarVisitasDiarias($scope.direccion.id);
                         });
                     },
                     function (response_){
