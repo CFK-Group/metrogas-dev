@@ -111,6 +111,20 @@ angular.module('metrogas')
 
 .controller('SideNavCtrl', ['$rootScope', '$scope', '$ionicSideMenuDelegate', '$state', function ($rootScope, $scope, $ionicSideMenuDelegate, $state) {
 
+    $rootScope.horaUltimoIncremento = localStorage.horaUltimoIncremento;
+    $rootScope.tiempoEntreVisitas = 30; //minutos
+
+    $rootScope.incrementarVisitasDiarias = function (idDir) {
+        var fecha = new Date();
+        var horaActual = parseInt(fecha.getHours()) * 60 + parseInt(fecha.getMinutes()); //hora en minutos
+        if(horaActual - $rootScope.horaUltimoIncremento > $rootScope.tiempoEntreVisitas || idDir !== localStorage.idUltimaDir){
+            localStorage.idUltimaDir = idDir;
+            localStorage.visitadas = parseInt(localStorage.visitadas) + 1 ;
+            localStorage.fechaUltimaVisita = fecha.getDate().toString() + '/' + fecha.getMonth().toString() + '/' + fecha.getFullYear().toString();
+            localStorage.horaUltimoIncremento = horaActual;
+        }
+    };
+
     $scope.$watch(function(){
         return window.localStorage.getItem('user');
     }, function(){
@@ -342,17 +356,6 @@ angular.module('metrogas')
                 }
             };
 
-            $scope.incrementarVisitasDiarias = function () {
-                var fecha = new Date();
-                var horaActual = parseInt(fecha.getHours()) * 60 + parseInt(fecha.getMinutes()); //hora en minutos
-                if(horaActual - $rootScope.horaUltimoIncremento > $rootScope.tiempoEntreVisitas || id !== localStorage.idUltimaDir){
-                    localStorage.idUltimaDir = id;
-                    localStorage.visitadas = parseInt(localStorage.visitadas) + 1 ;
-                    localStorage.fechaUltimaVisita = fecha.getDate().toString() + '/' + fecha.getMonth().toString() + '/' + fecha.getFullYear().toString();
-                    localStorage.horaUltimoIncremento = horaActual;
-                }
-            };
-
             $scope.editarVenta = function (){
                 ventasService.edit().save($scope.model).$promise.then(
                     function (response2) {
@@ -361,7 +364,7 @@ angular.module('metrogas')
                             title: 'Ok',
                             template: 'Información guardada correctamente'
                         });
-                        $scope.incrementarVisitasDiarias();
+                        $rootScope.incrementarVisitasDiarias(id);
                         if($scope.step !== '6'){
                             $state.go('app.asignadas');
                         }else{
@@ -493,7 +496,7 @@ angular.module('metrogas')
     $scope.$on('$stateChangeStart',
         function(event, toState, toParams, fromState, fromParams, options){
             if (fromState.name === 'app.accioncomercial') {
-                $scope.incrementarVisitasDiarias();
+                $rootScope.incrementarVisitasDiarias(idVenta);
             }
     });
 
@@ -587,17 +590,6 @@ angular.module('metrogas')
         $scope.openModal(index);
     };
 
-    $scope.incrementarVisitasDiarias = function () {
-        var fecha = new Date();
-        var horaActual = parseInt(fecha.getHours()) * 60 + parseInt(fecha.getMinutes()); //hora en minutos
-        if(horaActual - $rootScope.horaUltimoIncremento > $rootScope.tiempoEntreVisitas || idVenta !== localStorage.idUltimaDir){
-            localStorage.idUltimaDir = idVenta;
-            localStorage.visitadas = parseInt(localStorage.visitadas) + 1 ;
-            localStorage.fechaUltimaVisita = fecha.getDate().toString() + '/' + fecha.getMonth().toString() + '/' + fecha.getFullYear().toString();
-            localStorage.horaUltimoIncremento = horaActual;
-        }
-    };
-
     $scope.editar = function(){
         $ionicLoading.show();
         $cordovaGeolocation.getCurrentPosition(posOptions).then(
@@ -614,7 +606,7 @@ angular.module('metrogas')
                         template: 'Accion añadida correctamente'
                     });
                     alert.then(function () {
-                        $scope.incrementarVisitasDiarias();
+                        $rootScope.incrementarVisitasDiarias(idVenta);
                         $scope.closeModal();
                         $scope.acciones();
                         var userData = JSON.parse(localStorage.getItem('user'));
@@ -689,7 +681,7 @@ angular.module('metrogas')
                         });
                         alert.then(function () {
                             $scope.closeModal();
-                            $scope.incrementarVisitasDiarias();
+                            $rootScope.incrementarVisitasDiarias(idVenta);
                             $scope.acciones();
                             var userData = JSON.parse(localStorage.getItem('user'));
                             var _token = userData.api_token;
@@ -717,7 +709,6 @@ angular.module('metrogas')
 .controller('HistorialCtrl', ['$ionicPopup', '$scope', '$state', '$ionicLoading', '$ionicModal', 'ventasService', function($ionicPopup, $scope, $state, $ionicLoading, $ionicModal, ventasService){
 
     $ionicLoading.show();
-    //console.log($scope.dir.id);
 
     if(sessionStorage.filtrosH !== undefined){
         console.log('filter options = '+$scope.filterOptions);
@@ -835,17 +826,6 @@ angular.module('metrogas')
                 $scope.openModal(index);
             };
 
-            $scope.incrementarVisitasDiarias = function (idDir) {
-                var fecha = new Date();
-                var horaActual = parseInt(fecha.getHours()) * 60 + parseInt(fecha.getMinutes()); //hora en minutos
-                if(horaActual - $rootScope.horaUltimoIncremento > $rootScope.tiempoEntreVisitas || idDir !== localStorage.idUltimaDir){
-                    localStorage.idUltimaDir = idDir;
-                    localStorage.visitadas = parseInt(localStorage.visitadas) + 1 ;
-                    localStorage.fechaUltimaVisita = fecha.getDate().toString() + '/' + fecha.getMonth().toString() + '/' + fecha.getFullYear().toString();
-                    localStorage.horaUltimoIncremento = horaActual;
-                }
-            };
-
             $scope.editarDir = function (id) {
                 var confirmPopup = $ionicPopup.confirm({
                     title: 'Continuar',
@@ -893,7 +873,7 @@ angular.module('metrogas')
                             template: 'Información guardada correctamente'
                         });
                         alert.then(function (res) {
-                            $scope.incrementarVisitasDiarias(id);
+                            $rootScope.incrementarVisitasDiarias(id);
                         });
                     },
                     function (response_){
@@ -983,17 +963,6 @@ angular.module('metrogas')
         rut: "",
         tipo_vivienda: "",
         usuarios_id: (JSON.parse(localStorage.getItem('user'))).id
-    };
-
-    $scope.incrementarVisitasDiarias = function (idDir) {
-        var fecha = new Date();
-        var horaActual = parseInt(fecha.getHours()) * 60 + parseInt(fecha.getMinutes()); //hora en minutos
-        if(horaActual - $rootScope.horaUltimoIncremento > $rootScope.tiempoEntreVisitas || idDir !== localStorage.idUltimaDir){
-            localStorage.idUltimaDir = idDir;
-            localStorage.visitadas = parseInt(localStorage.visitadas) + 1 ;
-            localStorage.fechaUltimaVisita = fecha.getDate().toString() + '/' + fecha.getMonth().toString() + '/' + fecha.getFullYear().toString();
-            localStorage.horaUltimoIncremento = horaActual;
-        }
     };
 
     $scope.enviar = function (){

@@ -111,8 +111,6 @@ angular.module('metrogas', ['ionic','ui.router','ngCordova', 'ngStorage', 'angul
             localStorage.visitadas = 0;
         }
 
-        $rootScope.horaUltimoIncremento = localStorage.horaUltimoIncremento;
-        $rootScope.tiempoEntreVisitas = 30; //minutos
         $rootScope.loginShow= true;
         $rootScope.user = "";
         $ionicPlatform.registerBackButtonAction(function (event) {
