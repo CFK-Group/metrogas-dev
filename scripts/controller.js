@@ -483,12 +483,20 @@ angular.module('metrogas')
 
 }])
 
-.controller('AccionCtrl',['$cordovaGeolocation', '$scope', '$ionicModal', '$stateParams', '$ionicLoading', 'ventasService', '$ionicPopup', function($cordovaGeolocation, $scope, $ionicModal, $stateParams, $ionicLoading, ventasService, $ionicPopup) {
+.controller('AccionCtrl',['$rootScope', '$cordovaGeolocation', '$scope', '$ionicModal', '$stateParams', '$ionicLoading', 'ventasService', '$ionicPopup', function($rootScope, $cordovaGeolocation, $scope, $ionicModal, $stateParams, $ionicLoading, ventasService, $ionicPopup) {
     var idVenta = $stateParams.idVenta;
     var idCarga = $stateParams.idCarga;
     $scope.direccion = $stateParams.direccion;
     var posOptions = {timeout: 10000, enableHighAccuracy: false};
     $ionicLoading.show();
+
+    $scope.$on('$stateChangeStart',
+        function(event, toState, toParams, fromState, fromParams, options){
+            if (fromState.name === 'app.accioncomercial') {
+                $scope.incrementarVisitasDiarias();
+            }
+    });
+
 
     $scope.acciones = function () {
         ventasService.getAcciones(idVenta).query(
@@ -676,6 +684,7 @@ angular.module('metrogas')
                         });
                         alert.then(function () {
                             $scope.closeModal();
+                            $scope.incrementarVisitasDiarias();
                             $scope.acciones();
                             var userData = JSON.parse(localStorage.getItem('user'));
                             var _token = userData.api_token;
@@ -871,9 +880,12 @@ angular.module('metrogas')
                 ventasService.edit().save($scope.dir).$promise.then(
                     function (response2) {
                         $ionicLoading.hide();
-                        $ionicPopup.alert({
+                        var alert = $ionicPopup.alert({
                             title: 'Ok',
                             template: 'Información guardada correctamente'
+                        });
+                        alert.then(function (res) {
+                            $scope.incrementarVisitasDiarias();
                         });
                     },
                     function (response_){
