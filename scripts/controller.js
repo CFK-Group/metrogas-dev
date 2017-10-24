@@ -239,9 +239,6 @@ angular.module('metrogas')
 
 .controller('EditCtrl',['$scope', '$stateParams', '$state', 'ventasService', '$ionicLoading', '$ionicPopup', '$cordovaGeolocation', '$rootScope', function($scope, $stateParams, $state, ventasService, $ionicLoading, $ionicPopup, $cordovaGeolocation, $rootScope) {
 
-    var horaUltimoIncremento = localStorage.horaUltimoIncremento;
-    var tiempoEntreVisitas = 30; //minutos
-
     $scope.motivos_no_contacto = JSON.parse(localStorage.getItem('motivos_no_contacto'));
     //console.log($scope.motivos_no_contacto);
 
@@ -348,7 +345,7 @@ angular.module('metrogas')
             $scope.incrementarVisitasDiarias = function () {
                 var fecha = new Date();
                 var horaActual = parseInt(fecha.getHours()) * 60 + parseInt(fecha.getMinutes()); //hora en minutos
-                if(horaActual - horaUltimoIncremento > tiempoEntreVisitas || id !== localStorage.idUltimaDir){
+                if(horaActual - $rootScope.horaUltimoIncremento > $rootScope.tiempoEntreVisitas || id !== localStorage.idUltimaDir){
                     localStorage.idUltimaDir = id;
                     localStorage.visitadas = parseInt(localStorage.visitadas) + 1 ;
                     localStorage.fechaUltimaVisita = fecha.getDate().toString() + '/' + fecha.getMonth().toString() + '/' + fecha.getFullYear().toString();
@@ -593,7 +590,7 @@ angular.module('metrogas')
     $scope.incrementarVisitasDiarias = function () {
         var fecha = new Date();
         var horaActual = parseInt(fecha.getHours()) * 60 + parseInt(fecha.getMinutes()); //hora en minutos
-        if(horaActual - horaUltimoIncremento > tiempoEntreVisitas || idVenta !== localStorage.idUltimaDir){
+        if(horaActual - $rootScope.horaUltimoIncremento > $rootScope.tiempoEntreVisitas || idVenta !== localStorage.idUltimaDir){
             localStorage.idUltimaDir = idVenta;
             localStorage.visitadas = parseInt(localStorage.visitadas) + 1 ;
             localStorage.fechaUltimaVisita = fecha.getDate().toString() + '/' + fecha.getMonth().toString() + '/' + fecha.getFullYear().toString();
@@ -840,7 +837,7 @@ angular.module('metrogas')
             $scope.incrementarVisitasDiarias = function (idDir) {
                 var fecha = new Date();
                 var horaActual = parseInt(fecha.getHours()) * 60 + parseInt(fecha.getMinutes()); //hora en minutos
-                if(horaActual - horaUltimoIncremento > tiempoEntreVisitas || idDir !== localStorage.idUltimaDir){
+                if(horaActual - $rootScope.horaUltimoIncremento > $rootScope.tiempoEntreVisitas || idDir !== localStorage.idUltimaDir){
                     localStorage.idUltimaDir = idDir;
                     localStorage.visitadas = parseInt(localStorage.visitadas) + 1 ;
                     localStorage.fechaUltimaVisita = fecha.getDate().toString() + '/' + fecha.getMonth().toString() + '/' + fecha.getFullYear().toString();
@@ -986,6 +983,18 @@ angular.module('metrogas')
         tipo_vivienda: "",
         usuarios_id: (JSON.parse(localStorage.getItem('user'))).id
     };
+
+    $scope.incrementarVisitasDiarias = function (idDir) {
+        var fecha = new Date();
+        var horaActual = parseInt(fecha.getHours()) * 60 + parseInt(fecha.getMinutes()); //hora en minutos
+        if(horaActual - $rootScope.horaUltimoIncremento > $rootScope.tiempoEntreVisitas || idDir !== localStorage.idUltimaDir){
+            localStorage.idUltimaDir = idDir;
+            localStorage.visitadas = parseInt(localStorage.visitadas) + 1 ;
+            localStorage.fechaUltimaVisita = fecha.getDate().toString() + '/' + fecha.getMonth().toString() + '/' + fecha.getFullYear().toString();
+            localStorage.horaUltimoIncremento = horaActual;
+        }
+    };
+
     $scope.enviar = function (){
         //console.log($scope.model);
         ventasService.guardar().save($scope.model).$promise.then(
@@ -997,11 +1006,12 @@ angular.module('metrogas')
                     template: 'Datos guardados correctamente'
                 });
                 alert.then(function(){
+                    $scope.incrementarVisitasDiarias($scope.model.id);
                     var userData = JSON.parse(localStorage.getItem('user'));
                     var _token = userData.api_token;
                     ventasService.getVentas(_token);
                     ventasService.getHistorial(_token);
-                    $state.go('app.asignadas');  //confirmar q este era el cambio que había q realizar
+                    $state.go('app.asignadas');
                 });
             }},
             function(response){
