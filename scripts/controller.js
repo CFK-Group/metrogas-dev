@@ -74,7 +74,6 @@ angular.module('metrogas')
                         console.log('borrando filtrosDA');
                         console.log('guardando filtrosDA');
                         sessionStorage.filtrosDA = angular.toJson($scope.filterOptions);
-                        console.log(sessionStorage.filtrosDA);
 
                         //borramos filtros del historial al iniciar sesion
                         $scope.filterOptions={
@@ -89,7 +88,6 @@ angular.module('metrogas')
                         console.log('borrando filtrosH');
                         console.log('guardando filtrosH');
                         sessionStorage.filtrosH = angular.toJson($scope.filterOptions);
-                        console.log(sessionStorage.filtrosH);
 
                     } else {
                         $ionicLoading.hide();
@@ -180,7 +178,6 @@ angular.module('metrogas')
             });
 
             $scope.openModal = function(index) {
-                console.log(sessionStorage.filtrosDA);
                 if(sessionStorage.filtrosDA !== undefined){
                     $scope.filterOptions = JSON.parse(sessionStorage.filtrosDA);
                 }else{
@@ -204,7 +201,6 @@ angular.module('metrogas')
             $scope.guardarFiltros = function () {
                 console.log('guardando filtrosDA');
                 sessionStorage.filtrosDA = angular.toJson($scope.filterOptions);
-                console.log(sessionStorage.filtrosDA);
             };
 
             // Cleanup the modal when we're done with it!
@@ -223,7 +219,6 @@ angular.module('metrogas')
                     carga: ""
                 };
                 console.log('borrando filtrosDA');
-                console.log($scope.filterOptions);
             };
 
             $scope.search = function(row) {
@@ -350,11 +345,11 @@ angular.module('metrogas')
                 }
             };
 
-            $scope.incrementarVisitasDiarias = function (idDir) {
+            $scope.incrementarVisitasDiarias = function () {
                 var fecha = new Date();
                 var horaActual = parseInt(fecha.getHours()) * 60 + parseInt(fecha.getMinutes()); //hora en minutos
-                if(horaActual - horaUltimoIncremento > tiempoEntreVisitas || idDir !== localStorage.idUltimaDir){
-                    localStorage.idUltimaDir = idDir;
+                if(horaActual - horaUltimoIncremento > tiempoEntreVisitas || id !== localStorage.idUltimaDir){
+                    localStorage.idUltimaDir = id;
                     localStorage.visitadas = parseInt(localStorage.visitadas) + 1 ;
                     localStorage.fechaUltimaVisita = fecha.getDate().toString() + '/' + fecha.getMonth().toString() + '/' + fecha.getFullYear().toString();
                     localStorage.horaUltimoIncremento = horaActual;
@@ -369,7 +364,7 @@ angular.module('metrogas')
                             title: 'Ok',
                             template: 'Información guardada correctamente'
                         });
-                        $scope.incrementarVisitasDiarias($scope.direccion.id);
+                        $scope.incrementarVisitasDiarias();
                         if($scope.step !== '6'){
                             $state.go('app.asignadas');
                         }else{
@@ -501,7 +496,7 @@ angular.module('metrogas')
     $scope.$on('$stateChangeStart',
         function(event, toState, toParams, fromState, fromParams, options){
             if (fromState.name === 'app.accioncomercial') {
-                $scope.incrementarVisitasDiarias($scope.direccion.id);
+                $scope.incrementarVisitasDiarias();
             }
     });
 
@@ -595,11 +590,11 @@ angular.module('metrogas')
         $scope.openModal(index);
     };
 
-    $scope.incrementarVisitasDiarias = function (idDir) {
+    $scope.incrementarVisitasDiarias = function () {
         var fecha = new Date();
         var horaActual = parseInt(fecha.getHours()) * 60 + parseInt(fecha.getMinutes()); //hora en minutos
-        if(horaActual - horaUltimoIncremento > tiempoEntreVisitas || idDir !== localStorage.idUltimaDir){
-            localStorage.idUltimaDir = idDir;
+        if(horaActual - horaUltimoIncremento > tiempoEntreVisitas || idVenta !== localStorage.idUltimaDir){
+            localStorage.idUltimaDir = idVenta;
             localStorage.visitadas = parseInt(localStorage.visitadas) + 1 ;
             localStorage.fechaUltimaVisita = fecha.getDate().toString() + '/' + fecha.getMonth().toString() + '/' + fecha.getFullYear().toString();
             localStorage.horaUltimoIncremento = horaActual;
@@ -622,7 +617,7 @@ angular.module('metrogas')
                         template: 'Accion añadida correctamente'
                     });
                     alert.then(function () {
-                        $scope.incrementarVisitasDiarias($scope.direccion.id);
+                        $scope.incrementarVisitasDiarias();
                         $scope.closeModal();
                         $scope.acciones();
                         var userData = JSON.parse(localStorage.getItem('user'));
@@ -697,7 +692,7 @@ angular.module('metrogas')
                         });
                         alert.then(function () {
                             $scope.closeModal();
-                            $scope.incrementarVisitasDiarias($scope.direccion.id);
+                            $scope.incrementarVisitasDiarias();
                             $scope.acciones();
                             var userData = JSON.parse(localStorage.getItem('user'));
                             var _token = userData.api_token;
@@ -769,7 +764,6 @@ angular.module('metrogas')
 
             $scope.openModal = function(index) {
                 if (index === 1){
-                    console.log($scope.filterOptions);
                     if(sessionStorage.filtrosH !== undefined){
                         $scope.filterOptions = JSON.parse(sessionStorage.filtrosH);
                     }else{
@@ -800,7 +794,6 @@ angular.module('metrogas')
             $scope.guardarFiltros = function () {
                 console.log('guardando filtrosH');
                 sessionStorage.filtrosH = angular.toJson($scope.filterOptions);
-                console.log(sessionStorage.filtrosH);
             };
 
             // Cleanup the modal when we're done with it!
@@ -820,7 +813,6 @@ angular.module('metrogas')
                     carga: ""
                 };
                 console.log('borrando filtrosDA');
-                console.log($scope.filterOptions);
             };
 
             $scope.chooseModal= function (index, dir){
