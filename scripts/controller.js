@@ -1006,7 +1006,7 @@ angular.module('metrogas')
                     template: 'Datos guardados correctamente'
                 });
                 alert.then(function(){
-                    $scope.incrementarVisitasDiarias($scope.model.id);
+                    //$scope.incrementarVisitasDiarias($scope.model.id);
                     var userData = JSON.parse(localStorage.getItem('user'));
                     var _token = userData.api_token;
                     ventasService.getVentas(_token);
