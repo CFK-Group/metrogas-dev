@@ -712,7 +712,7 @@ angular.module('metrogas')
         }
     }])
 
-.controller('HistorialCtrl', ['$ionicPopup', '$scope', '$state', '$ionicLoading', '$ionicModal', 'ventasService', function($ionicPopup, $scope, $state, $ionicLoading, $ionicModal, ventasService){
+.controller('HistorialCtrl', ['$rootScope', '$ionicPopup', '$scope', '$state', '$ionicLoading', '$ionicModal', 'ventasService', function($rootScope, $ionicPopup, $scope, $state, $ionicLoading, $ionicModal, ventasService){
 
     $ionicLoading.show();
 
