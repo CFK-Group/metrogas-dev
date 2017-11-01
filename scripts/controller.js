@@ -115,8 +115,7 @@ angular.module('metrogas')
     $rootScope.tiempoEntreVisitas = 30; //minutos
 
     $rootScope.incrementarVisitasDiarias = function (idDir) {
-        console.log(idDir);
-        console.log(localStorage.idUltimaDir);
+        console.log('incrementando visitas diarias');
         var fecha = new Date();
         var horaActual = parseInt(fecha.getHours()) * 60 + parseInt(fecha.getMinutes()); //hora en minutos
         if(horaActual - $rootScope.horaUltimoIncremento > $rootScope.tiempoEntreVisitas || idDir !== localStorage.idUltimaDir){
@@ -612,7 +611,6 @@ angular.module('metrogas')
                         template: 'Accion añadida correctamente'
                     });
                     alert.then(function () {
-                        $rootScope.incrementarVisitasDiarias(idVenta);
                         $scope.closeModal();
                         $scope.acciones();
                         var userData = JSON.parse(localStorage.getItem('user'));
