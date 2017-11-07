@@ -6,7 +6,7 @@ angular.module('metrogas')
     $ionicPlatform.ready(function() {
         //console.log($cordovaDevice.getDevice());
 
-        var mode = 'develop'; //cambiar valor entre develop y produccion segun corresponda
+        var mode = 'develop'; //cambiar valor entre develop y produccion según corresponda
         var model = "";
         var uuid = "";
 
@@ -74,7 +74,6 @@ angular.module('metrogas')
                         console.log('borrando filtrosDA');
                         console.log('guardando filtrosDA');
                         sessionStorage.filtrosDA = angular.toJson($scope.filterOptions);
-                        console.log(sessionStorage.filtrosDA);
 
                         //borramos filtros del historial al iniciar sesion
                         $scope.filterOptions={
@@ -89,7 +88,6 @@ angular.module('metrogas')
                         console.log('borrando filtrosH');
                         console.log('guardando filtrosH');
                         sessionStorage.filtrosH = angular.toJson($scope.filterOptions);
-                        console.log(sessionStorage.filtrosH);
 
                     } else {
                         $ionicLoading.hide();
@@ -112,6 +110,25 @@ angular.module('metrogas')
 }])
 
 .controller('SideNavCtrl', ['$rootScope', '$scope', '$ionicSideMenuDelegate', '$state', function ($rootScope, $scope, $ionicSideMenuDelegate, $state) {
+
+    $rootScope.horaUltimoIncremento = localStorage.horaUltimoIncremento;
+    $rootScope.tiempoEntreVisitas = 30; //minutos
+
+    $rootScope.incrementarVisitasDiarias = function (idDir) {
+        console.log('incrementando visitas diarias');
+        var fecha = new Date();
+        var horaActual = parseInt(fecha.getHours()) * 60 + parseInt(fecha.getMinutes()); //hora en minutos
+        if(horaActual - $rootScope.horaUltimoIncremento > $rootScope.tiempoEntreVisitas || idDir !== localStorage.idUltimaDir){
+            localStorage.idUltimaDir = idDir;
+            localStorage.visitadas = parseInt(localStorage.visitadas) + 1 ;
+            localStorage.fechaUltimaVisita = fecha.getDate().toString() + '/' + fecha.getMonth().toString() + '/' + fecha.getFullYear().toString();
+            localStorage.horaUltimoIncremento = horaActual;
+        }
+    };
+
+    $rootScope.decrementarVisitasDiarias = function () {
+        localStorage.visitadas -= 1;
+    };
 
     $scope.$watch(function(){
         return window.localStorage.getItem('user');
@@ -138,12 +155,13 @@ angular.module('metrogas')
 }])
 
 .controller('HomeCtrl',['$scope', 'UserService', function($scope, UserService){
-
+    $scope.visitadas = localStorage.visitadas;
 }])
 
 .controller('AsignCtrl',['$scope', '$ionicModal', 'ventasService', '$ionicLoading', function($scope, $ionicModal, ventasService, $ionicLoading){
 
     $ionicLoading.show();
+    console.log($scope.filterOptions);
 
     if(sessionStorage.filtrosDA !== undefined){
         console.log('filter options = '+$scope.filterOptions);
@@ -151,6 +169,7 @@ angular.module('metrogas')
     }else{
         console.log('blanqueando filtros');
         $scope.filterOptions={
+            busqueda: "",
             calle: "",
             comuna: "",
             grilla: "",
@@ -165,7 +184,6 @@ angular.module('metrogas')
     //llamar a la api con solicitudes para ver las ventas...
     ventasService.getVentas(_token).query().$promise.then(
         function(response){
-            $ionicLoading.hide();
             $ionicModal.fromTemplateUrl('views/filtermodal.html',{
                 id: 1,
                 scope: $scope,
@@ -178,13 +196,14 @@ angular.module('metrogas')
                 $scope.allGrilla = JSON.parse(localStorage.getItem('grillas'));
                 $scope.allCargas = JSON.parse(localStorage.getItem('cargas'));
             });
+            $ionicLoading.hide();
 
             $scope.openModal = function(index) {
-                console.log(sessionStorage.filtrosDA);
                 if(sessionStorage.filtrosDA !== undefined){
                     $scope.filterOptions = JSON.parse(sessionStorage.filtrosDA);
                 }else{
                     $scope.filterOptions={
+                        busqueda: "",
                         calle: "",
                         comuna: "",
                         grilla: "",
@@ -204,7 +223,6 @@ angular.module('metrogas')
             $scope.guardarFiltros = function () {
                 console.log('guardando filtrosDA');
                 sessionStorage.filtrosDA = angular.toJson($scope.filterOptions);
-                console.log(sessionStorage.filtrosDA);
             };
 
             // Cleanup the modal when we're done with it!
@@ -214,6 +232,7 @@ angular.module('metrogas')
 
             $scope.resetFilter = function () {
                 $scope.filterOptions={
+                    busqueda: "",
                     calle: "",
                     comuna: "",
                     grilla: "",
@@ -223,7 +242,6 @@ angular.module('metrogas')
                     carga: ""
                 };
                 console.log('borrando filtrosDA');
-                console.log($scope.filterOptions);
             };
 
             $scope.search = function(row) {
@@ -242,7 +260,7 @@ angular.module('metrogas')
     );
 }])
 
-.controller('EditCtrl',['$scope', '$stateParams', '$state', 'ventasService', '$ionicLoading', '$ionicPopup', '$cordovaGeolocation', function($scope, $stateParams, $state, ventasService, $ionicLoading, $ionicPopup, $cordovaGeolocation) {
+.controller('EditCtrl',['$scope', '$stateParams', '$state', 'ventasService', '$ionicLoading', '$ionicPopup', '$cordovaGeolocation', '$rootScope', function($scope, $stateParams, $state, ventasService, $ionicLoading, $ionicPopup, $cordovaGeolocation, $rootScope) {
 
     $scope.motivos_no_contacto = JSON.parse(localStorage.getItem('motivos_no_contacto'));
     //console.log($scope.motivos_no_contacto);
@@ -355,21 +373,19 @@ angular.module('metrogas')
                             title: 'Ok',
                             template: 'Información guardada correctamente'
                         });
+                        $rootScope.incrementarVisitasDiarias(id);
                         if($scope.step !== '6'){
                             $state.go('app.asignadas');
                         }else{
                             $state.go('app.accioncomercial', {idVenta: $scope.direccion.id, idCarga: $scope.direccion.carga_id, from: "edit", direccion: $scope.direccion.direccion + " " + $scope.direccion.numero});
                         }
-
                     },
                     function (response_){
                         $ionicLoading.hide();
                         $ionicPopup.alert({
                             title: 'UPS!!',
-                            template: 'Algo pasó, intentaremos nuevamente' + response_
+                            template: 'Algo pasó, intente nuevamente' + response_
                         });
-                        $scope.editarVenta();
-                        $ionicLoading.show();
                     }
 
                 )
@@ -479,112 +495,193 @@ angular.module('metrogas')
 
 }])
 
-.controller('AccionCtrl',['$cordovaGeolocation', '$scope', '$ionicModal', '$stateParams', '$ionicLoading', 'ventasService', '$ionicPopup', function($cordovaGeolocation, $scope, $ionicModal, $stateParams, $ionicLoading, ventasService, $ionicPopup) {
-        var idVenta = $stateParams.idVenta;
-        var idCarga = $stateParams.idCarga;
-        $scope.direccion = $stateParams.direccion;
-        var posOptions = {timeout: 10000, enableHighAccuracy: false};
-        $ionicLoading.show();
+.controller('AccionCtrl',['$rootScope', '$cordovaGeolocation', '$scope', '$ionicModal', '$stateParams', '$ionicLoading', 'ventasService', '$ionicPopup', function($rootScope, $cordovaGeolocation, $scope, $ionicModal, $stateParams, $ionicLoading, ventasService, $ionicPopup) {
+    var idVenta = $stateParams.idVenta;
+    var idCarga = $stateParams.idCarga;
+    $scope.direccion = $stateParams.direccion;
+    var posOptions = {timeout: 10000, enableHighAccuracy: false};
+    $ionicLoading.show();
 
-        $scope.acciones = function () {
-            ventasService.getAcciones(idVenta).query(
-                function (data) {
+    $scope.$on('$stateChangeStart',
+        function(event, toState, toParams, fromState, fromParams, options){
+            if (fromState.name === 'app.accioncomercial') {
+                $rootScope.incrementarVisitasDiarias(idVenta);
+            }
+    });
+
+
+    $scope.acciones = function () {
+        ventasService.getAcciones(idVenta).query(
+            function (data) {
+                $ionicLoading.hide();
+                $scope.accionesComerciales = JSON.parse(JSON.stringify(data));
+            },
+            function (data) {
+                $ionicPopup.alert({
+                    title: 'Ups!',
+                    template: 'Algo ha pasado, intente nuevamente'
+                });
+            }
+        );
+    };
+
+    $scope.acciones();
+
+    $scope.model = {
+        accion_id: null,
+        resultado: "",
+        idVenta: idVenta,
+        idCarga: idCarga
+    };
+
+    $scope.tac = JSON.parse(localStorage.getItem("tac"));
+
+    //console.log("Venta: " + idVenta);
+    //console.log("Carga: " + idCarga);
+
+    $ionicModal.fromTemplateUrl('views/AddACmodal.html',{
+        id: 1,
+        scope: $scope,
+        animation: 'slide-in-up'
+    }).then(function(modal){
+        $scope.modal_1 = modal;
+    });
+
+    $ionicModal.fromTemplateUrl('views/EditACmodal.html',{
+        id: 2,
+        scope: $scope,
+        animation: 'slide-in-up'
+    }).then(function(modal){
+        $scope.modal_2 = modal;
+    });
+
+    $scope.openModal = function(index) {
+        if (index === 1){
+            $scope.modal_1.show();
+        }else{
+            $scope.modal_2.show();
+        }
+    };
+
+    $scope.closeModal = function(index) {
+        if (index === 1){
+            $scope.modal_1.hide();
+        }else{
+            $scope.modal_2.hide();
+        }
+    };
+
+    // Cleanup the modal when we're done with it!
+    $scope.$on('$destroy', function() {
+        $scope.modal_1.remove();
+        $scope.modal_2.remove();
+    });
+
+    $scope.chooseModal= function (index, model){
+        model = model || null;
+        if (model !== null){
+            $scope.model = {
+                id: model.id,
+                accion_id: model.tipo_accion_comercial_id,
+                resultado: model.resultado,
+                observacion: model.observacion
+            };
+            //console.log($scope.model);
+        }else{
+            $scope.model = {
+                accion_id: null,
+                resultado: "",
+                idVenta: idVenta,
+                idCarga: idCarga,
+                observacion : ""
+            };
+        }
+        $scope.openModal(index);
+    };
+
+    $scope.editar = function(){
+        $ionicLoading.show();
+        $cordovaGeolocation.getCurrentPosition(posOptions).then(
+        function (position) {
+            $scope.model.latitud = (position.coords.latitude).toString();
+            $scope.model.longitud = (position.coords.longitude).toString();
+            //console.log($scope.model);
+            ventasService.updateAC().save($scope.model).$promise.then(
+                function (response) {
+                    //console.log(response);
                     $ionicLoading.hide();
-                    $scope.accionesComerciales = JSON.parse(JSON.stringify(data));
+                    var alert = $ionicPopup.alert({
+                        title: 'Guardado',
+                        template: 'Accion añadida correctamente'
+                    });
+                    alert.then(function () {
+                        $scope.closeModal();
+                        $scope.acciones();
+                        var userData = JSON.parse(localStorage.getItem('user'));
+                        var _token = userData.api_token;
+                        ventasService.getVentas(_token);
+                        ventasService.getHistorial(_token);
+                    });
                 },
-                function (data) {
-                    $ionicPopup.alert({
+                function (response) {
+                    //console.log(response);
+                    $ionicLoading.hide();
+                    var alert = $ionicPopup.alert({
                         title: 'Ups!',
-                        template: 'Algo ha pasado, intente nuevamente'
+                        template: 'Algo ha pasado, intentaremos nuevamente'
+                    });
+
+                    alert.then(function () {
+                        $scope.enviar();
                     });
                 }
             );
-        };
-
-        $scope.acciones();
-
-        $scope.model = {
-            accion_id: null,
-            resultado: "",
-            idVenta: idVenta,
-            idCarga: idCarga
-        };
-
-        $scope.tac = JSON.parse(localStorage.getItem("tac"));
-
-        //console.log("Venta: " + idVenta);
-        //console.log("Carga: " + idCarga);
-
-        $ionicModal.fromTemplateUrl('views/AddACmodal.html',{
-            id: 1,
-            scope: $scope,
-            animation: 'slide-in-up'
-        }).then(function(modal){
-            $scope.modal_1 = modal;
         });
+    };
 
-        $ionicModal.fromTemplateUrl('views/EditACmodal.html',{
-            id: 2,
-            scope: $scope,
-            animation: 'slide-in-up'
-        }).then(function(modal){
-            $scope.modal_2 = modal;
-        });
 
-        $scope.openModal = function(index) {
-            if (index === 1){
-                $scope.modal_1.show();
-            }else{
-                $scope.modal_2.show();
-            }
-        };
 
-        $scope.closeModal = function(index) {
-            if (index === 1){
-                $scope.modal_1.hide();
-            }else{
-                $scope.modal_2.hide();
-            }
-        };
+    $scope.enviar = function(){
+        console.log("starting loading modal");
+        $ionicLoading.show();
+        console.log("start selecting data to add to model");
+        switch($scope.model.accion_id){
+            case "1":
+                $scope.model.accion = "Contactar Telefónicamente";
+                break;
+            case "2":
+                $scope.model.accion = "Agendar Visita";
+                break;
+            case "3":
+                $scope.model.accion = "Reagendar Visita";
+                break;
+            case "4":
+                $scope.model.accion = "Generar Presupuesto";
+                break;
+            case "5":
+                $scope.model.accion = "Enviar Correo";
+                break;
+            default:
+                $scope.model.accion = null;
+                break;
+        }
 
-        // Cleanup the modal when we're done with it!
-        $scope.$on('$destroy', function() {
-            $scope.modal_1.remove();
-            $scope.modal_2.remove();
-        });
+        console.log("GetCurentPosition");
 
-        $scope.chooseModal= function (index, model){
-            model = model || null;
-            if (model !== null){
-                $scope.model = {
-                    id: model.id,
-                    accion_id: model.tipo_accion_comercial_id,
-                    resultado: model.resultado,
-                    observacion: model.observacion
-                };
-                //console.log($scope.model);
-            }else{
-                $scope.model = {
-                    accion_id: null,
-                    resultado: "",
-                    idVenta: idVenta,
-                    idCarga: idCarga,
-                    observacion : ""
-                };
-            }
-            $scope.openModal(index);
-        };
-
-        $scope.editar = function(){
-            $ionicLoading.show();
-            $cordovaGeolocation.getCurrentPosition(posOptions).then(
+        $cordovaGeolocation.getCurrentPosition(posOptions).then(
             function (position) {
+                console.log("Starting GetCurentPosition");
+                console.log(position);
+
                 $scope.model.latitud = (position.coords.latitude).toString();
                 $scope.model.longitud = (position.coords.longitude).toString();
-                //console.log($scope.model);
-                ventasService.updateAC().save($scope.model).$promise.then(
+
+                console.log("Coordenadas obtenidas");
+                console.log($scope.model);
+
+                ventasService.saveAC().save($scope.model).$promise.then(
                     function (response) {
-                        //console.log(response);
+                        console.log("data enviada correctamente");
                         $ionicLoading.hide();
                         var alert = $ionicPopup.alert({
                             title: 'Guardado',
@@ -592,6 +689,7 @@ angular.module('metrogas')
                         });
                         alert.then(function () {
                             $scope.closeModal();
+                            $rootScope.incrementarVisitasDiarias(idVenta);
                             $scope.acciones();
                             var userData = JSON.parse(localStorage.getItem('user'));
                             var _token = userData.api_token;
@@ -600,96 +698,23 @@ angular.module('metrogas')
                         });
                     },
                     function (response) {
-                        //console.log(response);
+                        console.log("ERROR:");
+                        console.log(response);
                         $ionicLoading.hide();
                         var alert = $ionicPopup.alert({
                             title: 'Ups!',
-                            template: 'Algo ha pasado, intentaremos nuevamente'
-                        });
-
-                        alert.then(function () {
-                            $scope.enviar();
+                            template: 'Algo ha pasado, verifica que la ubicacion esté encendida'
                         });
                     }
                 );
+            },
+            function(err){
+                console.log(err);
             });
-        };
-
-
-
-        $scope.enviar = function(){
-            console.log("starting loading modal");
-            $ionicLoading.show();
-            console.log("start selecting data to add to model");
-            switch($scope.model.accion_id){
-                case "1":
-                    $scope.model.accion = "Contactar Telefónicamente";
-                    break;
-                case "2":
-                    $scope.model.accion = "Agendar Visita";
-                    break;
-                case "3":
-                    $scope.model.accion = "Reagendar Visita";
-                    break;
-                case "4":
-                    $scope.model.accion = "Generar Presupuesto";
-                    break;
-                case "5":
-                    $scope.model.accion = "Enviar Correo";
-                    break;
-                default:
-                    $scope.model.accion = null;
-                    break;
-            }
-
-            console.log("GetCurentPosition");
-
-            $cordovaGeolocation.getCurrentPosition(posOptions).then(
-                function (position) {
-                    console.log("Starting GetCurentPosition");
-                    console.log(position);
-
-                    $scope.model.latitud = (position.coords.latitude).toString();
-                    $scope.model.longitud = (position.coords.longitude).toString();
-
-                    console.log("Coordenadas obtenidas");
-                    console.log($scope.model);
-
-                    ventasService.saveAC().save($scope.model).$promise.then(
-                        function (response) {
-                            console.log("data enviada correctamente");
-                            $ionicLoading.hide();
-                            var alert = $ionicPopup.alert({
-                                title: 'Guardado',
-                                template: 'Accion añadida correctamente'
-                            });
-                            alert.then(function () {
-                                $scope.closeModal();
-                                $scope.acciones();
-                                var userData = JSON.parse(localStorage.getItem('user'));
-                                var _token = userData.api_token;
-                                ventasService.getVentas(_token);
-                                ventasService.getHistorial(_token);
-                            });
-                        },
-                        function (response) {
-                            console.log("ERROR:");
-                            console.log(response);
-                            $ionicLoading.hide();
-                            var alert = $ionicPopup.alert({
-                                title: 'Ups!',
-                                template: 'Algo ha pasado, verifica que la ubicacion esté encendida'
-                            });
-                        }
-                    );
-                },
-                function(err){
-                    console.log(err);
-                });
         }
     }])
 
-.controller('HistorialCtrl', ['$ionicPopup', '$scope', '$state', '$ionicLoading', '$ionicModal', 'ventasService', function($ionicPopup, $scope, $state, $ionicLoading, $ionicModal, ventasService){
+.controller('HistorialCtrl', ['$rootScope', '$ionicPopup', '$scope', '$state', '$ionicLoading', '$ionicModal', 'ventasService', function($rootScope, $ionicPopup, $scope, $state, $ionicLoading, $ionicModal, ventasService){
 
     $ionicLoading.show();
 
@@ -699,6 +724,7 @@ angular.module('metrogas')
     }else{
         console.log('blanqueando filtros');
         $scope.filterOptions={
+            busqueda: "",
             calle: "",
             comuna: "",
             grilla: "",
@@ -736,11 +762,11 @@ angular.module('metrogas')
 
             $scope.openModal = function(index) {
                 if (index === 1){
-                    console.log($scope.filterOptions);
                     if(sessionStorage.filtrosH !== undefined){
                         $scope.filterOptions = JSON.parse(sessionStorage.filtrosH);
                     }else{
                         $scope.filterOptions={
+                            busqueda: "",
                             calle: "",
                             comuna: "",
                             grilla: "",
@@ -767,7 +793,6 @@ angular.module('metrogas')
             $scope.guardarFiltros = function () {
                 console.log('guardando filtrosH');
                 sessionStorage.filtrosH = angular.toJson($scope.filterOptions);
-                console.log(sessionStorage.filtrosH);
             };
 
             // Cleanup the modal when we're done with it!
@@ -778,6 +803,7 @@ angular.module('metrogas')
 
             $scope.resetFilter = function () {
                 $scope.filterOptions={
+                    busqueda: "",
                     calle: "",
                     comuna: "",
                     grilla: "",
@@ -787,7 +813,6 @@ angular.module('metrogas')
                     carga: ""
                 };
                 console.log('borrando filtrosDA');
-                console.log($scope.filterOptions);
             };
 
             $scope.chooseModal= function (index, dir){
@@ -812,7 +837,7 @@ angular.module('metrogas')
                 $scope.openModal(index);
             };
 
-            $scope.editarDir = function () {
+            $scope.editarDir = function (id) {
                 var confirmPopup = $ionicPopup.confirm({
                     title: 'Continuar',
                     template: '¿Guardar cambios?',
@@ -823,7 +848,7 @@ angular.module('metrogas')
                 confirmPopup.then(function(res) {
                     if(res) {
                         //si apreta si
-                        $scope.executeSaving();
+                        $scope.executeSaving(id);
 
                         $scope.$watch($scope.dir, function(){
                             ventasService.getHistorial(_token).query().$promise.then(
@@ -839,23 +864,27 @@ angular.module('metrogas')
                 });
             };
 
-            $scope.executeSaving = function () {
+            $scope.executeSaving = function (id) {
                 $ionicLoading.show();
-                $scope.editarVenta();
+                $scope.editarVenta(id);
                 var userData = JSON.parse(localStorage.getItem('user'));
                 var _token = userData.api_token;
                 ventasService.getVentas(_token);
                 ventasService.getHistorial(_token);
                 $scope.closeModal(2);
+                $state.go('app.aux', {from:'goToHistorial'});
             };
 
-            $scope.editarVenta = function (){
+            $scope.editarVenta = function (id){
                 ventasService.edit().save($scope.dir).$promise.then(
                     function (response2) {
                         $ionicLoading.hide();
-                        $ionicPopup.alert({
+                        var alert = $ionicPopup.alert({
                             title: 'Ok',
                             template: 'Información guardada correctamente'
+                        });
+                        alert.then(function (res) {
+                            $rootScope.incrementarVisitasDiarias(id);
                         });
                     },
                     function (response_){
@@ -873,6 +902,7 @@ angular.module('metrogas')
 
             $scope.resetFilter = function () {
                 $scope.filterOptions={
+                    busqueda: "",
                     calle: "",
                     comuna: "",
                     grilla: "",
@@ -884,6 +914,7 @@ angular.module('metrogas')
             };
 
             $scope.filterOptions={
+                busqueda: "",
                 calle: "",
                 comuna: "",
                 grilla: "",
@@ -946,6 +977,7 @@ angular.module('metrogas')
         tipo_vivienda: "",
         usuarios_id: (JSON.parse(localStorage.getItem('user'))).id
     };
+
     $scope.enviar = function (){
         //console.log($scope.model);
         ventasService.guardar().save($scope.model).$promise.then(
@@ -957,11 +989,12 @@ angular.module('metrogas')
                     template: 'Datos guardados correctamente'
                 });
                 alert.then(function(){
+                    //$scope.incrementarVisitasDiarias($scope.model.id);
                     var userData = JSON.parse(localStorage.getItem('user'));
                     var _token = userData.api_token;
                     ventasService.getVentas(_token);
                     ventasService.getHistorial(_token);
-                    $state.go('app.asignadas');  //confirmar q este era el cambio que había q realizar
+                    $state.go('app.asignadas');
                 });
             }},
             function(response){
@@ -972,5 +1005,11 @@ angular.module('metrogas')
             }
         );
     };
+}])
+
+.controller('auxCtrl',['$stateParams', '$state', function ($stateParams, $state) {
+    if($stateParams.from === "goToHistorial"){
+        $state.go('app.historial');
+    }
 }])
 ;

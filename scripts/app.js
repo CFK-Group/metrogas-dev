@@ -85,12 +85,32 @@ angular.module('metrogas', ['ionic','ui.router','ngCordova', 'ngStorage', 'angul
             }
         })
 
+        .state('app.aux',{
+            url:'/aux/:from',
+            views: {
+                'content@': {
+                    controller: 'auxCtrl'
+                }
+            }
+        })
+
     ;
 
     $urlRouterProvider.otherwise('login');
 
 }).run(
     function($rootScope, $ionicSideMenuDelegate, $ionicPlatform, $state, $cordovaDevice){
+
+        var fecha = new Date();
+        var fechaActual = fecha.getDate().toString() + '/' + fecha.getMonth().toString() + '/' + fecha.getFullYear().toString();
+        console.log('fecha actual: ' + fechaActual);
+        console.log('fecha ultima visita: ' + localStorage.fechaUltimaVisita);
+        console.log('Visitadas Hoy: ' + localStorage.visitadas);
+
+        if(fechaActual !== localStorage.fechaUltimaVisita){
+            localStorage.visitadas = 0;
+        }
+
         $rootScope.loginShow= true;
         $rootScope.user = "";
         $ionicPlatform.registerBackButtonAction(function (event) {
