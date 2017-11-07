@@ -161,6 +161,7 @@ angular.module('metrogas')
 .controller('AsignCtrl',['$scope', '$ionicModal', 'ventasService', '$ionicLoading', function($scope, $ionicModal, ventasService, $ionicLoading){
 
     $ionicLoading.show();
+    console.log($scope.filterOptions);
 
     if(sessionStorage.filtrosDA !== undefined){
         console.log('filter options = '+$scope.filterOptions);
@@ -168,6 +169,7 @@ angular.module('metrogas')
     }else{
         console.log('blanqueando filtros');
         $scope.filterOptions={
+            busqueda: "",
             calle: "",
             comuna: "",
             grilla: "",
@@ -201,6 +203,7 @@ angular.module('metrogas')
                     $scope.filterOptions = JSON.parse(sessionStorage.filtrosDA);
                 }else{
                     $scope.filterOptions={
+                        busqueda: "",
                         calle: "",
                         comuna: "",
                         grilla: "",
@@ -229,6 +232,7 @@ angular.module('metrogas')
 
             $scope.resetFilter = function () {
                 $scope.filterOptions={
+                    busqueda: "",
                     calle: "",
                     comuna: "",
                     grilla: "",
@@ -720,6 +724,7 @@ angular.module('metrogas')
     }else{
         console.log('blanqueando filtros');
         $scope.filterOptions={
+            busqueda: "",
             calle: "",
             comuna: "",
             grilla: "",
@@ -761,6 +766,7 @@ angular.module('metrogas')
                         $scope.filterOptions = JSON.parse(sessionStorage.filtrosH);
                     }else{
                         $scope.filterOptions={
+                            busqueda: "",
                             calle: "",
                             comuna: "",
                             grilla: "",
@@ -797,6 +803,7 @@ angular.module('metrogas')
 
             $scope.resetFilter = function () {
                 $scope.filterOptions={
+                    busqueda: "",
                     calle: "",
                     comuna: "",
                     grilla: "",
@@ -895,6 +902,7 @@ angular.module('metrogas')
 
             $scope.resetFilter = function () {
                 $scope.filterOptions={
+                    busqueda: "",
                     calle: "",
                     comuna: "",
                     grilla: "",
@@ -906,6 +914,7 @@ angular.module('metrogas')
             };
 
             $scope.filterOptions={
+                busqueda: "",
                 calle: "",
                 comuna: "",
                 grilla: "",
