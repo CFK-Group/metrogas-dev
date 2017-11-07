@@ -184,7 +184,6 @@ angular.module('metrogas')
     //llamar a la api con solicitudes para ver las ventas...
     ventasService.getVentas(_token).query().$promise.then(
         function(response){
-            $ionicLoading.hide();
             $ionicModal.fromTemplateUrl('views/filtermodal.html',{
                 id: 1,
                 scope: $scope,
@@ -197,6 +196,7 @@ angular.module('metrogas')
                 $scope.allGrilla = JSON.parse(localStorage.getItem('grillas'));
                 $scope.allCargas = JSON.parse(localStorage.getItem('cargas'));
             });
+            $ionicLoading.hide();
 
             $scope.openModal = function(index) {
                 if(sessionStorage.filtrosDA !== undefined){
