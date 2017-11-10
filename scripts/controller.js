@@ -6,7 +6,7 @@ angular.module('metrogas')
     $ionicPlatform.ready(function() {
         //console.log($cordovaDevice.getDevice());
 
-        var mode = 'produccion'; //cambiar valor entre develop y produccion según corresponda
+        var mode = 'develop'; //cambiar valor entre develop y produccion según corresponda
         var model = "";
         var uuid = "";
 
@@ -151,7 +151,7 @@ angular.module('metrogas')
         sessionStorage.removeItem('userSession');
         $state.go('login')
     };
-    
+
 }])
 
 .controller('HomeCtrl',['$scope', 'UserService', function($scope, UserService){
@@ -314,7 +314,8 @@ angular.module('metrogas')
                     recorrida: null,
                     rut: null,
                     tipo_vivienda: $scope.direccion.tipo_vivienda,
-                    usuarios_id: $scope.direccion.usuarios_id
+                    usuarios_id: $scope.direccion.usuarios_id,
+                    origen: null
                 };
             }
             $scope.model.correo_actualizado = $scope.direccion.correo_BBDD;
@@ -359,7 +360,8 @@ angular.module('metrogas')
                         recorrida: null,
                         rut: null,
                         tipo_vivienda: $scope.direccion.tipo_vivienda,
-                        usuarios_id: $scope.direccion.usuarios_id
+                        usuarios_id: $scope.direccion.usuarios_id,
+                        origen: null
                     };
                     $state.go('app.asignadas');
                 }
