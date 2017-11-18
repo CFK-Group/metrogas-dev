@@ -102,7 +102,7 @@ angular.module('metrogas', ['ionic','ui.router','ngCordova', 'ngStorage', 'angul
     function($rootScope, $ionicSideMenuDelegate, $ionicPlatform, $state, $cordovaDevice){
 
         var fecha = new Date();
-        var fechaActual = fecha.getDate().toString() + '/' + fecha.getMonth().toString() + '/' + fecha.getFullYear().toString();
+        var fechaActual = fecha.getDate().toString() + '/' + (fecha.getMonth() + 1).toString().toString() + '/' + fecha.getFullYear().toString();
         console.log('fecha actual: ' + fechaActual);
         console.log('fecha ultima visita: ' + localStorage.fechaUltimaVisita);
         console.log('Visitadas Hoy: ' + localStorage.visitadas);

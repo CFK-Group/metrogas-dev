@@ -5,7 +5,6 @@ angular.module('metrogas')
 
     $ionicPlatform.ready(function() {
         //console.log($cordovaDevice.getDevice());
-
         var mode = 'develop'; //cambiar valor entre develop y produccion según corresponda
         var model = "";
         var uuid = "";
@@ -121,7 +120,7 @@ angular.module('metrogas')
         if(horaActual - $rootScope.horaUltimoIncremento > $rootScope.tiempoEntreVisitas || idDir !== localStorage.idUltimaDir){
             localStorage.idUltimaDir = idDir;
             localStorage.visitadas = parseInt(localStorage.visitadas) + 1 ;
-            localStorage.fechaUltimaVisita = fecha.getDate().toString() + '/' + fecha.getMonth().toString() + '/' + fecha.getFullYear().toString();
+            localStorage.fechaUltimaVisita = fecha.getDate().toString() + '/' + (fecha.getMonth() + 1).toString().toString() + '/' + fecha.getFullYear().toString();
             localStorage.horaUltimoIncremento = horaActual;
         }
     };
@@ -197,6 +196,14 @@ angular.module('metrogas')
                 $scope.allCargas = JSON.parse(localStorage.getItem('cargas'));
             });
             $ionicLoading.hide();
+
+            $scope.masDirecciones = function (id, _token) {
+
+            };
+
+            $scope.nuevasDirecciones = function (id, _token) {
+
+            };
 
             $scope.openModal = function(index) {
                 if(sessionStorage.filtrosDA !== undefined){
