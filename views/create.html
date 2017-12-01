@@ -50,7 +50,16 @@
                     <input type="text" placeholder="08-09" ng-model="model.grilla">
                 </label>
 
-                <div class="item item-text-wrap">
+                <label class="item item-input item-select">
+                    <h2 class="input-label">Origen</h2>
+                    <select ng-model="model.origen">
+                        <option ng-value="'demanda'">Demanda</option>
+                        <option ng-value="'lote'">Lote</option>
+                        <option ng-value="'referido'">Referido</option>
+                    </select>
+                </label>
+
+              <div class="item item-text-wrap">
                     <h2>Producto de Interés</h2>
                     <ion-list>
                         <ion-radio ng-model="model.observacion" ng-value="'RC'" name="observacion">RC</ion-radio>

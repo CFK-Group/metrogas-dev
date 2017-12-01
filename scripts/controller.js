@@ -984,7 +984,8 @@ angular.module('metrogas')
         recorrida: 0,
         rut: "",
         tipo_vivienda: "",
-        usuarios_id: (JSON.parse(localStorage.getItem('user'))).id
+        usuarios_id: (JSON.parse(localStorage.getItem('user'))).id,
+        origen: null
     };
 
     $scope.enviar = function (){
