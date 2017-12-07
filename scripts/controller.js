@@ -5,7 +5,7 @@ angular.module('metrogas')
 
     $ionicPlatform.ready(function() {
         //console.log($cordovaDevice.getDevice());
-        var mode = 'produccion'; //cambiar valor entre develop y produccion según corresponda
+        var mode = 'develop'; //cambiar valor entre develop y produccion según corresponda
         var model = "";
         var uuid = "";
 
@@ -718,10 +718,53 @@ angular.module('metrogas')
                 );
             },
             function(err){
-                console.log(err);
-            });
-        }
-    }])
+                console.log("Starting ErrorPosition");
+                var position = {
+                    coords: {
+                        latitude: 0,
+                        longitude: 0
+                    }
+                };
+                console.log(position);
+
+                $scope.model.latitud = (position.coords.latitude).toString();
+                $scope.model.longitud = (position.coords.longitude).toString();
+
+                console.log("Coordenadas obtenidas");
+                console.log($scope.model);
+
+                ventasService.saveAC().save($scope.model).$promise.then(
+                    function (response) {
+                        console.log("data enviada correctamente");
+                        $ionicLoading.hide();
+                        var alert = $ionicPopup.alert({
+                            title: 'Guardado',
+                            template: 'Accion añadida correctamente'
+                        });
+                        alert.then(function () {
+                            $scope.closeModal();
+                            $rootScope.incrementarVisitasDiarias(idVenta);
+                            $scope.acciones();
+                            var userData = JSON.parse(localStorage.getItem('user'));
+                            var _token = userData.api_token;
+                            ventasService.getVentas(_token);
+                            ventasService.getHistorial(_token);
+                        });
+                    },
+                    function (response) {
+                        console.log("ERROR:");
+                        console.log(response);
+                        $ionicLoading.hide();
+                        var alert = $ionicPopup.alert({
+                            title: 'Ups!',
+                            template: 'Algo ha pasado, verifica que la ubicacion esté encendida'
+                        });
+                    }
+                );
+            }
+        );
+    }
+}])
 
 .controller('HistorialCtrl', ['$rootScope', '$ionicPopup', '$scope', '$state', '$ionicLoading', '$ionicModal', 'ventasService', function($rootScope, $ionicPopup, $scope, $state, $ionicLoading, $ionicModal, ventasService){
 
