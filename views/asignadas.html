@@ -13,7 +13,7 @@
                 <input type="search" placeholder="Escriba búsqueda aquí" ng-model="filterOptions.busqueda" ng-change="filterOptions.busqueda = (filterOptions.busqueda | uppercase)">
             </label>
         </ion-item>
-        <ion-item ng-repeat="dir in direcciones | filter: search | filter: filterOptions.busqueda" ui-sref="app.edit({id: dir.id})">
+        <ion-item collection-repeat="dir in direcciones | filter: search | filter: filterOptions.busqueda" ui-sref="app.edit({id: dir.id})">
             <div class="row">
                 <div class="col col-100">
                     <h2>{{dir.direccion}} {{dir.numero}}
@@ -27,7 +27,7 @@
                 <div class="col col-50">
                     <p class="bold">{{dir.comuna}}</p>
                     <p>IC: {{dir.IC}}</p>
-                    <p>Grilla: {{dir.grilla}}</p>  
+                    <p>Grilla: {{dir.grilla}}</p>
                 </div>
                 <div class="col col-50">
                     <p>Recorrida: <span ng-if="dir.recorrida">Si</span><span ng-if="!dir.recorrida">No</span></p>

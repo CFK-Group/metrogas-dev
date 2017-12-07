@@ -5,7 +5,6 @@ angular.module('metrogas')
 
     $ionicPlatform.ready(function() {
         //console.log($cordovaDevice.getDevice());
-
         var mode = 'produccion'; //cambiar valor entre develop y produccion según corresponda
         var model = "";
         var uuid = "";
@@ -121,7 +120,7 @@ angular.module('metrogas')
         if(horaActual - $rootScope.horaUltimoIncremento > $rootScope.tiempoEntreVisitas || idDir !== localStorage.idUltimaDir){
             localStorage.idUltimaDir = idDir;
             localStorage.visitadas = parseInt(localStorage.visitadas) + 1 ;
-            localStorage.fechaUltimaVisita = fecha.getDate().toString() + '/' + fecha.getMonth().toString() + '/' + fecha.getFullYear().toString();
+            localStorage.fechaUltimaVisita = fecha.getDate().toString() + '/' + (fecha.getMonth() + 1).toString().toString() + '/' + fecha.getFullYear().toString();
             localStorage.horaUltimoIncremento = horaActual;
         }
     };
@@ -151,7 +150,7 @@ angular.module('metrogas')
         sessionStorage.removeItem('userSession');
         $state.go('login')
     };
-    
+
 }])
 
 .controller('HomeCtrl',['$scope', 'UserService', function($scope, UserService){
@@ -197,6 +196,14 @@ angular.module('metrogas')
                 $scope.allCargas = JSON.parse(localStorage.getItem('cargas'));
             });
             $ionicLoading.hide();
+
+            $scope.masDirecciones = function (id, _token) {
+
+            };
+
+            $scope.nuevasDirecciones = function (id, _token) {
+
+            };
 
             $scope.openModal = function(index) {
                 if(sessionStorage.filtrosDA !== undefined){
@@ -314,7 +321,8 @@ angular.module('metrogas')
                     recorrida: null,
                     rut: null,
                     tipo_vivienda: $scope.direccion.tipo_vivienda,
-                    usuarios_id: $scope.direccion.usuarios_id
+                    usuarios_id: $scope.direccion.usuarios_id,
+                    origen: null
                 };
             }
             $scope.model.correo_actualizado = $scope.direccion.correo_BBDD;
@@ -359,7 +367,8 @@ angular.module('metrogas')
                         recorrida: null,
                         rut: null,
                         tipo_vivienda: $scope.direccion.tipo_vivienda,
-                        usuarios_id: $scope.direccion.usuarios_id
+                        usuarios_id: $scope.direccion.usuarios_id,
+                        origen: null
                     };
                     $state.go('app.asignadas');
                 }
@@ -975,7 +984,8 @@ angular.module('metrogas')
         recorrida: 0,
         rut: "",
         tipo_vivienda: "",
-        usuarios_id: (JSON.parse(localStorage.getItem('user'))).id
+        usuarios_id: (JSON.parse(localStorage.getItem('user'))).id,
+        origen: null
     };
 
     $scope.enviar = function (){

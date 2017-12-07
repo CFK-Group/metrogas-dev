@@ -90,13 +90,22 @@
                 </label>
 
                 <label class="item item-input item-stacked-label">
-                  <h2 class="input-label">Correo Actualizado</h2>
-                  <input type="text" placeholder="correo@ejemplo.com" ng-model="model.correo_actualizado">
+                    <h2 class="input-label">Correo Actualizado</h2>
+                    <input type="text" placeholder="correo@ejemplo.com" ng-model="model.correo_actualizado">
                 </label>
 
                 <label class="item item-input item-stacked-label">
-                  <h2 class="input-label">Teléfono Actualizado</h2>
-                  <input type="tel" placeholder="+56 9 1234 5678" ng-model="model.fono_actualizado">
+                    <h2 class="input-label">Teléfono Actualizado</h2>
+                    <input type="tel" placeholder="+56 9 1234 5678" ng-model="model.fono_actualizado">
+                </label>
+
+                <label class="item item-input item-select">
+                    <h2 class="input-label">Origen</h2>
+                    <select ng-model="model.origen">
+                        <option>Demanda</option>
+                        <option>Lote</option>
+                        <option>Referido</option>
+                    </select>
                 </label>
             </div>
             <div class="item item-divider text-center row">
