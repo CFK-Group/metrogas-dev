@@ -5,7 +5,7 @@ angular.module('metrogas')
 
     $ionicPlatform.ready(function() {
         //console.log($cordovaDevice.getDevice());
-        var mode = 'produccion'; //cambiar valor entre develop y produccion según corresponda
+        var mode = 'develop'; //cambiar valor entre develop y produccion según corresponda
         var model = "";
         var uuid = "";
 
