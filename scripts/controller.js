@@ -443,64 +443,64 @@ angular.module('metrogas')
         }
     );
 
-    //var direcciones = JSON.parse(localStorage.getItem('direcciones')); //get direcciones from localstorage
-    /*
-    function findDireccion(address) {
-        return address.IC === item; // verifica si el campo IC es igual al parametro  de la url
-    }
-    $scope.direccion = direcciones.find(findDireccion);
-    console.log($scope.direccion);
-    $scope.model = JSON.parse(JSON.stringify($scope.direccion));
-*/
-    /*
-    function isEquivalent(a, b) {
-        // Create arrays of property names
-        var aProps = Object.getOwnPropertyNames(a);
-        var bProps = Object.getOwnPropertyNames(b);
-        console.log(aProps);
-        console.log(bProps);
-        // If number of properties is different,
-        // objects are not equivalent
-        if (aProps.length !== bProps.length) {
-            return false;
-        }
-        for (var i = 0; i < aProps.length; i++) {
-            var propName = aProps[i];
-
-            // If values of same property are not equal,
-            // objects are not equivalent
-            if (a[propName] !== b[propName]) {
-                return false;
-            }
-        }
-        // If we made it this far, objects
-        // are considered equivalent
-        return true;
-    }
-    */
-    //  $scope.edit = function(){
-  //      console.log(ventasService.edit().update({IC: $scope.model.IC}, $scope.model));
-    /*
-        PARA OFFLINE
-
-        var arr = [];
-        if (!isEquivalent($scope.model, $scope.direccion)) { //evalua si el elemento fue modificado o no comparandolo con el mismo elemento en el array original
-            if (localStorage.getItem('modified_dir') !== null) { //si existía algun elemento modificado en cola se agrega este elemento a la cola, de lo contrario
-                var existent = JSON.parse(localStorage.getItem('modified_dir'));
-                arr.push(existent);
-                arr.push($scope.model);
-                localStorage.setItem('modified_dir', angular.toJson(arr));
-            } else { //se crea el elemento
-                arr.push($scope.model);
-                localStorage.setItem('modified_dir', [angular.toJson(arr)]);
-            }
-        }*/
-    /*   console.log($scope.model);
-        console.log($scope.direccion);
-        console.log(isEquivalent($scope.model, $scope.direccion));
-        console.log('-------------');
-
-    }*/
+//     //var direcciones = JSON.parse(localStorage.getItem('direcciones')); //get direcciones from localstorage
+//     /*
+//     function findDireccion(address) {
+//         return address.IC === item; // verifica si el campo IC es igual al parametro  de la url
+//     }
+//     $scope.direccion = direcciones.find(findDireccion);
+//     console.log($scope.direccion);
+//     $scope.model = JSON.parse(JSON.stringify($scope.direccion));
+// */
+//     /*
+//     function isEquivalent(a, b) {
+//         // Create arrays of property names
+//         var aProps = Object.getOwnPropertyNames(a);
+//         var bProps = Object.getOwnPropertyNames(b);
+//         console.log(aProps);
+//         console.log(bProps);
+//         // If number of properties is different,
+//         // objects are not equivalent
+//         if (aProps.length !== bProps.length) {
+//             return false;
+//         }
+//         for (var i = 0; i < aProps.length; i++) {
+//             var propName = aProps[i];
+//
+//             // If values of same property are not equal,
+//             // objects are not equivalent
+//             if (a[propName] !== b[propName]) {
+//                 return false;
+//             }
+//         }
+//         // If we made it this far, objects
+//         // are considered equivalent
+//         return true;
+//     }
+//     */
+//     //  $scope.edit = function(){
+//   //      console.log(ventasService.edit().update({IC: $scope.model.IC}, $scope.model));
+//     /*
+//         PARA OFFLINE
+//
+//         var arr = [];
+//         if (!isEquivalent($scope.model, $scope.direccion)) { //evalua si el elemento fue modificado o no comparandolo con el mismo elemento en el array original
+//             if (localStorage.getItem('modified_dir') !== null) { //si existía algun elemento modificado en cola se agrega este elemento a la cola, de lo contrario
+//                 var existent = JSON.parse(localStorage.getItem('modified_dir'));
+//                 arr.push(existent);
+//                 arr.push($scope.model);
+//                 localStorage.setItem('modified_dir', angular.toJson(arr));
+//             } else { //se crea el elemento
+//                 arr.push($scope.model);
+//                 localStorage.setItem('modified_dir', [angular.toJson(arr)]);
+//             }
+//         }*/
+//     /*   console.log($scope.model);
+//         console.log($scope.direccion);
+//         console.log(isEquivalent($scope.model, $scope.direccion));
+//         console.log('-------------');
+//
+//     }*/
 
 }])
 
@@ -508,7 +508,10 @@ angular.module('metrogas')
     var idVenta = $stateParams.idVenta;
     var idCarga = $stateParams.idCarga;
     $scope.direccion = $stateParams.direccion;
-    var posOptions = {timeout: 10000, enableHighAccuracy: false};
+    var posOptions = {
+        timeout: 10000,
+        enableHighAccuracy: false
+    };
     $ionicLoading.show();
 
     $scope.$on('$stateChangeStart',
@@ -516,8 +519,8 @@ angular.module('metrogas')
             if (fromState.name === 'app.accioncomercial') {
                 $rootScope.incrementarVisitasDiarias(idVenta);
             }
-    });
-
+        }
+    );
 
     $scope.acciones = function () {
         ventasService.getAcciones(idVenta).query(

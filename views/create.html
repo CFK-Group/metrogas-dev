@@ -54,20 +54,22 @@
                     <h2 class="input-label">Origen</h2>
                     <select ng-model="model.origen">
                         <option ng-value="'demanda'">Demanda</option>
+                        <option ng-value="'telefono'">Demanda (Teléfono)</option>
+                        <option ng-value="'email'">Demanda (Email)</option>
                         <option ng-value="'lote'">Lote</option>
                         <option ng-value="'referido'">Referido</option>
                     </select>
                 </label>
 
-              <div class="item item-text-wrap">
+                <div class="item item-text-wrap">
                     <h2>Producto de Interés</h2>
                     <ion-list>
                         <ion-radio ng-model="model.observacion" ng-value="'RC'" name="observacion">RC</ion-radio>
                         <ion-radio ng-model="model.observacion" ng-value="'SCC'" name="observacion">SCC</ion-radio>
                         <ion-radio ng-model="model.observacion" ng-value="'ESTUFA'" name="observacion">ESTUFA</ion-radio>
                     </ion-list>
-                </div>
-            </div>
+                  </div>
+              </div>
         </div>
 
         <div class="card">

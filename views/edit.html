@@ -102,9 +102,11 @@
                 <label class="item item-input item-select">
                     <h2 class="input-label">Origen</h2>
                     <select ng-model="model.origen">
-                        <option>Demanda</option>
-                        <option>Lote</option>
-                        <option>Referido</option>
+                        <option ng-value="'demanda'">Demanda</option>
+                        <option ng-value="'telefono'">Demanda (Teléfono)</option>
+                        <option ng-value="'email'">Demanda (Email)</option>
+                        <option ng-value="'lote'">Lote</option>
+                        <option ng-value="'referido'">Referido</option>
                     </select>
                 </label>
             </div>
@@ -113,7 +115,8 @@
                     <button class="button button-assertive" ng-click="cancel()">Anular</button>
                 </div>
                 <div class="col padding-horizontal">
-                    <button class="button button-metrogas" ng-class="{disabled: (model.contactada == '' || model.contactada == undefined)}" ng-click="stepForward('4')">Siguiente</button>
+                    <button ng-if="model.origen === 'lote'" class="button button-metrogas" ng-class="{disabled: (model.contactada == '' || model.contactada == undefined)}" ng-click="stepForward('4')">Siguiente</button>
+                    <button ng-if="model.origen !== 'lote'" class="button button-metrogas" ng-class="{disabled: (model.contactada == '' || model.contactada == undefined)}" ng-click="stepForward('5A')">Siguiente</button>
                 </div>
             </div>
         </div>
